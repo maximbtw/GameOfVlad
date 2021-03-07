@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6781A0C0-FD0E-4F20-8EBE-90D53F21F869}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GameOfVlad</RootNamespace>
+    <AssemblyName>GameOfVlad</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MonoGamePlatform>Windows</MonoGamePlatform>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\Games\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\$(MonoGamePlatform)\$(Platform)\$(Configuration)\</OutputPath>
+    <DefineConstants>TRACE;WINDOWS</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Icon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>2659522B42ADA71F3BC5F1E1D56A61E55819C54F</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>GameOfVlad_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Button.cs" />
+    <Compile Include="Game1.cs" />
+    <Compile Include="GameEffects\FireEffect.cs" />
+    <Compile Include="GameEffects\HitBulletEffect.cs" />
+    <Compile Include="GameEffects\Particle.cs" />
+    <Compile Include="GameEffects\ParticleEngine.cs" />
+    <Compile Include="GameEffects\ScreenDimmingEffect.cs" />
+    <Compile Include="GameEffects\Star.cs" />
+    <Compile Include="Interfaces\CompliteMenu.cs" />
+    <Compile Include="Interfaces\DeathMenu.cs" />
+    <Compile Include="Interfaces\Gallery.cs" />
+    <Compile Include="Interfaces\Menu.cs" />
+    <Compile Include="Interfaces\PauseMenu.cs" />
+    <Compile Include="Levels\Level.cs" />
+    <Compile Include="Levels\Level1.cs" />
+    <Compile Include="Levels\Level10.cs" />
+    <Compile Include="Levels\Level11.cs" />
+    <Compile Include="Levels\Level12.cs" />
+    <Compile Include="Levels\Level13.cs" />
+    <Compile Include="Levels\Level14.cs" />
+    <Compile Include="Levels\Level15.cs" />
+    <Compile Include="Levels\Level16.cs" />
+    <Compile Include="Levels\Level17.cs" />
+    <Compile Include="Levels\Level18.cs" />
+    <Compile Include="Levels\Level19.cs" />
+    <Compile Include="Levels\Level2.cs" />
+    <Compile Include="Levels\Level20.cs" />
+    <Compile Include="Levels\Level21.cs" />
+    <Compile Include="Levels\Level22.cs" />
+    <Compile Include="Levels\Level23.cs" />
+    <Compile Include="Levels\Level24.cs" />
+    <Compile Include="Levels\Level25.cs" />
+    <Compile Include="Levels\Level26.cs" />
+    <Compile Include="Levels\Level27.cs" />
+    <Compile Include="Levels\Level28.cs" />
+    <Compile Include="Levels\Level29.cs" />
+    <Compile Include="Levels\Level3.cs" />
+    <Compile Include="Levels\Level30.cs" />
+    <Compile Include="Levels\Level31.cs" />
+    <Compile Include="Levels\Level4.cs" />
+    <Compile Include="Levels\Level5.cs" />
+    <Compile Include="Levels\Level6.cs" />
+    <Compile Include="Levels\Level7.cs" />
+    <Compile Include="Levels\Level8.cs" />
+    <Compile Include="Levels\Level9.cs" />
+    <Compile Include="Levels\SpecialLevel1.cs" />
+    <Compile Include="Levels\SpecialLevel2.cs" />
+    <Compile Include="Levels\SpecialLevel3.cs" />
+    <Compile Include="Pages\GameLevels.cs" />
+    <Compile Include="Pages\MainMenu.cs" />
+    <Compile Include="Pages\MapLevels.cs" />
+    <Compile Include="Pages\State.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Sprites\Abilities\Abilitie.cs" />
+    <Compile Include="Sprites\Abilities\Boost.cs" />
+    <Compile Include="Sprites\Abilities\Shield.cs" />
+    <Compile Include="Sprites\Bonuses\Bonus.cs" />
+    <Compile Include="Sprites\ColldesSprite.cs" />
+    <Compile Include="Sprites\Guns\BlackCatGun.cs" />
+    <Compile Include="Sprites\Guns\DemagogueGun.cs" />
+    <Compile Include="Sprites\Guns\DartGun.cs" />
+    <Compile Include="Sprites\Guns\Gun.cs" />
+    <Compile Include="Sprites\Guns\CutterGun.cs" />
+    <Compile Include="Sprites\Guns\MiniSharkGun.cs" />
+    <Compile Include="Sprites\Guns\WoodGoblinGun.cs" />
+    <Compile Include="Sprites\Guns\SandstoneGun.cs" />
+    <Compile Include="Sprites\Guns\SoundGun.cs" />
+    <Compile Include="Sprites\Guns\TuskGun.cs" />
+    <Compile Include="Sprites\Bonuses\HealthBox.cs" />
+    <Compile Include="Sprites\Mobs\Boss\Ship.cs" />
+    <Compile Include="Sprites\Mobs\Brain.cs" />
+    <Compile Include="Sprites\Mobs\Butler.cs" />
+    <Compile Include="Sprites\Mobs\EX40K.cs" />
+    <Compile Include="Sprites\Mobs\Kalabok.cs" />
+    <Compile Include="Sprites\Mobs\Librarian.cs" />
+    <Compile Include="Sprites\Mobs\Mob.cs" />
+    <Compile Include="Sprites\Mobs\Phantom.cs" />
+    <Compile Include="Sprites\Mobs\Ra.cs" />
+    <Compile Include="Sprites\Mobs\SpaceKnight.cs" />
+    <Compile Include="Sprites\Shells\Bomb.cs" />
+    <Compile Include="Sprites\Shells\Bullet.cs" />
+    <Compile Include="Sprites\Mobs\Children.cs" />
+    <Compile Include="Component.cs" />
+    <Compile Include="Sprites\Mobs\Fire.cs" />
+    <Compile Include="Sprites\Mobs\Meteorit.cs" />
+    <Compile Include="Sprites\Mobs\Observer.cs" />
+    <Compile Include="Sprites\Mobs\Mother.cs" />
+    <Compile Include="Sprites\Mobs\SpaceTrash.cs" />
+    <Compile Include="Sprites\Player.cs" />
+    <Compile Include="Sprites\Shells\GhostBullet.cs" />
+    <Compile Include="Sprites\Sprite.cs" />
+    <Compile Include="Sprites\Mobs\Boss\SunFish.cs" />
+    <Compile Include="Sprites\Shells\Lazer.cs" />
+    <Compile Include="Sprites\Shells\Shell.cs" />
+    <Compile Include="Sprites\Wall.cs" />
+    <Compile Include="Tools\Animation.cs" />
+    <Compile Include="Tools\Collides.cs" />
+    <Compile Include="Tools\DataCenter.cs" />
+    <Compile Include="Tools\Physics.cs" />
+    <Compile Include="Tools\RandomV.cs" />
+    <Compile Include="Tools\DataManager.cs" />
+    <Compile Include="Tools\Size.cs" />
+    <Compile Include="Tools\StateKeyboard.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>$(MonoGameInstallDirectory)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.manifest" />
+    <None Include="GameOfVlad_TemporaryKey.pfx" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <MonoGameContentReference Include="Content\Content.mgcb" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\MonoGame\v3.0\MonoGame.Content.Builder.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
