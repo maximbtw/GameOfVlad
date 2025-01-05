@@ -13,54 +13,6 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin ../../../../../Desktop/Adventore Vlad/мобы/Phantom/1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/Adventore Vlad/мобы/Phantom/1.png;Sprite/Phantom/1.png
-
-#begin ../../../../../Desktop/Adventore Vlad/мобы/Phantom/2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/Adventore Vlad/мобы/Phantom/2.png;Sprite/Phantom/2.png
-
-#begin ../../../../../Desktop/Adventore Vlad/мобы/Phantom/3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/Adventore Vlad/мобы/Phantom/3.png;Sprite/Phantom/3.png
-
-#begin ../../../../../Desktop/Adventore Vlad/мобы/Phantom/4.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:../../../../../Desktop/Adventore Vlad/мобы/Phantom/4.png;Sprite/Phantom/4.png
-
 #begin Abilitie/1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -927,17 +879,17 @@
 /processorParam:TextureFormat=Color
 /build:Pages/GamePlay/SpecialLevel2/Particles/рфтвы.png;Pages/GamePlay/SpecialLevel2/Particles/Hand
 
-#begin Pages/GamePlay/SpecialLevel2/Son_of_the_sun.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Pages/GamePlay/SpecialLevel2/Son_of_the_sun.mp3;Pages/GamePlay/SpecialLevel2/Music
-
 #begin Pages/GamePlay/SpecialLevel2/son_of_the_sun_2.mp3
 /importer:Mp3Importer
 /processor:SongProcessor
 /processorParam:Quality=Best
 /build:Pages/GamePlay/SpecialLevel2/son_of_the_sun_2.mp3;Pages/GamePlay/SpecialLevel2/Music2
+
+#begin Pages/GamePlay/SpecialLevel2/Son_of_the_sun.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Pages/GamePlay/SpecialLevel2/Son_of_the_sun.mp3;Pages/GamePlay/SpecialLevel2/Music
 
 #begin Pages/GamePlay/SpecialLevel3/MainMusic.mp3
 /importer:Mp3Importer

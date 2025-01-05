@@ -93,9 +93,7 @@ namespace GameOfVlad.Levels
             };
 
             textureCursor = Content.Load<Texture2D>("Pages/GamePlay/Cursor");
-            Mouse.SetCursor(MouseCursor.FromTexture2D(textureCursor,
-                textureCursor.Width / 2, textureCursor.Height / 2));
-           
+            
             List<Texture2D> textures = new List<Texture2D>();
             textures.Add(Content.Load<Texture2D>("Sprite/Rocket/BulletShot/Particle"));
             textures.Add(Content.Load<Texture2D>("Sprite/Rocket/BulletShot/Particle1"));

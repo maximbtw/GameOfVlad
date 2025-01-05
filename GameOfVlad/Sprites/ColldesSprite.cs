@@ -56,8 +56,8 @@ namespace GameOfVlad.Sprites
         {
             get
             {
-                return new Rectangle(RectangleRotation.X, RectangleRotation.Y, MathHelper.Max(RectangleRotation.Width, RectangleRotation.Height),
-                    MathHelper.Max(RectangleRotation.Width, RectangleRotation.Height));
+                return new Rectangle(RectangleRotation.X, RectangleRotation.Y, (int)MathHelper.Max(RectangleRotation.Width, RectangleRotation.Height),
+                    (int)MathHelper.Max(RectangleRotation.Width, RectangleRotation.Height));
             }
         }
 

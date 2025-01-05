@@ -34,7 +34,7 @@ namespace GameOfVlad
             graphics = new GraphicsDeviceManager(this);
             graphics.PreferredBackBufferWidth = 1920;
             graphics.PreferredBackBufferHeight = 1080;
-            graphics.IsFullScreen = true;
+                // graphics.IsFullScreen = true;
             this.Window.ClientSizeChanged += new EventHandler<EventArgs>(Window_ClientSizeChanged);
             graphics.ApplyChanges();
             Content.RootDirectory = "Content";

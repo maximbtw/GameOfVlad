@@ -46,7 +46,7 @@ namespace GameOfVlad.Pages
                 new Button(content, new Vector2(1320, 750), "Buttons/Setting"),
                 new Button(content, new Vector2(1420, 900), "Buttons/Exit"){ Action = () => game.Exit() },
             };
-            Mouse.SetCursor(MouseCursor.Arrow);
+            // Mouse.SetCursor(MouseCursor.Arrow);
         }
 
         public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

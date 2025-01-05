@@ -100,7 +100,7 @@ namespace GameOfVlad.Pages
                     game.DataCenter.Level31){ Action = () => ToLevelSelect(34) },
             };
 
-            Mouse.SetCursor(MouseCursor.Arrow);
+          //  Mouse.SetCursor(MouseCursor.Arrow);
         }
 
         private void ToLevelSelect(int indexLevel)

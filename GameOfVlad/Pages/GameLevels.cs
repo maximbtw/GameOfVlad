@@ -11,7 +11,7 @@ namespace GameOfVlad.Pages
         private Level currentState;
         private Level nextState;
         private static List<Level> levels;
-        public static int LevelCount { get { return 33; } }
+        public static int LevelCount { get { return 34; } }
 
         public GameLevels(Game1 game, GraphicsDevice graphicsDevice, ContentManager content, int indexLevel)
             : base(game, graphicsDevice, content, indexLevel)

@@ -46,9 +46,9 @@ namespace GameOfVlad.Sprites.Guns
         {
             Timer = 0;
             ShotShell = false;
-
-            Direction.X = mouse.Position.X - Parent.Location.X;
-            Direction.Y = mouse.Position.Y - Parent.Location.Y;
+            
+            Direction.X = mouse.X - Parent.Location.X;
+            Direction.Y = mouse.Y - Parent.Location.Y;
             if (Direction != Vector2.Zero)
                 Direction.Normalize();
         }
