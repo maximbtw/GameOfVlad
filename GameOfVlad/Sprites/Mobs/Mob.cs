@@ -1,4 +1,4 @@
-﻿using GameOfVlad.Levels;
+﻿using GameOfVlad.Game.Levels;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

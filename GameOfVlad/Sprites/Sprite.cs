@@ -1,13 +1,13 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using GameOfVlad.Game.Levels;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
-using GameOfVlad.Levels;
 using GameOfVlad.Tools;
 
 
 namespace GameOfVlad.Sprites
 {
-    public class Sprite : Component
+    public class Sprite : OldComponent
     {
         public ContentManager Content;
         public Texture2D Texture;

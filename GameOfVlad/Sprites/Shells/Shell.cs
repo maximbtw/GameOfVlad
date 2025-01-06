@@ -1,4 +1,4 @@
-﻿using GameOfVlad.Levels;
+﻿using GameOfVlad.Game.Levels;
 using GameOfVlad.Sprites.Guns;
 using GameOfVlad.Sprites.Mobs;
 using Microsoft.Xna.Framework;

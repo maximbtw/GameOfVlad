@@ -2,9 +2,10 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
+using GameOfVlad.Game.Levels;
 using Microsoft.Xna.Framework.Media;
 using GameOfVlad.Tools;
-using GameOfVlad.Levels;
+using GameOfVlad.UI.Button;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Interfaces
@@ -16,7 +17,7 @@ namespace GameOfVlad.Interfaces
         public string BestTime {private get; set; }
         public string СurrentTime {private get; set; }
 
-        public CompliteMenu(Game1 game, ContentManager content, GraphicsDevice graphicsDevice, Level level)
+        public CompliteMenu(GameOfVlad game, ContentManager content, GraphicsDevice graphicsDevice, Level level)
             : base(game, content, graphicsDevice, level)
         {
             Texture = content.Load<Texture2D>("Interfaces/Complite/Backgraund");
@@ -27,9 +28,9 @@ namespace GameOfVlad.Interfaces
 
             Buttons = new List<Button>()
             {
-                  new Button(content, new Vector2(Location.X+227, Location.Y+225), "Buttons/ContinueInMenu"){ Action = ()=>ToNextLevel(level.IndexLevel)},
-                  new Button(content, new Vector2(Location.X+268, Location.Y+415), "Buttons/Restart"){ Action = ()=>RestartLevel (level.IndexLevel)},
-                  new Button(content, new Vector2(Location.X + 285, Location.Y + 525), "Buttons/MainMenu"){ Action = ()=>ToMainMenu()},
+                  // new Button(content, new Vector2(Location.X+227, Location.Y+225), "Buttons/ContinueInMenu"){ OnPressed = ()=>ToNextLevel(level.IndexLevel)},
+                  // new Button(content, new Vector2(Location.X+268, Location.Y+415), "Buttons/Restart"){ OnPressed = ()=>RestartLevel (level.IndexLevel)},
+                  // new Button(content, new Vector2(Location.X + 285, Location.Y + 525), "Buttons/MainMenu"){ OnPressed = ()=>ToMainMenu()},
             };
         }
 
@@ -42,15 +43,15 @@ namespace GameOfVlad.Interfaces
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
-            if (game.CurrentMusic != music)
-                game.NextMusic = music;
-
-            if (level.StateKeyboard.CommandUp(Keys.Escape))
-                ToMainMenu();
-            if (level.StateKeyboard.CommandDown(Keys.Enter))
-                ToNextLevel(level.IndexLevel);
+            // base.Update(gameTime);
+            //
+            // if (game.CurrentMusic != music)
+            //     game.NextMusic = music;
+            //
+            // if (level.KeyboardState.CommandUp(Keys.Escape))
+            //     ToMainMenu();
+            // if (level.KeyboardState.CommandDown(Keys.Enter))
+            //     ToNextLevel(level.IndexLevel);
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using GameOfVlad.Levels;
 using Microsoft.Xna.Framework.Content;
 using System;
 using System.Collections.Generic;
+using GameOfVlad.Game.Levels;
 using GameOfVlad.GameEffects;
 
 namespace GameOfVlad.Sprites.Mobs.Boss

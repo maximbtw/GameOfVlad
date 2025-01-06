@@ -1,5 +1,4 @@
 ﻿using GameOfVlad.GameEffects;
-using GameOfVlad.Levels;
 using GameOfVlad.Sprites.Shells;
 using GameOfVlad.Tools;
 using Microsoft.Xna.Framework;
@@ -7,6 +6,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using GameOfVlad.Game.Levels;
 
 namespace GameOfVlad.Sprites.Mobs
 {

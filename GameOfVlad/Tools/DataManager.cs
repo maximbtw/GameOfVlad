@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using System.Xml;
-using GameOfVlad.Pages;
 
 namespace GameOfVlad.Tools
 {
@@ -25,7 +24,7 @@ namespace GameOfVlad.Tools
             xmlDoc.AppendChild(rootNode);
             XmlNode userNode;
 
-            for (int i = 1; i < GameLevels.LevelCount+1; i++)
+            for (int i = 1; i < 34; i++)
             {
                 userNode = xmlDoc.CreateElement("Level" + i.ToString());
                 userNode.InnerText = defaultValue;

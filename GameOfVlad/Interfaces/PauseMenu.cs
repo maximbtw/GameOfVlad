@@ -3,14 +3,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using GameOfVlad.Levels;
+using GameOfVlad.Game.Levels;
+using GameOfVlad.UI.Button;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Interfaces
 {
     public class PauseMenu : Menu
     {
-        public PauseMenu(Game1 game, ContentManager content, GraphicsDevice graphicsDevice, Level level)
+        public PauseMenu(GameOfVlad game, ContentManager content, GraphicsDevice graphicsDevice, Level level)
             : base(game, content, graphicsDevice, level)
         {
             Texture = content.Load<Texture2D>("Interfaces/Pause/Backgraund");
@@ -18,25 +19,25 @@ namespace GameOfVlad.Interfaces
 
             Buttons = new List<Button>()
             {
-                 new Button(content, new Vector2(Location.X+125, Location.Y+175), "Buttons/ContinueInMenu"){ Action = ()=>ToContinue()},
-                 new Button(content, new Vector2(Location.X+173, Location.Y+300), "Buttons/Restart"){ Action = ()=>RestartLevel (level.IndexLevel)},
-                 new Button(content, new Vector2(Location.X+183, Location.Y+425), "Buttons/Levels"){ Action=()=>ToLevelMap()},
-                 new Button(content, new Vector2(Location.X+175, Location.Y+550), "Buttons/SettingInMenu"),
-                 new Button(content, new Vector2(Location.X+190, Location.Y+675), "Buttons/MainMenu"){ Action = ()=>ToMainMenu()},
+                 // new Button(content, new Vector2(Location.X+125, Location.Y+175), "Buttons/ContinueInMenu"){ OnPressed = ()=>ToContinue()},
+                 // new Button(content, new Vector2(Location.X+173, Location.Y+300), "Buttons/Restart"){ OnPressed = ()=>RestartLevel (level.IndexLevel)},
+                 // new Button(content, new Vector2(Location.X+183, Location.Y+425), "Buttons/Levels"){ OnPressed=()=>ToLevelMap()},
+                 // new Button(content, new Vector2(Location.X+175, Location.Y+550), "Buttons/SettingInMenu"),
+                 // new Button(content, new Vector2(Location.X+190, Location.Y+675), "Buttons/MainMenu"){ OnPressed = ()=>ToMainMenu()},
             };
         }
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
-
-            if (MediaPlayer.State == MediaState.Playing)
-                MediaPlayer.Pause();
-
-            if (level.StateKeyboard.CommandUp(Keys.Escape))
-                ToMainMenu();
-            if (level.StateKeyboard.CommandDown(Keys.Enter))
-                ToContinue();
+            // base.Update(gameTime);
+            //
+            // if (MediaPlayer.State == MediaState.Playing)
+            //     MediaPlayer.Pause();
+            //
+            // if (level.KeyboardState.CommandUp(Keys.Escape))
+            //     ToMainMenu();
+            // if (level.KeyboardState.CommandDown(Keys.Enter))
+            //     ToContinue();
         }
     }
 }

@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using GameOfVlad.Game.Levels;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using GameOfVlad.Levels;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Sprites.Mobs

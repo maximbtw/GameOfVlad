@@ -1,16 +1,14 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
-using GameOfVlad.Levels;
-using Microsoft.Xna.Framework.Content;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using GameOfVlad.Tools;
+using GameOfVlad.Game.Levels;
 using GameOfVlad.GameEffects;
-using GameOfVlad.Sprites.Shells;
-using GameOfVlad.Sprites.Mobs;
 using GameOfVlad.Sprites.Bonuses;
+using GameOfVlad.Sprites.Shells;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.Sprites.Boss
+namespace GameOfVlad.Sprites.Mobs.Boss
 {
     class SunFish : Mob
     {

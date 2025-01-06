@@ -2,11 +2,11 @@
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using GameOfVlad.Levels;
 using GameOfVlad.Tools;
 using System;
 using GameOfVlad.Sprites.Guns;
 using System.Collections.Generic;
+using GameOfVlad.Game.Levels;
 using GameOfVlad.Sprites.Abilities;
 using GameOfVlad.Sprites.Mobs;
 

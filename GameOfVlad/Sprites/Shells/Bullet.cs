@@ -1,12 +1,12 @@
 ﻿ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using GameOfVlad.Levels;
 using Microsoft.Xna.Framework.Content;
 using GameOfVlad.Tools;
 using GameOfVlad.GameEffects;
 using System;
+using GameOfVlad.Game.Levels;
 using GameOfVlad.Sprites.Mobs;
-using GameOfVlad.Sprites.Boss;
+using GameOfVlad.Sprites.Mobs.Boss;
 
 namespace GameOfVlad.Sprites.Shells
 {

@@ -1,13 +1,13 @@
-﻿using GameOfVlad.Levels;
-using GameOfVlad.Sprites.Mobs;
+﻿using GameOfVlad.Sprites.Mobs;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using System; 
+using System;
+using GameOfVlad.Game.Levels;
 
 namespace GameOfVlad.Sprites.Abilities
 {
-    public class Abilitie : Component
+    public class Abilitie : OldComponent
     {
         public bool Activ = false;
         protected ContentManager Content;

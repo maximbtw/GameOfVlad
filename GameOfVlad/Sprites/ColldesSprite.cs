@@ -3,9 +3,9 @@ using Microsoft.Xna.Framework.Content;
 using System.Collections.Generic;
 using GameOfVlad.Sprites.Shells;
 using Microsoft.Xna.Framework;
-using GameOfVlad.Levels;
 using GameOfVlad.Tools;
 using System;
+using GameOfVlad.Game.Levels;
 using GameOfVlad.Sprites.Mobs;
 
 namespace GameOfVlad.Sprites

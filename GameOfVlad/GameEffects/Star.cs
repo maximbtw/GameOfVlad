@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using GameOfVlad.Tools;
 using GameOfVlad.Sprites;
 using System;
-using GameOfVlad.Levels;
+using GameOfVlad.Game.Levels;
 
 namespace GameOfVlad.GameEffects
 {

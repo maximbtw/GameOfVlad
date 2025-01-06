@@ -2,26 +2,27 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using GameOfVlad.Levels;
+using GameOfVlad.Game.Levels;
+using GameOfVlad.Scenes.MainMenu;
 using GameOfVlad.Tools;
-using GameOfVlad.Pages;
+using GameOfVlad.UI.Button;
 
 namespace GameOfVlad.Interfaces
 {
     public class Menu
     {
-        protected Game1 game;
+        protected GameOfVlad game;
         protected ContentManager content;
         protected GraphicsDevice graphicsDevice;
         protected Level level;
-        protected MainMenu mainMenu;
+        protected MainMenuScene mainMenu;
 
         public Texture2D Texture;
         public Vector2 Location;
 
         public List<Button> Buttons;
 
-        public Menu(Game1 game, ContentManager content, GraphicsDevice graphicsDevice,MainMenu mainMenu)
+        public Menu(GameOfVlad game, ContentManager content, GraphicsDevice graphicsDevice,MainMenuScene mainMenu)
         {
             this.game = game;
             this.content = content;
@@ -29,7 +30,7 @@ namespace GameOfVlad.Interfaces
             this.mainMenu = mainMenu;
         }
 
-        public Menu(Game1 game, ContentManager content, GraphicsDevice graphicsDevice, Level level)
+        public Menu(GameOfVlad game, ContentManager content, GraphicsDevice graphicsDevice, Level level)
         {
             this.game = game;
             this.content = content;
@@ -57,24 +58,24 @@ namespace GameOfVlad.Interfaces
 
         public void RestartLevel(int indexLevel)
         {
-            game.ChangeState(new GameLevels(game, graphicsDevice, content, indexLevel));
+         //   game.ChangeState(new GameLevels(game, graphicsDevice, content, indexLevel));
         }
 
         public void ToMainMenu()
         {
-            game.ChangeState(new MainMenu(game, graphicsDevice, content));
+            //game.ChangeState(new MainMenuPage(game, graphicsDevice, content));
             game.NextMusic = game.BackgraundMusic;
         }
 
         public void ToLevelMap()
         {
-            game.ChangeState(new MapLevels(game, graphicsDevice, content));
+            //game.ChangeState(new MapPage(game, graphicsDevice, content));
             game.NextMusic = game.BackgraundMusic;
         }
 
         public void ToNextLevel(int indexLevel)
         {
-            game.ChangeState(new GameLevels(game, graphicsDevice, content, indexLevel + 1));
+           // game.ChangeState(new GameLevels(game, graphicsDevice, content, indexLevel + 1));
         }
     }
 }

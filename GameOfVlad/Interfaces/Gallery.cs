@@ -4,16 +4,15 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using GameOfVlad.Tools;
-using GameOfVlad.Levels;
 using Microsoft.Xna.Framework.Input;
-using GameOfVlad.Pages;
 using System;
+using GameOfVlad.UI.Button;
 
 namespace GameOfVlad.Interfaces
 {
-    public class Gallery : Menu
+    public class Gallery 
     {
-        public List<GalleryRecords> Records;
+    /*    public List<GalleryRecords> Records;
         private readonly Vector2 position1 = new Vector2(85f, 200f);
         private readonly Vector2 position2 = new Vector2(485f, 200f);
         private readonly Vector2 position3 = new Vector2(885f, 200f);
@@ -25,17 +24,17 @@ namespace GameOfVlad.Interfaces
         private readonly Vector2 position9 = new Vector2(1f, 1f);
 
         private bool start = true;
-        public Gallery(Game1 game, ContentManager content, GraphicsDevice graphicsDevice, MainMenu mainMenu)
+        public Gallery(GameOfVlad game, ContentManager content, GraphicsDevice graphicsDevice, MainMenuPage mainMenu)
             : base(game, content, graphicsDevice, mainMenu) 
         {
             Texture = content.Load<Texture2D>("Interfaces/Gallery/Backgraund");
             Location = new Vector2(65, 100);
             Buttons = new List<Button>
             {
-                new ButtonGallery(content,new Vector2(65,100),"Interfaces/Gallery/ButtonRecords")
-                                    {Action = ()=>RecordsPage1() },
-                new ButtonGallery(content,new Vector2(665,100),"Interfaces/Gallery/ButtonWeapons")
-                                    {Action = ()=>WeaponsPage1() },
+                // new ButtonGallery(content,new Vector2(65,100),"Interfaces/Gallery/ButtonRecords")
+                //                     {OnPressed = ()=>RecordsPage1() },
+                // new ButtonGallery(content,new Vector2(665,100),"Interfaces/Gallery/ButtonWeapons")
+                //                     {OnPressed = ()=>WeaponsPage1() },
             };
             Records = new List<GalleryRecords>();
         }
@@ -60,7 +59,7 @@ namespace GameOfVlad.Interfaces
                 start = false;
             }
             if (mainMenu.StateKeyboard.CommandUp(Keys.Escape))
-                mainMenu._State = MainMenu.State.Noraml;
+                mainMenu._State = MainMenuPage.State.Noraml;
 
         }
 
@@ -116,8 +115,8 @@ namespace GameOfVlad.Interfaces
                 {
                     if (mouseState.LeftButton == ButtonState.Pressed)
                     {
-                        if (Action != null && _State == State.Hover)
-                            Action.Invoke();
+                        if (OnPressed != null && _State == State.Hover)
+                            OnPressed.Invoke();
                     }
                 }
             }
@@ -149,12 +148,12 @@ namespace GameOfVlad.Interfaces
                 {
                     if (mouseState.LeftButton == ButtonState.Pressed)
                     {
-                        if (Action != null && _State == State.Hover)
-                            Action.Invoke();
+                        if (OnPressed != null && _State == State.Hover)
+                            OnPressed.Invoke();
                         _State = State.Hover;
                     }
                 }
             }
-        }
-    }
+        }*/
+    }    
 }

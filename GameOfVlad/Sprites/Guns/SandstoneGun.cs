@@ -2,8 +2,8 @@
 using Microsoft.Xna.Framework.Graphics;
 using GameOfVlad.Sprites.Shells;
 using Microsoft.Xna.Framework;
-using GameOfVlad.Levels;
 using System;
+using GameOfVlad.Game.Levels;
 using GameOfVlad.Sprites.Mobs;
 
 namespace GameOfVlad.Sprites.Guns

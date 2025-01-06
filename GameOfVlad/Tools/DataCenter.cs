@@ -37,7 +37,7 @@
         public bool Level30 { get; set; }
         public bool Level31 { get; set; }
 
-        public void LoadData(Game1 game)
+        public void LoadData(GameOfVlad game)
         {
             Level1 = game.DataManager.LevelPassed("Level1");
             Level2 = game.DataManager.LevelPassed("Level2");
