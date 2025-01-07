@@ -2,20 +2,17 @@ using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.Game.Physics;
 
-public class Physic
+public class PhysicsV2
 {
-    private Vector2 _currentVelocity = Vector2.Zero;
-
-    // Применение физики и сил к объекту
-    public void ApplyForces(IPhysicalGameObject obj, ForceDelegate forces, GameTime gameTime)
+    public void ApplyForces(IPhysicalGameObject obj, ForceDelegate force, GameTime gameTime)
     {
         var deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
-
+        
         // Рассчитываем суммарное ускорение
-        Vector2 acceleration = forces(obj) / obj.Mass;
+        Vector2 acceleration = force(obj) / obj.Mass;
 
         // Рассчитываем новую скорость
-        Vector2 newVelocity = _currentVelocity + acceleration * deltaTime;
+        Vector2 newVelocity = obj.Velocity + acceleration * deltaTime;
 
         // Ограничиваем скорость
         if (newVelocity.Length() > obj.MaxVelocity)
@@ -25,9 +22,9 @@ public class Physic
         }
 
         // Обновляем текущую скорость
-        this._currentVelocity = newVelocity;
-
+        obj.Velocity = newVelocity;
+        
         // Обновляем позицию объекта
-        obj.Position += _currentVelocity * deltaTime;
+        obj.Position += obj.Velocity * deltaTime;
     }
 }

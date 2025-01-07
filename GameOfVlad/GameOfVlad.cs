@@ -118,7 +118,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
 
     protected override void Draw(GameTime gameTime)
     {
-        this.GraphicsDevice.Clear(Color.White);
+        this.GraphicsDevice.Clear(new Color(0, 0, 100, 255));
         _spriteBatch.Begin();
 
         // currentState.Draw(gameTime, spriteBatch);

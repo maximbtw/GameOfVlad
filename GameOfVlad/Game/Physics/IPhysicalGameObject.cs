@@ -6,20 +6,18 @@ public interface IPhysicalGameObject
 {
     Vector2 Position { get; set; }
     
-    float Rotation { get; set; }
-    
-    /// <summary>
-    /// Сила тяги
-    /// </summary>
-    float ThrustPower { get; set; }
-    
     /// <summary>
     /// Масса объекта
     /// </summary>
-    float Mass { get; }          
+    float Mass { get; set; }        
     
     /// <summary>
     /// Максимальная скорость объекта
     /// </summary>
-    float MaxVelocity { get; }  
+    float MaxVelocity { get; set; } 
+    
+    /// <summary>
+    /// Скорость
+    /// </summary>
+    public Vector2 Velocity { get; set; }
 }

@@ -21,13 +21,11 @@ public abstract class ColliderEntity(IServiceProvider serviceProvider) : Entity(
     public virtual Rectangle Collider =>
         new((int)this.Position.X, (int)this.Position.Y, (int)this.Size.Width, (int)this.Size.Height);
 
-    protected IGraphicService GraphicService => this.ServiceProvider.GetRequiredService<IGraphicService>();
-
     private ColliderDrawer _colliderDrawer;
 
     protected override void InitCore(ContentManager content)
     {
-        _colliderDrawer = new ColliderDrawer(this, this.GraphicService);
+        _colliderDrawer = new ColliderDrawer(this);
 
         base.InitCore(content);
     }
@@ -41,19 +39,6 @@ public abstract class ColliderEntity(IServiceProvider serviceProvider) : Entity(
 
     protected override void DrawCore(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        // Рисуем объект как повернутый прямоугольник
-        spriteBatch.Draw(
-            this.Texture,
-            Position + Origin, // Позиция объекта с учетом центра вращения
-            null,
-            this.Color, // Цвет объекта (по умолчанию — белый)
-            Rotation, // Угол поворота
-            Origin, // Точка вращения (центр объекта)
-            Vector2.One, // Масштабирование объекта до заданного размера
-            SpriteEffects.None,
-            0f
-        );
-
         if (Settings.ShowCollider)
         {
             _colliderDrawer.DrawCollider(spriteBatch);

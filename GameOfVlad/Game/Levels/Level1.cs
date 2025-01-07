@@ -5,9 +5,7 @@ using GameOfVlad.Game.Physics;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.Modificators;
 using GameOfVlad.Services.Graphic;
-using GameOfVlad.Tools.Keyboards;
 using GameOfVlad.UI;
-using GameOfVlad.UI.Background;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -22,7 +20,10 @@ public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvide
     
     public IEnumerable<IRendererModificator> GetLevelModificators()
     {
-        yield return new PhysicRendererModificator(new Physic());
+        yield return new PhysicRendererModificator
+        {
+            Gravity = new Gravity(new Vector2(800, 800), 5000f)
+        };
     }
 
     private IGraphicService GraphicService => this.ServiceProvider.GetRequiredService<IGraphicService>();
@@ -34,7 +35,9 @@ public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvide
         yield return new PlayerV2(this.ServiceProvider)
         {
             Texture = content.Load<Texture2D>("Sprite/Rocket/Rocket"),
-            Position = new Vector2(100, 100)
+            Position = new Vector2(100, 100),
+            TrustPower = 5000,
+            Mass = 100
         };
     }
 
@@ -86,11 +89,11 @@ public class CanvasLevel1(IGraphicService graphicService) : LevelCanvas(graphicS
 {
     protected override IEnumerable<UiComponent> GetUiComponents(ContentManager content)
     {
-        yield return new Background
-        {
-            Texture = content.Load<Texture2D>("Pages/GamePlay/Backgraund1080"),
-            Size = new Vector2(1920, 1080)
-        };
+        // yield return new Background
+        // {
+        //     Texture = content.Load<Texture2D>("Pages/GamePlay/Backgraund1080"),
+        //     Size = new Vector2(1920, 1080)
+        // };
         
         yield break;
     }

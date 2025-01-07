@@ -6,41 +6,36 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Tools.Draw;
 
-public class ColliderDrawer : IDisposable
+public class ColliderDrawer(ColliderEntity entity) : IDisposable
 {
     // Статическая текстура 1x1 пиксель (общая для всех сущностей)
-    private readonly Texture2D _pixelTexture;
-    private readonly ColliderEntity _entity;
-
-    public ColliderDrawer(ColliderEntity entity, IGraphicService graphicService)
-    {
-        _entity = entity;
-        
-        GraphicsDeviceManager graphicsDeviceManager = graphicService.GetGraphicsDeviceManager();
-
-        _pixelTexture = new Texture2D(graphicsDeviceManager.GraphicsDevice, 1, 1);
-        _pixelTexture.SetData([Color.White]);
-    }
+    private Texture2D _pixelTexture;
 
     public void DrawCollider(SpriteBatch spriteBatch)
     {
+        if (_pixelTexture == null)
+        {
+            _pixelTexture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+            _pixelTexture.SetData([Color.White]);
+        }
+        
         // Получаем вершины прямоугольника (коллайдера)
-        Vector2 topLeft = _entity.Position;
-        Vector2 topRight = _entity.Position + new Vector2(_entity.Size.Width, 0);
-        Vector2 bottomLeft = _entity.Position + new Vector2(0, _entity.Size.Height);
-        Vector2 bottomRight = _entity.Position + new Vector2(_entity.Size.Width, _entity.Size.Height);
+        Vector2 topLeft = entity.Position;
+        Vector2 topRight = entity.Position + new Vector2(entity.Size.Width, 0);
+        Vector2 bottomLeft = entity.Position + new Vector2(0, entity.Size.Height);
+        Vector2 bottomRight = entity.Position + new Vector2(entity.Size.Width, entity.Size.Height);
 
         // Применяем вращение к каждой вершине относительно центра
-        topLeft = RotatePoint(topLeft, _entity.Position + _entity.Origin, _entity.Rotation);
-        topRight = RotatePoint(topRight, _entity.Position + _entity.Origin, _entity.Rotation);
-        bottomLeft = RotatePoint(bottomLeft, _entity.Position + _entity.Origin, _entity.Rotation);
-        bottomRight = RotatePoint(bottomRight, _entity.Position + _entity.Origin, _entity.Rotation);
+        topLeft = RotatePoint(topLeft, entity.Position + entity.Origin, entity.Rotation);
+        topRight = RotatePoint(topRight, entity.Position + entity.Origin, entity.Rotation);
+        bottomLeft = RotatePoint(bottomLeft, entity.Position + entity.Origin, entity.Rotation);
+        bottomRight = RotatePoint(bottomRight, entity.Position + entity.Origin, entity.Rotation);
 
         // Рисуем линии между вершинами
-        DrawLine(spriteBatch, topLeft, topRight, _entity.ColliderColor); // Верхняя линия
-        DrawLine(spriteBatch, topRight, bottomRight, _entity.ColliderColor); // Правая линия
-        DrawLine(spriteBatch, bottomRight, bottomLeft, _entity.ColliderColor); // Нижняя линия
-        DrawLine(spriteBatch, bottomLeft, topLeft, _entity.ColliderColor); // Левая линия
+        DrawLine(spriteBatch, topLeft, topRight, entity.ColliderColor); // Верхняя линия
+        DrawLine(spriteBatch, topRight, bottomRight, entity.ColliderColor); // Правая линия
+        DrawLine(spriteBatch, bottomRight, bottomLeft, entity.ColliderColor); // Нижняя линия
+        DrawLine(spriteBatch, bottomLeft, topLeft, entity.ColliderColor); // Левая линия
     }
 
     private Vector2 RotatePoint(Vector2 point, Vector2 center, float angle)
