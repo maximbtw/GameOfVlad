@@ -1,5 +1,10 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Entities.Interfaces;
+using GameOfVlad.GameObjects.UI.Interfaces;
+using GameOfVlad.Scenes.Game;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Game;
@@ -8,54 +13,54 @@ public abstract class LevelBase(IServiceProvider serviceProvider)
 {
     protected readonly IServiceProvider ServiceProvider = serviceProvider;
     
-    protected readonly List<IGameObject> GameObjects = new();
-    private ILevelCanvas Canvas { get; set; }
-    
-    public void Init(ContentManager content)
-    {
-        this.Canvas = CreateCanvas();
-        this.Canvas.Init(content);
+    private readonly List<IGameObject> _alwaysVisiblyGameObjects = new();
+    private readonly List<IGameObject> _gameObjects = new();
 
-        foreach (IGameObject gameObject in InitGameObjects(content))
+    public IEnumerable<IGameObject> GetGameObjects() => _gameObjects.Concat(_alwaysVisiblyGameObjects);
+    
+    public void Load(ContentManager content)
+    {
+        foreach (IGameGameObject gameObject in LoadGameGameObjects(content))
         {
-            this.GameObjects.Add(gameObject);
+            _gameObjects.Add(gameObject);
         }
         
-        InitCore(content);
-    }
-
-    public void Terminate()
-    {
-        this.GameObjects.Clear();
+        foreach (IUiComponent gameObject in LoadUiComponents(content))
+        {
+            _gameObjects.Add(gameObject);
+        }
         
-        TerminateCore();
+        foreach (IGameGameObject gameObject in LoadAlwaysVisiblyGameGameObjects(content))
+        {
+            _alwaysVisiblyGameObjects.Add(gameObject);
+        }
+        
+        foreach (IUiComponent gameObject in LoadAlwaysVisiblyUiComponents(content))
+        {
+            _alwaysVisiblyGameObjects.Add(gameObject);
+        }
     }
 
-    public IEnumerable<IGameObject> GetGameObjects() => GameObjects;
-
-    public void Play()
+    public void Unload()
     {
-        this.GameObjects.ForEach(x => x.IsActive = true);
+        _gameObjects.ForEach(x=>x.Destroyed = true);
+        _gameObjects.Clear();
     }
 
-    public void Stop()
+    public void GameStateChanged(GameState state)
     {
-        this.GameObjects.ForEach(x => x.IsActive = false);
+        if (state == GameState.Play)
+        {
+            _gameObjects.ForEach(x => x.IsActive = true);
+        }
+        else if (state == GameState.Pause)
+        {
+            _gameObjects.ForEach(x => x.IsActive = false);
+        }
     }
-
-    public ILevelCanvas GetCanvas() => this.Canvas;
     
-    public abstract ILevelCanvas CreateCanvas();
-
-    protected abstract IEnumerable<IGameObject> InitGameObjects(ContentManager content);
-
-    protected virtual void InitCore(ContentManager content)
-    {
-        
-    }
-
-    protected virtual void TerminateCore()
-    {
-        
-    }
+    protected abstract IEnumerable<IUiComponent> LoadAlwaysVisiblyUiComponents(ContentManager content);
+    protected abstract IEnumerable<IGameGameObject> LoadAlwaysVisiblyGameGameObjects(ContentManager content);
+    protected abstract IEnumerable<IUiComponent> LoadUiComponents(ContentManager content);
+    protected abstract IEnumerable<IGameGameObject> LoadGameGameObjects(ContentManager content);
 }

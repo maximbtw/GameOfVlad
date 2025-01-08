@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameOfVlad.Entities;
+using GameOfVlad.GameObjects.Entities;
+using GameOfVlad.GameObjects.Entities.Interfaces;
+using GameOfVlad.GameObjects.UI.Components;
+using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.Modificators;
-using GameOfVlad.UI;
-using GameOfVlad.UI.Background;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -12,13 +13,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Game.Levels;
 
-
 public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvider), ILevel
 {
     public Size LevelSize => new(Width: 2000, Height: 2000);
     
     public LevelType LevelType => LevelType.Level1;
-    
+
     public IEnumerable<IRendererModificator> GetLevelModificators()
     {
         yield return new PhysicRendererModificator
@@ -29,9 +29,26 @@ public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvide
         yield return new LevelBorderRendererModificator(Vector2.Zero, this.LevelSize);
     }
     
-    public override ILevelCanvas CreateCanvas() => new CanvasLevel1(this.ServiceProvider);
-    
-    protected override IEnumerable<IGameObject> InitGameObjects(ContentManager content)
+    protected override IEnumerable<IUiComponent> LoadAlwaysVisiblyUiComponents(ContentManager content)
+    {
+        yield return new BackgroundGenerator(
+            this.ServiceProvider,
+            texture: content.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_04-512x512"), 
+            new Vector2(-1000,-1000),
+            Size.Create(width: 5000, height: 5000));
+    }
+
+    protected override IEnumerable<IGameGameObject> LoadAlwaysVisiblyGameGameObjects(ContentManager content)
+    {
+        yield break;
+    }
+
+    protected override IEnumerable<IUiComponent> LoadUiComponents(ContentManager content)
+    {
+        yield break;
+    }
+
+    protected override IEnumerable<IGameGameObject> LoadGameGameObjects(ContentManager content)
     {
         yield return new PlayerV2(this.ServiceProvider)
         {
@@ -84,28 +101,4 @@ public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvide
         {
         };
     }*/
-}
-
-public class CanvasLevel1(IServiceProvider serviceProvider) : LevelCanvas(serviceProvider), ILevelCanvas
-{
-    protected override IEnumerable<UiComponent> GetUiComponents(ContentManager content)
-    {
-        // yield return new Background
-        // {
-        //     Texture = content.Load<Texture2D>("Pages/GamePlay/Backgraund1080"),
-        //     Size = new Vector2(1920, 1080)
-        // };
-
-        yield return new BackgroundGenerator(
-            texture: content.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_04-512x512"), 
-            new Vector2(-1000,-1000),
-            Size.Create(width: 5000, height: 5000));
-        
-        yield break;
-    }
-
-    protected override IEnumerable<UiComponent> GetHideUiComponents(ContentManager content)
-    {
-        yield break;
-    }
 }

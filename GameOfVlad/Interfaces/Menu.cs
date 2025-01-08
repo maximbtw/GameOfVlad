@@ -3,8 +3,8 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using GameOfVlad.Game.Levels;
+using GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 using GameOfVlad.Scenes.MainMenu;
-using GameOfVlad.UI.Button;
 
 namespace GameOfVlad.Interfaces
 {

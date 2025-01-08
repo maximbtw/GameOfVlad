@@ -1,6 +1,7 @@
 using System.Collections.Generic;
-using GameOfVlad.Entities.Interfaces;
 using GameOfVlad.Game.Physics;
+using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Entities.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

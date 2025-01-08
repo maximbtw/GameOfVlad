@@ -1,14 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Scenes.MainMenu;
 
-public sealed class MainMenuScene(IServiceProvider serviceProvider)
-    : SceneBase<MainMenuSceneCanvas>(serviceProvider), IScene
+public partial class MainMenuScene(IServiceProvider serviceProvider) : SceneBase(serviceProvider), IScene
 {
     public SceneType Type => SceneType.MainMenu;
     
@@ -34,15 +36,8 @@ public sealed class MainMenuScene(IServiceProvider serviceProvider)
         };
     }
 
-    protected override MainMenuSceneCanvas GetCanvas()
+    protected override IEnumerable<IGameGameObject> InitInitGameGameObjectsCore(ContentManager content)
     {
-        var canvas = new MainMenuSceneCanvas(this.ServiceProvider)
-        {
-            ExitGame = this.GameService.ExitGame,
-            SetGameView = () => this.SceneService.SetScene(SceneType.Game),
-            SetNewView = this.SceneService.SetScene,
-        };
-
-        return canvas;
+        yield break;
     }
 }

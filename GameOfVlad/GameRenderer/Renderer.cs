@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameOfVlad.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -53,9 +54,15 @@ public class Renderer(ContentManager contentManager)
 
     public void Update(GameTime gameTime)
     {
+        var destroy = new List<IGameObject>();
         foreach (IGameObject gameObject in _gameObjects.OrderBy(x => x.UpdateOrder))
         {
-            UpdateGameObject(gameTime, gameObject);
+            UpdateGameObject(gameTime, gameObject, ref destroy);
+        }
+
+        foreach (IGameObject gameObject in destroy)
+        {
+            RemoveGameObject(gameObject);
         }
     }
 
@@ -67,8 +74,15 @@ public class Renderer(ContentManager contentManager)
         }
     }
 
-    private void UpdateGameObject(GameTime gameTime, IGameObject gameObject)
+    private void UpdateGameObject(GameTime gameTime, IGameObject gameObject, ref List<IGameObject> destroy)
     {
+        if (gameObject.Destroyed)
+        {
+            destroy.Add(gameObject);
+            
+            return;
+        }
+        
         if (!gameObject.IsActive)
         {
             return;
@@ -87,12 +101,13 @@ public class Renderer(ContentManager contentManager)
         
         foreach (IGameObject child in gameObject.Children.OrderBy(x => x.UpdateOrder))
         {
-            UpdateGameObject(gameTime, child);
+            UpdateGameObject(gameTime, child, ref destroy);
         }
     }
     
     private void DrawGameObject(GameTime gameTime, SpriteBatch spriteBatch, IGameObject gameObject)
     {
+        //TODO: сценарии когда объект не активен, но нужно отрисовать
         if (!gameObject.IsActive)
         {
             return;

@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -13,8 +12,5 @@ public class CameraService(Utils.Camera.Camera camera) : ICameraService
         camera.Position = position;
     }
 
-    public void ResetCamera()
-    {
-        camera.Position = Vector2.Zero;
-    }
+    public Utils.Camera.Camera GetCamera() => camera;
 }

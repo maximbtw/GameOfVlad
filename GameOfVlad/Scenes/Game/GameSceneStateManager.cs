@@ -15,17 +15,15 @@ public class GameSceneStateManager(IGraphicService graphicService)
     
     public GameState GetState() => _state;
     
-    public ILevel GetLevel() => _level;
-    
     public void SetLevel(ILevel newLevel)
     {
         ContentManager content = graphicService.GetContentManager();
 
         var eventArgs = new GameLevelChangeEventArgs(_level, newLevel);
         
-        _level?.Terminate();
+        _level?.Unload();
         _level = newLevel;
-        _level.Init(content);
+        _level.Load(content);
         
         OnLevelChanged?.Invoke(this, eventArgs);
     }
@@ -34,6 +32,8 @@ public class GameSceneStateManager(IGraphicService graphicService)
     {
         if (_state != state)
         {
+            _level.GameStateChanged(state);
+            
             OnGameStateChanged?.Invoke(this, new GameStateChangeEventArgs(state));
         }
         _state = state;

@@ -1,5 +1,5 @@
 using System;
-using GameOfVlad.Entities;
+using GameOfVlad.GameObjects.Entities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

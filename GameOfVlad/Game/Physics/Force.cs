@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameOfVlad.Entities.Interfaces;
+using GameOfVlad.GameObjects.Entities.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.Game.Physics;

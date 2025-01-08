@@ -7,5 +7,5 @@ public interface ICameraService
 {
     void SetCameraPosition(Vector2 position, GraphicsDevice graphicsDevice);
 
-    void ResetCamera();
+    Utils.Camera.Camera GetCamera();
 }

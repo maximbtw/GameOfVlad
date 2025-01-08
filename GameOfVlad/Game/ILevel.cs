@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using GameOfVlad.GameObjects;
 using GameOfVlad.GameRenderer;
+using GameOfVlad.Scenes.Game;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework.Content;
 
@@ -11,17 +13,13 @@ public interface ILevel
     
     LevelType LevelType { get; }
 
-    void Init(ContentManager content);
+    void Load(ContentManager content);
 
-    void Terminate();
-    
-    ILevelCanvas GetCanvas();
+    void Unload();
     
     IEnumerable<IGameObject> GetGameObjects();
     
     IEnumerable<IRendererModificator> GetLevelModificators();
 
-    void Play();
-
-    void Stop();
+    void GameStateChanged(GameState state);
 }

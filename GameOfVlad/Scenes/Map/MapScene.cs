@@ -1,13 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.Services.Level;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Scenes.Map;
 
-public sealed class MapScene(IServiceProvider serviceProvider) : SceneBase<MapSceneCanvas>(serviceProvider), IScene
+public partial class MapScene(IServiceProvider serviceProvider) : SceneBase(serviceProvider), IScene
 {
     public SceneType Type => SceneType.Map;
     
@@ -25,15 +28,8 @@ public sealed class MapScene(IServiceProvider serviceProvider) : SceneBase<MapSc
         };
     }
 
-    protected override MapSceneCanvas GetCanvas()
+    protected override IEnumerable<IGameGameObject> InitInitGameGameObjectsCore(ContentManager content)
     {
-        return new MapSceneCanvas(this.ServiceProvider)
-        {
-            SetLevel = level =>
-            {
-                this.LevelService.SetLevel(level);
-                this.SceneService.SetScene(SceneType.Game);
-            }
-        };
+        yield break;
     }
 }
