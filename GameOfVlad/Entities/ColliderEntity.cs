@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel;
 using GameOfVlad.Services.Graphic;
-using GameOfVlad.Tools.Draw;
+using GameOfVlad.Utils.Draw;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

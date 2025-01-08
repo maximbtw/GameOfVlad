@@ -1,9 +1,9 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
 using System.Collections.Generic;
-using System;
 using GameOfVlad.Sprites;
+using Microsoft.Xna.Framework;
 
-namespace GameOfVlad.Tools
+namespace GameOfVlad.Utils
 {
     public delegate Vector2 RocketForce(Player rocket);
     public delegate Vector2 Gravity(Size size, Vector2 location);

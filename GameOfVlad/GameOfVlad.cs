@@ -1,13 +1,13 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
-using GameOfVlad.Tools;
 using System;
 using GameOfVlad.Scenes;
 using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Graphic;
 using GameOfVlad.Services.Level;
 using GameOfVlad.Services.Scene;
+using GameOfVlad.Utils;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GameOfVlad;

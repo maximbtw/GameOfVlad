@@ -1,7 +1,7 @@
 ﻿using GameOfVlad.Sprites;
 using Microsoft.Xna.Framework;
 
-namespace GameOfVlad.Tools
+namespace GameOfVlad.Utils
 {
     public class Collides
     {

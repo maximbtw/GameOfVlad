@@ -4,7 +4,7 @@ using GameOfVlad.GameEffects;
 using GameOfVlad.Interfaces;
 using GameOfVlad.Sprites;
 using GameOfVlad.Sprites.Mobs;
-using GameOfVlad.Tools;
+using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

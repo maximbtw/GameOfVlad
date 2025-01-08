@@ -1,8 +1,8 @@
 ﻿using GameOfVlad.Game.Levels;
+using GameOfVlad.Utils;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
-using GameOfVlad.Tools;
 
 
 namespace GameOfVlad.Sprites

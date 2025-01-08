@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using System;
 using GameOfVlad.Game.Levels;
-using GameOfVlad.Tools;
+using GameOfVlad.Utils;
 
 namespace GameOfVlad.Sprites.Mobs
 {

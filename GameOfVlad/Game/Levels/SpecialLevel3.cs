@@ -5,7 +5,7 @@ using GameOfVlad.Sprites;
 using GameOfVlad.Sprites.Bonuses;
 using GameOfVlad.Sprites.Mobs;
 using GameOfVlad.Sprites.Mobs.Boss;
-using GameOfVlad.Tools;
+using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

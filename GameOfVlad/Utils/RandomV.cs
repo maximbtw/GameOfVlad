@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
 
-namespace GameOfVlad.Tools
+namespace GameOfVlad.Utils
 {
     public static class RandomV
     {

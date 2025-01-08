@@ -1,4 +1,4 @@
-﻿namespace GameOfVlad.Tools
+﻿namespace GameOfVlad.Utils
 {
     public class DataCenter
     {

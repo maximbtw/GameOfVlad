@@ -4,7 +4,7 @@ using System;
 using GameOfVlad.Game.Levels;
 using Microsoft.Xna.Framework.Content;
 using GameOfVlad.Sprites.Shells;
-using GameOfVlad.Tools;
+using GameOfVlad.Utils;
 
 namespace GameOfVlad.Sprites.Mobs
 {

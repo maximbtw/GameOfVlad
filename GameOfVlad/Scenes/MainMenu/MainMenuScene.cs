@@ -1,7 +1,7 @@
 ﻿using System;
 using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Scene;
-using GameOfVlad.Tools.Keyboards;
+using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework.Input;
 

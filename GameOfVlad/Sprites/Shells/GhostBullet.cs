@@ -1,8 +1,8 @@
 ﻿using GameOfVlad.Game.Levels;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
-using GameOfVlad.Tools;
 using GameOfVlad.Sprites.Mobs;
+using GameOfVlad.Utils;
 
 namespace GameOfVlad.Sprites.Shells
 {

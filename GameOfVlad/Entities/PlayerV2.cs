@@ -1,6 +1,6 @@
 using System;
 using GameOfVlad.Game.Physics;
-using GameOfVlad.Tools.Keyboards;
+using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

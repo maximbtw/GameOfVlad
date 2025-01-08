@@ -2,7 +2,7 @@
 using System.IO;
 using System.Xml;
 
-namespace GameOfVlad.Tools
+namespace GameOfVlad.Utils
 {
     public class DataManager
     {

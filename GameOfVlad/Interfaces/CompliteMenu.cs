@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using GameOfVlad.Game.Levels;
 using Microsoft.Xna.Framework.Media;
-using GameOfVlad.Tools;
 using GameOfVlad.UI.Button;
 using Microsoft.Xna.Framework.Input;
 

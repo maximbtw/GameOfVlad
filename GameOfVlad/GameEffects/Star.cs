@@ -2,10 +2,10 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
-using GameOfVlad.Tools;
 using GameOfVlad.Sprites;
 using System;
 using GameOfVlad.Game.Levels;
+using GameOfVlad.Utils;
 
 namespace GameOfVlad.GameEffects
 {

@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using GameOfVlad.Game.Levels;
 using GameOfVlad.Scenes.MainMenu;
-using GameOfVlad.Tools;
 using GameOfVlad.UI.Button;
 
 namespace GameOfVlad.Interfaces

@@ -1,7 +1,7 @@
 using GameOfVlad.Scenes.Game;
 using GameOfVlad.Scenes.MainMenu;
 using GameOfVlad.Scenes.Map;
-using GameOfVlad.Tools.Keyboards;
+using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GameOfVlad.Scenes;

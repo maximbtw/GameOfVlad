@@ -2,7 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameOfVlad.Tools.Keyboards;
+namespace GameOfVlad.Utils.Keyboards;
 
 public sealed class KeyboardStateObserver
 {

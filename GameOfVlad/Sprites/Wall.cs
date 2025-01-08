@@ -1,7 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework;
-using GameOfVlad.Tools;
 using System;
 using GameOfVlad.Sprites.Mobs;
 using System.Collections.Generic;

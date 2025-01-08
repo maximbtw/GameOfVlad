@@ -1,10 +1,9 @@
 using System;
 using GameOfVlad.Entities;
-using GameOfVlad.Services.Graphic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.Tools.Draw;
+namespace GameOfVlad.Utils.Draw;
 
 public class ColliderDrawer(ColliderEntity entity) : IDisposable
 {
