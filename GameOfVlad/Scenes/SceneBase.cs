@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Scenes;
 
-public abstract class SceneBase<TCanvas> where TCanvas : ICanvas
+public abstract class SceneBase<TCanvas> : IDisposable  where TCanvas : ICanvas
 {
     protected Renderer Renderer;
     private TCanvas _canvas;
@@ -99,4 +99,9 @@ public abstract class SceneBase<TCanvas> where TCanvas : ICanvas
     protected abstract void BindKeyboardKeys(KeyboardStateObserver keyboard);
     
     protected abstract TCanvas GetCanvas();
+
+    public void Dispose()
+    {
+        Terminate();
+    }
 }

@@ -1,3 +1,4 @@
+using GameOfVlad.Entities.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.Game.Physics;

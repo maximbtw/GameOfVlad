@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameOfVlad.Entities.Interfaces;
 using GameOfVlad.Game.Physics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -18,7 +19,7 @@ public class PhysicRendererModificator : IRendererModificator
         {
             var forces = new List<ForceDelegate>();
 
-            if (obj is ITrustForcedGameObject trustForcedGameObject)
+            if (obj is ITrustForcePhysicalGameObject trustForcedGameObject)
             {
                 ForceDelegate thrustForce = Force.CreateThrustForce(trustForcedGameObject);
                 forces.Add(thrustForce);

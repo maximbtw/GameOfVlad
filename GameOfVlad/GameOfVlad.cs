@@ -3,11 +3,13 @@ using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
 using System;
 using GameOfVlad.Scenes;
+using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Graphic;
 using GameOfVlad.Services.Level;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Utils;
+using GameOfVlad.Utils.Camera;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GameOfVlad;
@@ -18,6 +20,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     private readonly SpriteBatch _spriteBatch;
     
     private GameStateManager _gameStateManager;
+    private Camera _camera;
         
     // DI-контейнер
     private readonly IServiceProvider _serviceProvider;
@@ -54,6 +57,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         _graphics.ApplyChanges();
             
         _spriteBatch = new SpriteBatch(this.GraphicsDevice);
+        _camera = new Camera(this.GraphicsDevice);
             
         // DI
         var serviceCollection = new ServiceCollection();
@@ -67,6 +71,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         services.AddSingleton<IGraphicService>(new GraphicService(this.Content, _graphics));
         services.AddSingleton<ISceneService, SceneService>();
         services.AddSingleton<ILevelService, LevelService>();
+        services.AddSingleton<ICameraService>(new CameraService(_camera));
         
         services.RegisterScenes();
     }
@@ -112,6 +117,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         // UpdateSounds(gameTime);
             
         _gameStateManager?.Update(gameTime);
+        _camera.Update();
             
         base.Update(gameTime);
     }
@@ -119,13 +125,13 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     protected override void Draw(GameTime gameTime)
     {
         this.GraphicsDevice.Clear(new Color(0, 0, 100, 255));
-        _spriteBatch.Begin();
-
-        // currentState.Draw(gameTime, spriteBatch);
+        
+        _spriteBatch.Begin(transformMatrix: _camera.View);
             
         _gameStateManager?.Draw(gameTime, _spriteBatch);
             
         _spriteBatch.End();
+        
         base.Draw(gameTime);
     }
         
@@ -138,8 +144,8 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         }
         else
         {
-            _graphics.PreferredBackBufferWidth = 1920;
-            _graphics.PreferredBackBufferHeight = 1080;
+            _graphics.PreferredBackBufferWidth = Settings.ScreenWidth;
+            _graphics.PreferredBackBufferHeight = Settings.ScreenHeight;
         }
 
         _graphics.ApplyChanges();

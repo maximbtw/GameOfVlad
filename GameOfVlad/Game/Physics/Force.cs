@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameOfVlad.Entities.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.Game.Physics;
@@ -12,7 +13,7 @@ public static class Force
     /// <summary>
     /// Создаёт силу тяги, направленную вперёд, по направлению Rotation
     /// </summary>
-    public static ForceDelegate CreateThrustForce(ITrustForcedGameObject trustForce)
+    public static ForceDelegate CreateThrustForce(ITrustForcePhysicalGameObject trustForce)
     {
         return _ =>
         {
@@ -23,8 +24,6 @@ public static class Force
             );
             
             float force = trustForce.TrustPower;
-            
-            Console.WriteLine($"Thrust force: {direction} - {force}");
             
             return direction * force;
         };
@@ -50,8 +49,6 @@ public static class Force
             // Модифицированная формула с "+ offset" для сглаживания
             float offset = 0.002f; // Смещение для уменьшения влияния расстояния
             float force = gravityStrength / (distance * offset);
-
-            Console.WriteLine($"Gravity force: {direction} - {force}");
             
             return direction * force;
         };

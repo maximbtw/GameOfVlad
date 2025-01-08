@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework;
 
-namespace GameOfVlad.Game.Physics;
+namespace GameOfVlad.Entities.Interfaces;
 
 public interface IPhysicalGameObject
 {

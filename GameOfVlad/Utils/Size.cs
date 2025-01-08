@@ -1,13 +1,3 @@
-﻿namespace GameOfVlad.Utils
-{
-    public struct Size
-    {
-        public float Width { get; set; }
-        public float Height { get; set; }
-        public Size(float width, float height)
-        {
-            Width = width;
-            Height = height;
-        }
-    }
-}
+﻿namespace GameOfVlad.Utils;
+
+public record struct Size(float Width, float Height);

@@ -4,9 +4,12 @@ using GameOfVlad.GameRenderer;
 using GameOfVlad.Services.Level;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.UI.Forms.GamePause;
+using GameOfVlad.Utils.Draw;
 using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Scenes.Game;
