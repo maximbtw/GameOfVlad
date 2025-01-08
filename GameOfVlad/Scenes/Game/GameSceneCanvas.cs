@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using GameOfVlad.Game;
-using GameOfVlad.Services.Graphic;
 using GameOfVlad.UI;
 using GameOfVlad.UI.Forms.GamePause;
 using Microsoft.Xna.Framework.Content;
@@ -8,9 +8,9 @@ using Microsoft.Xna.Framework.Content;
 namespace GameOfVlad.Scenes.Game;
 
 public sealed class GameSceneCanvas(
-    IGraphicService graphicService,
+    IServiceProvider serviceProvider,
     GameSceneStateManager gameStateManager,
-    GamePauseFormEventConfiguration gamePauseFormEventConfiguration) : CanvasBase(graphicService), ICanvas
+    GamePauseFormEventConfiguration gamePauseFormEventConfiguration) : CanvasBase(serviceProvider), ICanvas
 {
     private readonly GamePauseForm _gamePauseForm = new(gamePauseFormEventConfiguration);
 

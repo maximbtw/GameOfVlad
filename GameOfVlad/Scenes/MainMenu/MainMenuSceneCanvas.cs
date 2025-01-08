@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Scenes.MainMenu;
 
-public sealed class MainMenuSceneCanvas(IGraphicService graphicService) : CanvasBase(graphicService), ICanvas
+public sealed class MainMenuSceneCanvas(IServiceProvider serviceProvider) : CanvasBase(serviceProvider), ICanvas
 {
     public Action SetGameView { get; init; }
     public Action<SceneType> SetNewView { get; init; }

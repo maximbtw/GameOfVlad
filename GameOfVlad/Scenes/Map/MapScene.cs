@@ -27,7 +27,7 @@ public sealed class MapScene(IServiceProvider serviceProvider) : SceneBase<MapSc
 
     protected override MapSceneCanvas GetCanvas()
     {
-        return new MapSceneCanvas(this.GraphicService)
+        return new MapSceneCanvas(this.ServiceProvider)
         {
             SetLevel = level =>
             {

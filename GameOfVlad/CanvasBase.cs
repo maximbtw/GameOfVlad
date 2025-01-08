@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using GameOfVlad.Services.Graphic;
 using GameOfVlad.UI;
@@ -5,9 +6,10 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad;
 
-public abstract class CanvasBase(IGraphicService graphicService)
+public abstract class CanvasBase(IServiceProvider serviceProvider)
 {
     protected readonly List<UiComponent> UiComponents = new();
+    protected readonly IServiceProvider ServiceProvider = serviceProvider;
 
     public IEnumerable<UiComponent> GetComponents() => this.UiComponents;
     

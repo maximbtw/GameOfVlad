@@ -36,7 +36,7 @@ public sealed class MainMenuScene(IServiceProvider serviceProvider)
 
     protected override MainMenuSceneCanvas GetCanvas()
     {
-        var canvas = new MainMenuSceneCanvas(this.GraphicService)
+        var canvas = new MainMenuSceneCanvas(this.ServiceProvider)
         {
             ExitGame = this.GameService.ExitGame,
             SetGameView = () => this.SceneService.SetScene(SceneType.Game),

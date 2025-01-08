@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Scenes.Map;
 
-public sealed class MapSceneCanvas(IGraphicService graphicService) : CanvasBase(graphicService), ICanvas
+public sealed class MapSceneCanvas(IServiceProvider serviceProvider) : CanvasBase(serviceProvider), ICanvas
 {
     public Action<LevelType> SetLevel { get; init; }
     

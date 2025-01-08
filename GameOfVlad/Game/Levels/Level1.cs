@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using GameOfVlad.Entities;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.Modificators;
-using GameOfVlad.Services.Graphic;
 using GameOfVlad.UI;
 using GameOfVlad.UI.Background;
 using GameOfVlad.Utils;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Gravity = GameOfVlad.Game.Physics.Gravity;
 
 namespace GameOfVlad.Game.Levels;
 
@@ -31,10 +28,8 @@ public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvide
         
         yield return new LevelBorderRendererModificator(Vector2.Zero, this.LevelSize);
     }
-
-    private IGraphicService GraphicService => this.ServiceProvider.GetRequiredService<IGraphicService>();
     
-    public override ILevelCanvas CreateCanvas() => new CanvasLevel1(GraphicService);
+    public override ILevelCanvas CreateCanvas() => new CanvasLevel1(this.ServiceProvider);
     
     protected override IEnumerable<IGameObject> InitGameObjects(ContentManager content)
     {
@@ -91,15 +86,20 @@ public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvide
     }*/
 }
 
-public class CanvasLevel1(IGraphicService graphicService) : LevelCanvas(graphicService), ILevelCanvas
+public class CanvasLevel1(IServiceProvider serviceProvider) : LevelCanvas(serviceProvider), ILevelCanvas
 {
     protected override IEnumerable<UiComponent> GetUiComponents(ContentManager content)
     {
-        yield return new Background
-        {
-            Texture = content.Load<Texture2D>("Pages/GamePlay/Backgraund1080"),
-            Size = new Vector2(1920, 1080)
-        };
+        // yield return new Background
+        // {
+        //     Texture = content.Load<Texture2D>("Pages/GamePlay/Backgraund1080"),
+        //     Size = new Vector2(1920, 1080)
+        // };
+
+        yield return new BackgroundGenerator(
+            texture: content.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_04-512x512"), 
+            new Vector2(-1000,-1000),
+            Size.Create(width: 5000, height: 5000));
         
         yield break;
     }

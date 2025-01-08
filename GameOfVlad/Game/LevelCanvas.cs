@@ -1,11 +1,11 @@
+using System;
 using System.Collections.Generic;
-using GameOfVlad.Services.Graphic;
 using GameOfVlad.UI;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Game;
 
-public abstract class LevelCanvas(IGraphicService graphicService) : CanvasBase(graphicService)
+public abstract class LevelCanvas(IServiceProvider serviceProvider) : CanvasBase(serviceProvider)
 {
     private readonly List<UiComponent> _hidedComponents = new();
 
