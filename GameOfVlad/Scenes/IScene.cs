@@ -8,7 +8,7 @@ public interface IScene
 {
     SceneType Type { get; }
     
-    void Load(ContentManager content);
+    void Load();
 
     void Unload();
     

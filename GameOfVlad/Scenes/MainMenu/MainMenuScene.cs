@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.GameObjectRendererModificators;
@@ -13,16 +12,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Scenes.MainMenu;
 
-public partial class MainMenuScene(IServiceProvider serviceProvider) : SceneBase(serviceProvider), IScene
+public partial class MainMenuScene(ContentManager contentManager) : SceneBase(contentManager), IScene
 {
     public SceneType Type => SceneType.MainMenu;
     
-    private ISceneService SceneService => ServiceProvider.GetRequiredService<ISceneService>();
-    private IGameService GameService => this.ServiceProvider.GetRequiredService<IGameService>();
-    private ICameraService CameraService => this.ServiceProvider.GetRequiredService<ICameraService>();
-    private IMouseService MouseService => this.ServiceProvider.GetRequiredService<IMouseService>();
+    private ISceneService SceneService => this.ContentManager.ServiceProvider.GetRequiredService<ISceneService>();
+    private IGameService GameService => this.ContentManager.ServiceProvider.GetRequiredService<IGameService>();
+    private ICameraService CameraService => this.ContentManager.ServiceProvider.GetRequiredService<ICameraService>();
+    private IMouseService MouseService => this.ContentManager.ServiceProvider.GetRequiredService<IMouseService>();
 
-    protected override void LoadCore(ContentManager content)
+    protected override void LoadCore()
     {
         AddDefaultRendererModificators();
         
@@ -50,7 +49,7 @@ public partial class MainMenuScene(IServiceProvider serviceProvider) : SceneBase
         AddRendererModificators(modificators);
     }
 
-    protected override IEnumerable<IGameGameObject> InitInitGameGameObjectsCore(ContentManager content)
+    protected override IEnumerable<IGameGameObject> InitInitGameGameObjectsCore()
     {
         yield break;
     }

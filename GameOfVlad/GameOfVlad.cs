@@ -1,21 +1,16 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
-using System;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.OldProject;
 using GameOfVlad.Scenes;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Game;
-using GameOfVlad.Services.Graphic;
-using GameOfVlad.Services.Level;
 using GameOfVlad.Services.Mouse;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Utils.Camera;
-using GameOfVlad.Utils.Keyboards;
 using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad;
 
@@ -25,7 +20,6 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     private readonly SpriteBatch _spriteBatch;
 
     private readonly GameSceneRenderer _gameSceneRenderer;
-    private readonly IServiceProvider _serviceProvider;
     private readonly Camera _camera;
     private readonly MouseInput _mouseInput;
 
@@ -49,7 +43,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
 
     public GameOfVlad()
     {
-        this.Content.RootDirectory = "Content";
+        //this.Content.RootDirectory = "Content";
         this.IsMouseVisible = true;
 
         _graphics = new GraphicsDeviceManager(this);
@@ -64,32 +58,23 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         _spriteBatch = new SpriteBatch(this.GraphicsDevice);
         _camera = new Camera(this.GraphicsDevice);
         _mouseInput = new MouseInput();
-        _gameSceneRenderer = new GameSceneRenderer(this.Content);
+        _gameSceneRenderer = new GameSceneRenderer();
 
-        var serviceCollection = new ServiceCollection();
-        ConfigureServices(serviceCollection);
-        _serviceProvider = serviceCollection.BuildServiceProvider();
+        ConfigureServices();
     }
+    
 
-    private void ConfigureServices(IServiceCollection services)
+    private void ConfigureServices()
     {
-        services.AddSingleton<IGameService>(new GameService(this));
-        services.AddSingleton<IGraphicService>(new GraphicService(this.Content, _graphics));
-        services.AddSingleton<ISceneService, SceneService>(x => new SceneService(x, _gameSceneRenderer));
-        services.AddSingleton<ILevelService, LevelService>();
-        services.AddSingleton<ICameraService>(new CameraService(_camera));
-        services.AddSingleton<IMouseService>(new MouseService(_mouseInput));
-        services.AddTransient<KeyboardInputObserver>();
-
-        services.RegisterScenes();
+        this.Services.AddService(typeof(IGameService), new GameService(this));
+        this.Services.AddService(typeof(ISceneService), new SceneService(this.Services, _gameSceneRenderer));
+        this.Services.AddService(typeof(ICameraService), new CameraService(_camera));
+        this.Services.AddService(typeof(IMouseService),new MouseService(_mouseInput));
     }
 
     protected override void Initialize()
     {
-        var sceneService = _serviceProvider.GetRequiredService<ISceneService>();
-        var levelService = _serviceProvider.GetRequiredService<ILevelService>();
-        levelService.LoadLevelsToCache();
-
+        var sceneService = this.Services.GetRequiredService<ISceneService>();
         sceneService.PushScene(SceneType.MainMenu);
 
         // BackgraundMusic = Content.Load<Song>("Pages/MainMenu/Music");

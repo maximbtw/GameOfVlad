@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.Entities;
 
-public abstract class ColliderEntity(IServiceProvider serviceProvider) : Entity(serviceProvider)
+public abstract class ColliderEntity(ContentManager contentManager) : Entity(contentManager)
 {
     public Color ColliderColor { get; set; } = Color.Red;
     public float Rotation { get; set; }
@@ -50,11 +50,11 @@ public abstract class ColliderEntity(IServiceProvider serviceProvider) : Entity(
         return new Vector2(rotatedX, rotatedY) + center;
     }
 
-    public override void Init(ContentManager content)
+    public override void Init()
     {
         _colliderDrawer = new ColliderDrawer((IColliderGameObject)this);
 
-        base.Init(content);
+        base.Init();
     }
 
     public override void Terminate()

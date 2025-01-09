@@ -41,25 +41,25 @@ public abstract class UiComponentBase : IDisposable
         ? Rectangle.Empty
         : new Rectangle((int)CameraPosition.X, (int)CameraPosition.Y, Texture.Width, Texture.Height);
 
-    protected readonly IServiceProvider ServiceProvider;
+    protected readonly ContentManager ContentManager;
     
-    protected ICameraService CameraService => this.ServiceProvider.GetRequiredService<ICameraService>();
+    protected ICameraService CameraService => this.ContentManager.ServiceProvider.GetRequiredService<ICameraService>();
     private readonly UiColliderDrawer _drawCollider;
 
-    protected UiComponentBase(IServiceProvider serviceProvider)
+    protected UiComponentBase(ContentManager contentManager)
     {
-        this.ServiceProvider = serviceProvider;
+        this.ContentManager = contentManager;
         
         _drawCollider = new UiColliderDrawer((IUiComponent)this);
     }
 
-    public virtual void Init(ContentManager content)
+    public virtual void Init()
     {
     }
 
     public virtual void Terminate()
     {
-        //this.Texture.Dispose();
+        _drawCollider.Dispose();
     }
     
     public virtual void Update(GameTime gameTime)

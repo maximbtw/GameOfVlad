@@ -5,35 +5,35 @@ using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Utils.Keyboards;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Scenes;
 
-public abstract class SceneBase(IServiceProvider serviceProvider) : IDisposable
+public abstract class SceneBase(ContentManager contentManager) : IDisposable
 {
     private GameObjectRenderer _renderer;
 
     protected KeyboardInputObserver KeyboardInputObserver;
+    
+    protected readonly ContentManager ContentManager = contentManager;
 
-    protected readonly IServiceProvider ServiceProvider = serviceProvider;
-
-    public void Load(ContentManager content)
+    public void Load()
     {
-        _renderer = new GameObjectRenderer(content);
-        this.KeyboardInputObserver = this.ServiceProvider.GetRequiredService<KeyboardInputObserver>();
+        _renderer = new GameObjectRenderer();
+        this.KeyboardInputObserver = new KeyboardInputObserver();
 
-        InitUiComponents(content);
-        InitGameGameObjects(content);
+        InitUiComponents();
+        InitGameGameObjects();
 
-        LoadCore(content);
+        LoadCore();
     }
 
     public void Unload()
     {
         _renderer.Clear();
+        this.ContentManager.Unload();
 
         UnloadCore();
     }
@@ -74,7 +74,7 @@ public abstract class SceneBase(IServiceProvider serviceProvider) : IDisposable
         _renderer.ResetModificators();
     }
 
-    protected virtual void LoadCore(ContentManager content)
+    protected virtual void LoadCore()
     {
     }
 
@@ -90,20 +90,20 @@ public abstract class SceneBase(IServiceProvider serviceProvider) : IDisposable
     {
     }
     
-    protected abstract IEnumerable<IGameGameObject> InitInitGameGameObjectsCore(ContentManager content);
-    protected abstract IEnumerable<IUiComponent> InitUiComponentsCore(ContentManager content);
+    protected abstract IEnumerable<IGameGameObject> InitInitGameGameObjectsCore();
+    protected abstract IEnumerable<IUiComponent> InitUiComponentsCore();
     
-    private void InitGameGameObjects(ContentManager content)
+    private void InitGameGameObjects()
     {
-        foreach (IGameGameObject gameObject in InitInitGameGameObjectsCore(content))
+        foreach (IGameGameObject gameObject in InitInitGameGameObjectsCore())
         {
             _renderer.AddGameObject(gameObject);
         }
     }
 
-    private void InitUiComponents(ContentManager content)
+    private void InitUiComponents()
     {
-        foreach (IUiComponent uiComponent in InitUiComponentsCore(content))
+        foreach (IUiComponent uiComponent in InitUiComponentsCore())
         {
             _renderer.AddGameObject(uiComponent);
         }

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using GameOfVlad.Game;
+using GameOfVlad.Game.Levels;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.GameObjectRendererModificators;
 using GameOfVlad.Services.Camera;
-using GameOfVlad.Services.Graphic;
-using GameOfVlad.Services.Level;
 using GameOfVlad.Services.Mouse;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Utils.Keyboards;
@@ -15,28 +14,22 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Scenes.Game;
 
-public partial class GameScene : SceneBase, IScene
+public partial class GameScene(ContentManager contentManager) : SceneBase(contentManager), IScene
 {
     public SceneType Type => SceneType.Game;
     
-    private ILevelService LevelService => this.ServiceProvider.GetRequiredService<ILevelService>();
-    private ISceneService SceneService => this.ServiceProvider.GetRequiredService<ISceneService>();
-    private IGraphicService GraphicService => this.ServiceProvider.GetRequiredService<IGraphicService>();
-    private ICameraService CameraService => this.ServiceProvider.GetRequiredService<ICameraService>();
-    private IMouseService MouseService => this.ServiceProvider.GetRequiredService<IMouseService>();
+    private ISceneService SceneService => this.ContentManager.ServiceProvider.GetRequiredService<ISceneService>();
+    private ICameraService CameraService => this.ContentManager.ServiceProvider.GetRequiredService<ICameraService>();
+    private IMouseService MouseService => this.ContentManager.ServiceProvider.GetRequiredService<IMouseService>();
     
-    private readonly GameSceneStateManager _stateManager;
-    public GameScene(IServiceProvider serviceProvider) : base(serviceProvider)
-    {
-        _stateManager = new GameSceneStateManager(this.GraphicService);
-    }
+    private readonly GameSceneStateManager _stateManager = new(contentManager);
 
-    protected override void LoadCore(ContentManager content)
+    protected override void LoadCore()
     {
         _stateManager.OnGameStateChanged += OnGameStateChanged;
         _stateManager.OnLevelChanged += OnLevelChanged;
         
-        _stateManager.SetLevel(this.LevelService.GetCurrentLevel());
+        _stateManager.SetLevel(LevelType.Level1);
         _stateManager.SetState(GameState.Play);
 
         this.KeyboardInputObserver.KeyDown += HandleKeyDawn;
@@ -63,11 +56,11 @@ public partial class GameScene : SceneBase, IScene
         }
     }
 
-    protected override IEnumerable<IGameGameObject> InitInitGameGameObjectsCore(ContentManager content)
+    protected override IEnumerable<IGameGameObject> InitInitGameGameObjectsCore()
     {
         yield break;
     }
-    
+
     private void AddDefaultRendererModificators()
     {
         var modificators = new List<IGameObjectRendererModificator>

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.Entities;
 
-public abstract class Entity(IServiceProvider serviceProvider) : IDisposable
+public abstract class Entity(ContentManager contentManager) : IDisposable
 {
     public IGameObject Parent { get; set; }
     public IEnumerable<IGameObject> Children { get; set; }
@@ -18,11 +18,11 @@ public abstract class Entity(IServiceProvider serviceProvider) : IDisposable
     
     public Guid Guid => _guid;
     
-    protected readonly IServiceProvider ServiceProvider = serviceProvider;
+    protected readonly ContentManager ContentManager = contentManager;
     
     private readonly Guid _guid = Guid.NewGuid();
     
-    public virtual void Init(ContentManager content)
+    public virtual void Init()
     {
     }
 

@@ -1,56 +1,54 @@
-using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects.UI.Components;
 using GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 using GameOfVlad.GameObjects.UI.Interfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Scenes.MainMenu;
 
 public partial class MainMenuScene
 {
-    protected override IEnumerable<IUiComponent> InitUiComponentsCore(ContentManager content)
+    protected override IEnumerable<IUiComponent> InitUiComponentsCore()
     {
-        yield return new Image(this.ServiceProvider)
+        yield return new Image(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Pages/MainMenu/Backgraund")
+            Texture = this.ContentManager.Load<Texture2D>("Pages/MainMenu/Backgraund")
         };
 
-        var btnStartGame = new Button(this.ServiceProvider)
+        var btnStartGame = new Button(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Buttons/Start"),
+            Texture = this.ContentManager.Load<Texture2D>("Buttons/Start"),
             Position = new Vector2(1420, 150),
         };
 
-        var btnMap= new Button(this.ServiceProvider)
+        var btnMap= new Button(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Buttons/Levels"),
+            Texture = this.ContentManager.Load<Texture2D>("Buttons/Levels"),
             Position = new Vector2(1410, 300)
         };
 
-        var btnMiniGames = new Button(this.ServiceProvider)
+        var btnMiniGames = new Button(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Buttons/MiniGames"),
+            Texture = this.ContentManager.Load<Texture2D>("Buttons/MiniGames"),
             Position = new Vector2(1320, 450)
         };
 
-        var btnGallery = new Button(this.ServiceProvider)
+        var btnGallery = new Button(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Buttons/Gallery"),
+            Texture = this.ContentManager.Load<Texture2D>("Buttons/Gallery"),
             Position = new Vector2(1410, 600)
         };
 
-        var btnSettings = new Button(this.ServiceProvider)
+        var btnSettings = new Button(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Buttons/Setting"),
+            Texture = this.ContentManager.Load<Texture2D>("Buttons/Setting"),
             Position = new Vector2(1320, 750)
         };
 
-        var btnExit = new Button(this.ServiceProvider)
+        var btnExit = new Button(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Buttons/Exit"),
+            Texture = this.ContentManager.Load<Texture2D>("Buttons/Exit"),
             Position = new Vector2(1420, 900)
         };
 

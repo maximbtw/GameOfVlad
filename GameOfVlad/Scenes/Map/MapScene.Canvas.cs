@@ -4,32 +4,30 @@ using GameOfVlad.GameObjects.UI.Components;
 using GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 using GameOfVlad.GameObjects.UI.Interfaces;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Scenes.Map;
 
 public partial class MapScene
 {
-    protected override IEnumerable<IUiComponent> InitUiComponentsCore(ContentManager content)
+    protected override IEnumerable<IUiComponent> InitUiComponentsCore()
     {
-        var font = content.Load<SpriteFont>("Pages/MapLevels/Font");
+        var font = this.ContentManager.Load<SpriteFont>("Pages/MapLevels/Font");
         
-        yield return new Image(this.ServiceProvider)
+        yield return new Image(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Pages/MapLevels/Backgraund2")
+            Texture = this.ContentManager.Load<Texture2D>("Pages/MapLevels/Backgraund2")
         };
 
-        var btnLevel1 = new Button(this.ServiceProvider)
+        var btnLevel1 = new Button(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Pages/MapLevels/Buttons/LevelSelect"),
+            Texture = this.ContentManager.Load<Texture2D>("Pages/MapLevels/Buttons/LevelSelect"),
             Position = new Vector2(954, Settings.ScreenHeight - 165),
             Text = ButtonText.Create(font, "1", Color.AliceBlue)
         };
 
         btnLevel1.OnBtnClick += () =>
         {
-            this.LevelService.SetLevel(LevelType.Level1);
             this.SceneService.PushScene(SceneType.Game);
         };
 

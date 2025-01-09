@@ -18,8 +18,8 @@ public class BackgroundGenerator : UiComponentBase, IUiComponent
     private int _horizontalTiles;
     private int _verticalTiles;
 
-    public BackgroundGenerator(IServiceProvider serviceProvider, Texture2D texture, Vector2 startPoint, Size size) :
-        base(serviceProvider)
+    public BackgroundGenerator(ContentManager contentManager, Texture2D texture, Vector2 startPoint, Size size) :
+        base(contentManager)
     {
         this.Texture = texture;
 
@@ -27,7 +27,7 @@ public class BackgroundGenerator : UiComponentBase, IUiComponent
         _size = size;
     }
 
-    public override void Init(ContentManager content)
+    public override void Init()
     {
         int textureWidth = this.Texture.Width;
         int textureHeight = this.Texture.Height;
@@ -35,7 +35,7 @@ public class BackgroundGenerator : UiComponentBase, IUiComponent
         _horizontalTiles = (int)Math.Ceiling(_size.Width / textureWidth);
         _verticalTiles = (int)Math.Ceiling(_size.Height / textureHeight);
         
-        base.Init(content);
+        base.Init();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

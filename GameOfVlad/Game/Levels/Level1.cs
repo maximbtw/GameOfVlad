@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameOfVlad.GameObjects.Entities;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.UI.Components;
@@ -13,7 +12,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Game.Levels;
 
-public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvider), ILevel
+public class Level1(ContentManager contentManager) : LevelBase(contentManager), ILevel
 {
     public Size LevelSize => new(Width: 2000, Height: 2000);
     
@@ -29,30 +28,30 @@ public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvide
         yield return new LevelBorderRendererModificator(Vector2.Zero, this.LevelSize);
     }
     
-    protected override IEnumerable<IUiComponent> LoadAlwaysVisiblyUiComponents(ContentManager content)
+    protected override IEnumerable<IUiComponent> LoadAlwaysVisiblyUiComponents()
     {
         yield return new BackgroundGenerator(
-            this.ServiceProvider,
-            texture: content.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_04-512x512"), 
+            this.ContentManager,
+            this.ContentManager.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_04-512x512"), 
             new Vector2(-1000,-1000),
             Size.Create(width: 5000, height: 5000));
     }
 
-    protected override IEnumerable<IGameGameObject> LoadAlwaysVisiblyGameGameObjects(ContentManager content)
+    protected override IEnumerable<IGameGameObject> LoadAlwaysVisiblyGameGameObjects()
     {
         yield break;
     }
 
-    protected override IEnumerable<IUiComponent> LoadUiComponents(ContentManager content)
+    protected override IEnumerable<IUiComponent> LoadUiComponents()
     {
         yield break;
     }
 
-    protected override IEnumerable<IGameGameObject> LoadGameGameObjects(ContentManager content)
+    protected override IEnumerable<IGameGameObject> LoadGameGameObjects()
     {
-        yield return new PlayerV2(this.ServiceProvider)
+        yield return new PlayerV2(this.ContentManager)
         {
-            Texture = content.Load<Texture2D>("Sprite/Rocket/Rocket"),
+            Texture = this.ContentManager.Load<Texture2D>("Sprite/Rocket/Rocket"),
             Position = new Vector2(100, 100),
             TrustPower = 5000,
             Mass = 100

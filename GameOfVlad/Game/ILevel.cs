@@ -13,7 +13,7 @@ public interface ILevel
     
     LevelType LevelType { get; }
 
-    void Load(ContentManager content);
+    void Load();
 
     void Unload();
     

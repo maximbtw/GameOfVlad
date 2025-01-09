@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using GameOfVlad.GameObjects;
@@ -9,33 +8,33 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Game;
 
-public abstract class LevelBase(IServiceProvider serviceProvider)
+public abstract class LevelBase(ContentManager contentManager)
 {
-    protected readonly IServiceProvider ServiceProvider = serviceProvider;
+    protected readonly ContentManager ContentManager = contentManager;
     
     private readonly List<IGameObject> _alwaysVisiblyGameObjects = new();
     private readonly List<IGameObject> _gameObjects = new();
 
     public IEnumerable<IGameObject> GetGameObjects() => _gameObjects.Concat(_alwaysVisiblyGameObjects);
     
-    public void Load(ContentManager content)
+    public void Load()
     {
-        foreach (IGameGameObject gameObject in LoadGameGameObjects(content))
+        foreach (IGameGameObject gameObject in LoadGameGameObjects())
         {
             _gameObjects.Add(gameObject);
         }
         
-        foreach (IUiComponent gameObject in LoadUiComponents(content))
+        foreach (IUiComponent gameObject in LoadUiComponents())
         {
             _gameObjects.Add(gameObject);
         }
         
-        foreach (IGameGameObject gameObject in LoadAlwaysVisiblyGameGameObjects(content))
+        foreach (IGameGameObject gameObject in LoadAlwaysVisiblyGameGameObjects())
         {
             _alwaysVisiblyGameObjects.Add(gameObject);
         }
         
-        foreach (IUiComponent gameObject in LoadAlwaysVisiblyUiComponents(content))
+        foreach (IUiComponent gameObject in LoadAlwaysVisiblyUiComponents())
         {
             _alwaysVisiblyGameObjects.Add(gameObject);
         }
@@ -59,8 +58,8 @@ public abstract class LevelBase(IServiceProvider serviceProvider)
         }
     }
     
-    protected abstract IEnumerable<IUiComponent> LoadAlwaysVisiblyUiComponents(ContentManager content);
-    protected abstract IEnumerable<IGameGameObject> LoadAlwaysVisiblyGameGameObjects(ContentManager content);
-    protected abstract IEnumerable<IUiComponent> LoadUiComponents(ContentManager content);
-    protected abstract IEnumerable<IGameGameObject> LoadGameGameObjects(ContentManager content);
+    protected abstract IEnumerable<IUiComponent> LoadAlwaysVisiblyUiComponents();
+    protected abstract IEnumerable<IGameGameObject> LoadAlwaysVisiblyGameGameObjects();
+    protected abstract IEnumerable<IUiComponent> LoadUiComponents();
+    protected abstract IEnumerable<IGameGameObject> LoadGameGameObjects();
 }

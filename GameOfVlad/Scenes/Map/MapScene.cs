@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.GameObjectRendererModificators;
 using GameOfVlad.Services.Camera;
-using GameOfVlad.Services.Level;
 using GameOfVlad.Services.Mouse;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Utils.Keyboards;
@@ -14,23 +12,22 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Scenes.Map;
 
-public partial class MapScene(IServiceProvider serviceProvider) : SceneBase(serviceProvider), IScene
+public partial class MapScene(ContentManager contentManager) : SceneBase(contentManager), IScene
 {
     public SceneType Type => SceneType.Map;
     
-    private ISceneService SceneService => ServiceProvider.GetRequiredService<ISceneService>();
-    private ILevelService LevelService => this.ServiceProvider.GetRequiredService<ILevelService>();
-    private ICameraService CameraService => this.ServiceProvider.GetRequiredService<ICameraService>();
-    private IMouseService MouseService => this.ServiceProvider.GetRequiredService<IMouseService>();
+    private ISceneService SceneService => this.ContentManager.ServiceProvider.GetRequiredService<ISceneService>();
+    private ICameraService CameraService => this.ContentManager.ServiceProvider.GetRequiredService<ICameraService>();
+    private IMouseService MouseService => this.ContentManager.ServiceProvider.GetRequiredService<IMouseService>();
 
-    protected override void LoadCore(ContentManager content)
+    protected override void LoadCore()
     {
         this.KeyboardInputObserver.KeyUp += HandleKeyUp;
         
         AddDefaultRendererModificators();
     }
 
-    protected override IEnumerable<IGameGameObject> InitInitGameGameObjectsCore(ContentManager content)
+    protected override IEnumerable<IGameGameObject> InitInitGameGameObjectsCore()
     {
         yield break;
     }

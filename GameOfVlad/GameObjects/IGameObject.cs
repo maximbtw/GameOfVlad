@@ -22,7 +22,7 @@ public interface IGameObject
     
     bool Destroyed { get; set; }
     
-    void Init(ContentManager content);
+    void Init();
 
     void Terminate();
     

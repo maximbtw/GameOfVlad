@@ -9,9 +9,9 @@ public partial class GameScene
 {
     private GamePauseForm _gamePauseForm;
     
-    protected override IEnumerable<IUiComponent> InitUiComponentsCore(ContentManager content)
+    protected override IEnumerable<IUiComponent> InitUiComponentsCore()
     {
-        _gamePauseForm = CreatePauseForm(content);
+        _gamePauseForm = CreatePauseForm();
 
         yield return _gamePauseForm;
     }
@@ -26,9 +26,9 @@ public partial class GameScene
         _gamePauseForm.IsActive = gameState == GameState.Pause;
     }
 
-    private GamePauseForm CreatePauseForm(ContentManager content)
+    private GamePauseForm CreatePauseForm()
     {
-        var form = new GamePauseForm(this.ServiceProvider);
+        var form = new GamePauseForm(this.ContentManager);
 
         form.BtnContinueGame.OnBtnClick += () => _stateManager.SetState(GameState.Play);
         form.BtnRestartGame.OnBtnClick += () => { }; // TODO: how

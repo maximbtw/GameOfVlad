@@ -1,12 +1,18 @@
 using System;
+using System.Collections.Generic;
 using GameOfVlad.Game;
-using GameOfVlad.Services.Graphic;
+using GameOfVlad.Game.Levels;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Scenes.Game;
 
-public class GameSceneStateManager(IGraphicService graphicService)
+public class GameSceneStateManager(ContentManager contentManager)
 {
+    private readonly Dictionary<LevelType, Func<ContentManager, ILevel>> _levelTypeToLevelFabricIndex = new()
+    {
+        { LevelType.Level1 , x=> new Level1(x)}
+    };
+    
     private GameState _state = GameState.Loading;
     private ILevel _level = null!;
     
@@ -15,15 +21,15 @@ public class GameSceneStateManager(IGraphicService graphicService)
     
     public GameState GetState() => _state;
     
-    public void SetLevel(ILevel newLevel)
+    public void SetLevel(LevelType levelType)
     {
-        ContentManager content = graphicService.GetContentManager();
-
+        ILevel newLevel = _levelTypeToLevelFabricIndex[levelType].Invoke(contentManager);
+        
         var eventArgs = new GameLevelChangeEventArgs(_level, newLevel);
         
         _level?.Unload();
         _level = newLevel;
-        _level.Load(content);
+        _level.Load();
         
         OnLevelChanged?.Invoke(this, eventArgs);
     }

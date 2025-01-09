@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameRenderer;
 
-public class GameObjectRenderer(ContentManager contentManager)
+public class GameObjectRenderer
 {
     private readonly List<IGameObject> _gameObjects = new();
     private readonly List<IGameObjectRendererModificator> _rendererModificators = new();
@@ -35,7 +35,7 @@ public class GameObjectRenderer(ContentManager contentManager)
             throw new InvalidOperationException("Cannot add game object to a child of a game object");
         }
         
-        gameObject.Init(contentManager);
+        gameObject.Init();
         
         _gameObjects.Add(gameObject);
     }

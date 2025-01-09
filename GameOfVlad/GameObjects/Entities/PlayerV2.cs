@@ -1,4 +1,3 @@
-using System;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Utils.Keyboards;
@@ -10,8 +9,8 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.GameObjects.Entities;
 
-public class PlayerV2(IServiceProvider serviceProvider)
-    : ColliderEntity(serviceProvider), ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject
+public class PlayerV2(ContentManager contentManager)
+    : ColliderEntity(contentManager), ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject
 {
     public int DrawOrder => (int)DrawOrderType.Player;
     public int UpdateOrder => 1;
@@ -21,17 +20,15 @@ public class PlayerV2(IServiceProvider serviceProvider)
     public Vector2 Velocity { get; set; } = Vector2.Zero;
     public float TrustPower { get; set; } = 50f;
 
-    private readonly KeyboardInputObserver _keyboardInputObserver =
-        serviceProvider.GetRequiredService<KeyboardInputObserver>();
-
+    private readonly KeyboardInputObserver _keyboardInputObserver = new();
     private readonly ICameraService _cameraService =
-        serviceProvider.GetRequiredService<ICameraService>();
+        contentManager.ServiceProvider.GetRequiredService<ICameraService>();
 
-    public override void Init(ContentManager content)
+    public override void Init()
     {
         _keyboardInputObserver.KeyPressed += HandleKeyPressed;
 
-        base.Init(content);
+        base.Init();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)

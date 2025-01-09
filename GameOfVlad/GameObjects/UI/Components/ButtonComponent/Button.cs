@@ -2,12 +2,12 @@
 using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.Utils.Camera;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 
-public class Button(IServiceProvider serviceProvider)
-    : UiComponentBase(serviceProvider), IUiComponent, IClickable
+public class Button(ContentManager contentManager) : UiComponentBase(contentManager), IUiComponent, IClickable
 {
     public int UpdateOrder => (int)DrawOrderType.FrontCanvas;
     public int DrawOrder => 1;

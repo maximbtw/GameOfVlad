@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using GameOfVlad.Scenes;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameRenderer;
 
-public class GameSceneRenderer(ContentManager contentManager)
+public class GameSceneRenderer
 {
     private readonly Stack<IScene> _scenes = new();
 
@@ -35,7 +34,7 @@ public class GameSceneRenderer(ContentManager contentManager)
             }
         }
         
-        scene.Load(contentManager);
+        scene.Load();
         _scenes.Push(scene);
     }
 
