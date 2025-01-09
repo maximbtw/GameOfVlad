@@ -1,3 +1,4 @@
+using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -16,5 +17,8 @@ public class Camera(GraphicsDevice graphicsDevice)
         View = Matrix.CreateTranslation(new Vector3(-Position.X, -Position.Y, 0)) *
                Matrix.CreateRotationZ(Rotation) *
                Matrix.CreateScale(Zoom);
+        
     }
+    
+    public void ResetCamera() => this.Position = Vector2.Zero;
 }

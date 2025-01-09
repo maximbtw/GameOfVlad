@@ -19,7 +19,7 @@ public interface ILevel
     
     IEnumerable<IGameObject> GetGameObjects();
     
-    IEnumerable<IRendererModificator> GetLevelModificators();
+    IEnumerable<IGameObjectRendererModificator> GetLevelModificators();
 
     void GameStateChanged(GameState state);
 }

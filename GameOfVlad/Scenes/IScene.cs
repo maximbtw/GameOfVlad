@@ -8,9 +8,9 @@ public interface IScene
 {
     SceneType Type { get; }
     
-    void Init(ContentManager content);
+    void Load(ContentManager content);
 
-    void Terminate();
+    void Unload();
     
     void Update(GameTime gameTime);
     

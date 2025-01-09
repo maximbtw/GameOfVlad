@@ -16,7 +16,11 @@ public abstract class Entity(IServiceProvider serviceProvider) : IDisposable
     public Vector2 Position { get; set; }
     public Color Color { get; set; } = Color.White;
     
+    public Guid Guid => _guid;
+    
     protected readonly IServiceProvider ServiceProvider = serviceProvider;
+    
+    private readonly Guid _guid = Guid.NewGuid();
     
     public virtual void Init(ContentManager content)
     {
@@ -24,7 +28,7 @@ public abstract class Entity(IServiceProvider serviceProvider) : IDisposable
 
     public virtual void Terminate()
     {
-        Texture?.Dispose();
+       Texture?.Dispose();
     }
     
     public virtual void Update(GameTime gameTime)

@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.UI.Components;
 
-public class BackgroundGenerator : UiComponentBase, ICameraUnboundUiComponent
+public class BackgroundGenerator : UiComponentBase, IUiComponent
 {
     public int DrawOrder => (int)DrawOrderType.Background;
     public int UpdateOrder => 1;

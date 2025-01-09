@@ -54,8 +54,8 @@ public partial class MainMenuScene
             Position = new Vector2(1420, 900)
         };
 
-        btnStartGame.OnBtnClick += () => this.SceneService.SetScene(SceneType.Game);
-        btnMap.OnBtnClick += () => this.SceneService.SetScene(SceneType.Map);
+        btnStartGame.OnBtnClick += () => this.SceneService.PushScene(SceneType.Game);
+        btnMap.OnBtnClick += () => this.SceneService.PushScene(SceneType.Map);
         btnExit.OnBtnClick += () => this.GameService.ExitGame();
 
         yield return btnStartGame;

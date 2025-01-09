@@ -4,7 +4,7 @@ namespace GameOfVlad.Services.Scene;
 
 public interface ISceneService
 {
-    void SetScene(SceneType sceneType);
-    
-    IScene GetCurrentScene();
+    void PushScene(SceneType sceneType);
+
+    void PopScene();
 } 

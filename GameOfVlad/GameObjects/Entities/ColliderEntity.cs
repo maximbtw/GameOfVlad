@@ -1,4 +1,5 @@
 using System;
+using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.Utils;
 using GameOfVlad.Utils.Draw;
 using Microsoft.Xna.Framework;
@@ -51,7 +52,7 @@ public abstract class ColliderEntity(IServiceProvider serviceProvider) : Entity(
 
     public override void Init(ContentManager content)
     {
-        _colliderDrawer = new ColliderDrawer(this);
+        _colliderDrawer = new ColliderDrawer((IColliderGameObject)this);
 
         base.Init(content);
     }
@@ -79,7 +80,7 @@ public abstract class ColliderEntity(IServiceProvider serviceProvider) : Entity(
         
         if (Settings.ShowCollider)
         {
-            _colliderDrawer.DrawCollider(spriteBatch, this);
+            _colliderDrawer.DrawCollider(spriteBatch);
         }
     }
 }

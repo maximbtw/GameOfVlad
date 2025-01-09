@@ -5,7 +5,7 @@ using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.UI.Components;
 using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
-using GameOfVlad.GameRenderer.Modificators;
+using GameOfVlad.GameRenderer.GameObjectRendererModificators;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -19,7 +19,7 @@ public class Level1(IServiceProvider serviceProvider) : LevelBase(serviceProvide
     
     public LevelType LevelType => LevelType.Level1;
 
-    public IEnumerable<IRendererModificator> GetLevelModificators()
+    public IEnumerable<IGameObjectRendererModificator> GetLevelModificators()
     {
         yield return new PhysicRendererModificator
         {

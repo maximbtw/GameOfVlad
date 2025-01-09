@@ -7,6 +7,8 @@ public interface IUiComponent : IGameObject
 {
     Vector2 Position { get; set; }
     
+    Vector2 CameraPosition { get; }
+    
     Texture2D Texture { get; set; }
     
     Color Color { get; set; } 

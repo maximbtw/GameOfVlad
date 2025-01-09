@@ -1,37 +1,38 @@
 using System;
+using GameOfVlad.GameRenderer;
 using GameOfVlad.Scenes;
 using GameOfVlad.Scenes.Game;
 using GameOfVlad.Scenes.MainMenu;
 using GameOfVlad.Scenes.Map;
+using GameOfVlad.Services.Camera;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.Services.Scene;
 
-public class SceneService(IServiceProvider serviceProvider) : ISceneService
+public class SceneService(IServiceProvider serviceProvider, GameSceneRenderer sceneRenderer) : ISceneService
 {
-    private IScene _currentScene;
+    private ICameraService CameraService => serviceProvider.GetService<ICameraService>();
     
-    public void SetScene(SceneType sceneType)
+    public void PushScene(SceneType sceneType)
     {
-        switch (sceneType)
+        IScene scene = sceneType switch
         {
-            case SceneType.MainMenu:
-                _currentScene = serviceProvider.GetRequiredService<MainMenuScene>();
-                break;
-            case SceneType.Map:
-                _currentScene = serviceProvider.GetRequiredService<MapScene>();
-                break;
-            case SceneType.Game:
-                _currentScene = serviceProvider.GetRequiredService<GameScene>();
-                break;
-            case SceneType.Gallery:
-                break;
-            case SceneType.Settings:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(sceneType), sceneType, null);
-        }
+            SceneType.MainMenu => serviceProvider.GetRequiredService<MainMenuScene>(),
+            SceneType.Map => serviceProvider.GetRequiredService<MapScene>(),
+            SceneType.Game => serviceProvider.GetRequiredService<GameScene>(),
+            SceneType.Gallery => throw new NotImplementedException(),
+            SceneType.Settings => throw new NotImplementedException(),
+            _ => throw new ArgumentOutOfRangeException(nameof(sceneType), sceneType, null)
+        };
+     
+        CameraService.SetCameraPosition(Vector2.Zero);
+        sceneRenderer.PushScene(scene);
     }
 
-    public IScene GetCurrentScene() => _currentScene;
+    public void PopScene()
+    {
+        CameraService.SetCameraPosition(Vector2.Zero);
+        sceneRenderer.PopScene();
+    }
 }

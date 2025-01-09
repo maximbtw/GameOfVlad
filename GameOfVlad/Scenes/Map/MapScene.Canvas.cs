@@ -30,8 +30,10 @@ public partial class MapScene
         btnLevel1.OnBtnClick += () =>
         {
             this.LevelService.SetLevel(LevelType.Level1);
-            this.SceneService.SetScene(SceneType.Game);
+            this.SceneService.PushScene(SceneType.Game);
         };
+
+        yield return btnLevel1;
     }
     
     /*protected override IEnumerable<UiComponentBase> GetUiComponents(ContentManager content, ICameraService cameraService)

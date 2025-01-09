@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
-using GameOfVlad.GameEffects;
-using GameOfVlad.Interfaces;
-using GameOfVlad.Sprites;
-using GameOfVlad.Sprites.Mobs;
+using GameOfVlad.OldProject;
+using GameOfVlad.OldProject.GameEffects;
+using GameOfVlad.OldProject.Interfaces;
+using GameOfVlad.OldProject.Sprites;
+using GameOfVlad.OldProject.Sprites.Mobs;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;

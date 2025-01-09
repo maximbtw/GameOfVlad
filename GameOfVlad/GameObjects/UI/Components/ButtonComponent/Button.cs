@@ -7,14 +7,14 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 
 public class Button(IServiceProvider serviceProvider)
-    : UiComponentBase(serviceProvider), ICameraBoundUiComponent, IClickable
+    : UiComponentBase(serviceProvider), IUiComponent, IClickable
 {
     public int UpdateOrder => (int)DrawOrderType.FrontCanvas;
     public int DrawOrder => 1;
 
     public event Action OnBtnClick;
     public ButtonText Text { get; set; }
-    private int HoverOffset { get; set; } = 3;
+    public int HoverOffset { get; set; } = 3;
 
 
     private ButtonInteractionState _state;
@@ -42,11 +42,6 @@ public class Button(IServiceProvider serviceProvider)
         base.Draw(gameTime, spriteBatch);
     }
 
-    public void UpdateByCamera(GameTime gameTime, Camera camera)
-    {
-        //TODO:
-    }
-
     public void OnHoverEnter()
     {
         this.Position = new Vector2(this.Position.X + HoverOffset, this.Position.Y + HoverOffset);
@@ -61,11 +56,12 @@ public class Button(IServiceProvider serviceProvider)
 
     public bool IsCursorOver(Vector2 cursorPosition)
     {
-        throw new NotImplementedException();
+        return this.BoundingBox.Contains(cursorPosition);
     }
 
     public void OnClick()
     {
+        Console.WriteLine("Click");
         OnBtnClick?.Invoke();
     }
 }

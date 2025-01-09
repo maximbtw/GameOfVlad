@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -10,6 +11,8 @@ public interface IGameObject
     int DrawOrder { get; }
     
     int UpdateOrder { get; }
+    
+    Guid Guid { get; }
     
     IGameObject Parent { get; set; }
     

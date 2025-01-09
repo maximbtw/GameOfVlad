@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameOfVlad.GameEffects;
-using GameOfVlad.Interfaces;
-using GameOfVlad.Sprites;
-using GameOfVlad.Sprites.Bonuses;
-using GameOfVlad.Sprites.Mobs;
-using GameOfVlad.Sprites.Shells;
+using GameOfVlad.OldProject;
+using GameOfVlad.OldProject.GameEffects;
+using GameOfVlad.OldProject.Interfaces;
+using GameOfVlad.OldProject.Sprites;
+using GameOfVlad.OldProject.Sprites.Bonuses;
+using GameOfVlad.OldProject.Sprites.Mobs;
+using GameOfVlad.OldProject.Sprites.Shells;
 using GameOfVlad.Utils;
 using GameOfVlad.Utils.Keyboards;
 using Microsoft.Xna.Framework;
@@ -33,7 +34,6 @@ namespace GameOfVlad.Game.Levels
         public List<HitBulletEffect> EffectsBulletHit;
         public List<Star> Stars;
         //Keyboard
-        public KeyboardStateObserver KeyboardState;
         //Music
         private float timeMusic = 0;
         public Song Music;
@@ -80,8 +80,7 @@ namespace GameOfVlad.Game.Levels
             Game = game;
             GraphicsDevice = graphicsDevice;
             Content = content;
-
-            KeyboardState = new KeyboardStateObserver();
+            
             font = content.Load<SpriteFont>("Pages/GamePlay/Font");
 
             Shells = new List<Shell>();

@@ -29,13 +29,12 @@ public partial class GameScene
     private GamePauseForm CreatePauseForm(ContentManager content)
     {
         var form = new GamePauseForm(this.ServiceProvider);
-        form.Init(content);
 
         form.BtnContinueGame.OnBtnClick += () => _stateManager.SetState(GameState.Play);
         form.BtnRestartGame.OnBtnClick += () => { }; // TODO: how
-        form.BtnToMapScene.OnBtnClick += () => this.SceneService.SetScene(SceneType.Map);
+        form.BtnToMapScene.OnBtnClick += () => this.SceneService.PushScene(SceneType.Map);
         form.BtnToSettingsScene.OnBtnClick += () => { };
-        form.BtnToMainMenuScene.OnBtnClick += () => this.SceneService.SetScene(SceneType.MainMenu);
+        form.BtnToMainMenuScene.OnBtnClick += () => this.SceneService.PopScene();
         
         return form;
     }

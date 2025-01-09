@@ -1,7 +1,6 @@
 using GameOfVlad.Scenes.Game;
 using GameOfVlad.Scenes.MainMenu;
 using GameOfVlad.Scenes.Map;
-using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace GameOfVlad.Scenes;
@@ -10,10 +9,8 @@ public static class DependencyInjectionExtension
 {
     public static void RegisterScenes(this IServiceCollection services)
     {
-        services.AddTransient(_ => new KeyboardStateObserver());
-        
-        services.AddScoped(serviceProvider => new MainMenuScene(serviceProvider));
-        services.AddScoped(serviceProvider => new MapScene(serviceProvider));
-        services.AddScoped(serviceProvider => new GameScene(serviceProvider));
+        services.AddScoped<MainMenuScene>();
+        services.AddScoped<MapScene>();
+        services.AddScoped<GameScene>();
     }
 }

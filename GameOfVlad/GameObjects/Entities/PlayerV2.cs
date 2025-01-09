@@ -21,51 +21,29 @@ public class PlayerV2(IServiceProvider serviceProvider)
     public Vector2 Velocity { get; set; } = Vector2.Zero;
     public float TrustPower { get; set; } = 50f;
 
-    private readonly KeyboardStateObserver _keyboardStateObserver =
-        serviceProvider.GetRequiredService<KeyboardStateObserver>();
+    private readonly KeyboardInputObserver _keyboardInputObserver =
+        serviceProvider.GetRequiredService<KeyboardInputObserver>();
 
     private readonly ICameraService _cameraService =
         serviceProvider.GetRequiredService<ICameraService>();
 
     public override void Init(ContentManager content)
     {
-        _keyboardStateObserver.OnUpdated += HandleUpdateKeyboard;
+        _keyboardInputObserver.KeyPressed += HandleKeyPressed;
 
         base.Init(content);
     }
 
-    public override void Update(GameTime gameTime)
-    {
-        _keyboardStateObserver.Update(gameTime);
-
-        base.Update(gameTime);
-    }
-
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        _cameraService.SetCameraPosition(this.Position, spriteBatch.GraphicsDevice);
+        _cameraService.SetCameraPosition(this.Position);
 
         base.Draw(gameTime, spriteBatch);
     }
 
-    private void HandleUpdateKeyboard(object sender, KeyboardStateEventArgs e)
+    public override void Update(GameTime gameTime)
     {
-        float rotationSpeed = MathHelper.ToRadians(this.RotationVelocity);
-        if (e.Key.IsKeyDown(Keys.A))
-        {
-            Rotate(-rotationSpeed);
-        }
-        else if (e.Key.IsKeyDown(Keys.D))
-        {
-            Rotate(rotationSpeed);
-        }
-
-        void Rotate(float rotationChange)
-        {
-            this.Rotation += rotationChange;
-
-            this.Rotation = MathHelper.WrapAngle(this.Rotation);
-        }
+        _keyboardInputObserver.Update();
     }
 
     public void OnLevelBorderCollision(Vector2 collisionNormal)
@@ -77,4 +55,24 @@ public class PlayerV2(IServiceProvider serviceProvider)
         //this.Velocity -= Vector2.Dot(this.Velocity, collisionNormal) * collisionNormal;
     }
     
+    private void HandleKeyPressed(KeyEventArgs e)
+    {
+        float rotationSpeed = MathHelper.ToRadians(this.RotationVelocity);
+        if (e.Key == Keys.A)
+        {
+            Rotate(-rotationSpeed);
+        }
+        
+        if (e.Key == Keys.D)
+        {
+            Rotate(rotationSpeed);
+        }
+
+        void Rotate(float rotationChange)
+        {
+            this.Rotation += rotationChange;
+
+            this.Rotation = MathHelper.WrapAngle(this.Rotation);
+        }
+    }
 }

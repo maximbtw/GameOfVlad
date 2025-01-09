@@ -4,7 +4,6 @@ using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
-using GameOfVlad.Services.Graphic;
 using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
@@ -15,31 +14,28 @@ namespace GameOfVlad.Scenes;
 
 public abstract class SceneBase(IServiceProvider serviceProvider) : IDisposable
 {
-    private readonly KeyboardStateObserver _keyboardStateObserver = serviceProvider.GetRequiredService<KeyboardStateObserver>();
-    private Renderer _renderer;
+    private GameObjectRenderer _renderer;
+
+    protected KeyboardInputObserver KeyboardInputObserver;
 
     protected readonly IServiceProvider ServiceProvider = serviceProvider;
-    protected IGraphicService GraphicService => ServiceProvider.GetRequiredService<IGraphicService>();
 
-    public void Init(ContentManager content)
+    public void Load(ContentManager content)
     {
-        _renderer = new Renderer(this.GraphicService.GetContentManager());
-        
-        InitBeginCore(content);
+        _renderer = new GameObjectRenderer(content);
+        this.KeyboardInputObserver = this.ServiceProvider.GetRequiredService<KeyboardInputObserver>();
 
         InitUiComponents(content);
         InitGameGameObjects(content);
-        
-        BindKeyboardKeys(_keyboardStateObserver);
 
-        InitEndCore(content);
+        LoadCore(content);
     }
 
-    public void Terminate()
+    public void Unload()
     {
         _renderer.Clear();
 
-        TerminalCore();
+        UnloadCore();
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -51,9 +47,8 @@ public abstract class SceneBase(IServiceProvider serviceProvider) : IDisposable
 
     public void Update(GameTime gameTime)
     {
+        KeyboardInputObserver.Update();
         _renderer.Update(gameTime);
-
-        _keyboardStateObserver.Update(gameTime);
 
         UpdateCore(gameTime);
     }
@@ -66,24 +61,20 @@ public abstract class SceneBase(IServiceProvider serviceProvider) : IDisposable
         }
     }
     
-    protected void AddRendererModificators(IEnumerable<IRendererModificator> modificators)
+    protected void AddRendererModificators(IEnumerable<IGameObjectRendererModificator> modificators)
     {
-        foreach (IRendererModificator modificator in modificators)
+        foreach (IGameObjectRendererModificator modificator in modificators)
         {
             _renderer.AddModificator(modificator);
         }
     }
     
-    protected void ClearModificators()
+    protected void ResetModificators()
     {
-        _renderer.ClearModificators();
-    }
-    
-    protected virtual void InitBeginCore(ContentManager content)
-    {
+        _renderer.ResetModificators();
     }
 
-    protected virtual void InitEndCore(ContentManager content)
+    protected virtual void LoadCore(ContentManager content)
     {
     }
 
@@ -95,11 +86,10 @@ public abstract class SceneBase(IServiceProvider serviceProvider) : IDisposable
     {
     }
 
-    protected virtual void TerminalCore()
+    protected virtual void UnloadCore()
     {
     }
-
-    protected abstract void BindKeyboardKeys(KeyboardStateObserver keyboard);
+    
     protected abstract IEnumerable<IGameGameObject> InitInitGameGameObjectsCore(ContentManager content);
     protected abstract IEnumerable<IUiComponent> InitUiComponentsCore(ContentManager content);
     
@@ -121,6 +111,6 @@ public abstract class SceneBase(IServiceProvider serviceProvider) : IDisposable
 
     public void Dispose()
     {
-        Terminate();
+        Unload();
     }
 }

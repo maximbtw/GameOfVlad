@@ -2,15 +2,20 @@
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
 using System;
+using GameOfVlad.GameRenderer;
+using GameOfVlad.OldProject;
 using GameOfVlad.Scenes;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Graphic;
 using GameOfVlad.Services.Level;
+using GameOfVlad.Services.Mouse;
 using GameOfVlad.Services.Scene;
-using GameOfVlad.Utils;
 using GameOfVlad.Utils.Camera;
+using GameOfVlad.Utils.Keyboards;
+using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad;
 
@@ -18,19 +23,19 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
 {
     private readonly GraphicsDeviceManager _graphics;
     private readonly SpriteBatch _spriteBatch;
-    
-    private GameStateManager _gameStateManager;
-    private Camera _camera;
-        
-    // DI-контейнер
+
+    private readonly GameSceneRenderer _gameSceneRenderer;
     private readonly IServiceProvider _serviceProvider;
-        
-        
+    private readonly Camera _camera;
+    private readonly MouseInput _mouseInput;
+
     //Music
     public Song CurrentMusic;
     public Song NextMusic;
     public Song BackgraundMusic;
+
     private float timeMusic = 0;
+
     //
     public DataManager DataManager;
     public DataCenter DataCenter;
@@ -45,21 +50,22 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     public GameOfVlad()
     {
         this.Content.RootDirectory = "Content";
-        this.Window.ClientSizeChanged += OnClientSizeChanged;
         this.IsMouseVisible = true;
-            
+
         _graphics = new GraphicsDeviceManager(this);
         _graphics.PreferredBackBufferWidth = 1920;
         _graphics.PreferredBackBufferHeight = 1080;
-        
+
         // graphics.IsFullScreen = true;
-                
+        //this.Window.ClientSizeChanged += OnClientSizeChanged;
+
         _graphics.ApplyChanges();
-            
+        
         _spriteBatch = new SpriteBatch(this.GraphicsDevice);
         _camera = new Camera(this.GraphicsDevice);
-            
-        // DI
+        _mouseInput = new MouseInput();
+        _gameSceneRenderer = new GameSceneRenderer(this.Content);
+
         var serviceCollection = new ServiceCollection();
         ConfigureServices(serviceCollection);
         _serviceProvider = serviceCollection.BuildServiceProvider();
@@ -69,24 +75,23 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     {
         services.AddSingleton<IGameService>(new GameService(this));
         services.AddSingleton<IGraphicService>(new GraphicService(this.Content, _graphics));
-        services.AddSingleton<ISceneService, SceneService>();
+        services.AddSingleton<ISceneService, SceneService>(x => new SceneService(x, _gameSceneRenderer));
         services.AddSingleton<ILevelService, LevelService>();
         services.AddSingleton<ICameraService>(new CameraService(_camera));
-        
+        services.AddSingleton<IMouseService>(new MouseService(_mouseInput));
+        services.AddTransient<KeyboardInputObserver>();
+
         services.RegisterScenes();
     }
 
     protected override void Initialize()
     {
         var sceneService = _serviceProvider.GetRequiredService<ISceneService>();
-        var graphicService = _serviceProvider.GetRequiredService<IGraphicService>();
         var levelService = _serviceProvider.GetRequiredService<ILevelService>();
         levelService.LoadLevelsToCache();
-        
-        sceneService.SetScene(SceneType.MainMenu);
-        
-        _gameStateManager = new GameStateManager(sceneService, graphicService);
-            
+
+        sceneService.PushScene(SceneType.MainMenu);
+
         // BackgraundMusic = Content.Load<Song>("Pages/MainMenu/Music");
         // NextMusic = BackgraundMusic;
 
@@ -101,11 +106,6 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         DataCenter.LoadData(this);
     }
 
-    protected override void UnloadContent()
-    {
-        base.UnloadContent();
-    }
-
     protected override void Update(GameTime gameTime)
     {
         // if (nextState != null)
@@ -115,27 +115,28 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         // }
         // currentState.Update(gameTime);
         // UpdateSounds(gameTime);
-            
-        _gameStateManager?.Update(gameTime);
+
         _camera.Update();
-            
+        _mouseInput.Update();
+        _gameSceneRenderer?.Update(gameTime);
+
         base.Update(gameTime);
     }
 
     protected override void Draw(GameTime gameTime)
     {
-        this.GraphicsDevice.Clear(new Color(0, 0, 100, 255));
+        this.GraphicsDevice.Clear(Color.White);
         
         _spriteBatch.Begin(transformMatrix: _camera.View);
-            
-        _gameStateManager?.Draw(gameTime, _spriteBatch);
-            
+
+        _gameSceneRenderer?.Draw(gameTime, _spriteBatch);
+
         _spriteBatch.End();
-        
+
         base.Draw(gameTime);
     }
-        
-    private void OnClientSizeChanged(object sender, EventArgs e)
+
+    /*private void OnClientSizeChanged(object sender, EventArgs e)
     {
         if (_graphics.IsFullScreen)
         {
@@ -169,6 +170,5 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
                 timeMusic = 0;
             }
 
-        }
-    }
+        }*/
 }
