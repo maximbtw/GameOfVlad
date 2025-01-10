@@ -1,32 +1,31 @@
-using System;
-using System.Collections.Generic;
+using GameOfVlad.GameRenderer;
+using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects;
 
-public interface IGameObject
+public interface IGameObject : IRendererObject
 {
-    int DrawOrder { get; }
+    Texture2D Texture { get; set; }
     
-    int UpdateOrder { get; }
+    public Vector2 Position { get; set; }
     
-    Guid Guid { get; }
+    public Vector2 Origin { get; }
     
-    IGameObject Parent { get; set; }
+    public Size Size { get; set; }
     
-    IEnumerable<IGameObject> Children { get; set; }
+    public Rectangle? SourceRectangle { get; }
     
-    bool IsActive { get; set; }
+    public Color Color { get; set; }
     
-    bool Destroyed { get; set; }
+    public float Rotation { get; set; }
     
-    void Init();
-
-    void Terminate();
+    public Vector2 Scale { get; set; }
     
-    void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+    public SpriteEffects SpriteEffects { get; set; }
     
-    void Update(GameTime gameTime);
+    public float LayerDepth { get; set; }
+    
+    public Vector2 DrawPosition { get; }
 }

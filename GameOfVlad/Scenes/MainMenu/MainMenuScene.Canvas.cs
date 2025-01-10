@@ -9,7 +9,7 @@ namespace GameOfVlad.Scenes.MainMenu;
 
 public partial class MainMenuScene
 {
-    protected override IEnumerable<IUiComponent> InitUiComponentsCore()
+    protected override IEnumerable<IUiComponent> InitRenderObjectsCore()
     {
         yield return new Image(this.ContentManager)
         {

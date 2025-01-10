@@ -1,13 +1,14 @@
 ﻿using System;
+using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.GameObjects.UI.Interfaces;
-using GameOfVlad.Utils.Camera;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 
-public class Button(ContentManager contentManager) : UiComponentBase(contentManager), IUiComponent, IClickable
+public sealed class Button(ContentManager contentManager)
+    : CollierUiComponent(contentManager), IUiComponent, IClickable, IColliderGameObject
 {
     public int UpdateOrder => (int)DrawOrderType.FrontCanvas;
     public int DrawOrder => 1;
@@ -15,6 +16,10 @@ public class Button(ContentManager contentManager) : UiComponentBase(contentMana
     public event Action OnBtnClick;
     public ButtonText Text { get; set; }
     public int HoverOffset { get; set; } = 3;
+
+    public Rectangle BoundingBox => this.Texture == null
+        ? Rectangle.Empty
+        : new Rectangle((int)PositionByCamera.X, (int)PositionByCamera.Y, Texture.Width, Texture.Height);
 
 
     private ButtonInteractionState _state;
@@ -61,7 +66,6 @@ public class Button(ContentManager contentManager) : UiComponentBase(contentMana
 
     public void OnClick()
     {
-        Console.WriteLine("Click");
         OnBtnClick?.Invoke();
     }
 }

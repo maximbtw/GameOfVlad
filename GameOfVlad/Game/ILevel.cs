@@ -1,25 +1,12 @@
-using System.Collections.Generic;
-using GameOfVlad.GameObjects;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Scenes.Game;
-using GameOfVlad.Utils;
-using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.Game;
 
-public interface ILevel
+public interface ILevel : IRendererObject
 {
-    Size LevelSize { get; }
+    Rectangle LevelBounds { get; }
     
     LevelType LevelType { get; }
-
-    void Load();
-
-    void Unload();
-    
-    IEnumerable<IGameObject> GetGameObjects();
-    
-    IEnumerable<IGameObjectRendererModificator> GetLevelModificators();
-
-    void GameStateChanged(GameState state);
 }

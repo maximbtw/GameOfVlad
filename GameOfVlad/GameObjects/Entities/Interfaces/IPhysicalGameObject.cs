@@ -2,7 +2,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.GameObjects.Entities.Interfaces;
 
-public interface IPhysicalGameObject : IGameGameObject
+public interface IPhysicalGameObject : IGameObject
 {
     /// <summary>
     /// Масса объекта

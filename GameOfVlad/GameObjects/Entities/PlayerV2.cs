@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Input;
 namespace GameOfVlad.GameObjects.Entities;
 
 public class PlayerV2(ContentManager contentManager)
-    : ColliderEntity(contentManager), ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject
+    : ColliderGameObject, ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject
 {
     public int DrawOrder => (int)DrawOrderType.Player;
     public int UpdateOrder => 1;
@@ -19,16 +19,21 @@ public class PlayerV2(ContentManager contentManager)
     public float MaxVelocity { get; set; } = 300f;
     public Vector2 Velocity { get; set; } = Vector2.Zero;
     public float TrustPower { get; set; } = 50f;
+    public float RotationVelocity { get; set; } = 5f;
+    
 
     private readonly KeyboardInputObserver _keyboardInputObserver = new();
+
     private readonly ICameraService _cameraService =
         contentManager.ServiceProvider.GetRequiredService<ICameraService>();
 
-    public override void Init()
+    private bool _trustPowerActive;
+
+    protected override void LoadCore()
     {
         _keyboardInputObserver.KeyPressed += HandleKeyPressed;
 
-        base.Init();
+        base.LoadCore();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -40,6 +45,7 @@ public class PlayerV2(ContentManager contentManager)
 
     public override void Update(GameTime gameTime)
     {
+        _trustPowerActive = false;
         _keyboardInputObserver.Update();
     }
 
@@ -51,7 +57,7 @@ public class PlayerV2(ContentManager contentManager)
         // Альтернатива: полностью обнуляем компонент скорости в направлении нормали
         //this.Velocity -= Vector2.Dot(this.Velocity, collisionNormal) * collisionNormal;
     }
-    
+
     private void HandleKeyPressed(KeyEventArgs e)
     {
         float rotationSpeed = MathHelper.ToRadians(this.RotationVelocity);
@@ -59,10 +65,15 @@ public class PlayerV2(ContentManager contentManager)
         {
             Rotate(-rotationSpeed);
         }
-        
+
         if (e.Key == Keys.D)
         {
             Rotate(rotationSpeed);
+        }
+
+        if (e.Key == Keys.Space)
+        {
+            _trustPowerActive = true;
         }
 
         void Rotate(float rotationChange)
@@ -71,5 +82,10 @@ public class PlayerV2(ContentManager contentManager)
 
             this.Rotation = MathHelper.WrapAngle(this.Rotation);
         }
+    }
+
+    public float GetTrustForce()
+    {
+        return _trustPowerActive ? this.TrustPower : 0f;
     }
 }

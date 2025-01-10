@@ -1,3 +1,4 @@
+using GameOfVlad.GameObjects.Interfaces;
 using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.GameObjects.Entities.Interfaces;

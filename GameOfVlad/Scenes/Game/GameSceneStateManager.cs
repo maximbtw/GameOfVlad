@@ -27,9 +27,7 @@ public class GameSceneStateManager(ContentManager contentManager)
         
         var eventArgs = new GameLevelChangeEventArgs(_level, newLevel);
         
-        _level?.Unload();
         _level = newLevel;
-        _level.Load();
         
         OnLevelChanged?.Invoke(this, eventArgs);
     }
@@ -38,7 +36,7 @@ public class GameSceneStateManager(ContentManager contentManager)
     {
         if (_state != state)
         {
-            _level.GameStateChanged(state);
+            _level.IsActive = state == GameState.Play;
             
             OnGameStateChanged?.Invoke(this, new GameStateChangeEventArgs(state));
         }

@@ -4,7 +4,7 @@ using GameOfVlad.Scenes;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.GameRenderer;
+namespace GameOfVlad;
 
 public class GameSceneRenderer
 {

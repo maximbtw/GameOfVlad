@@ -7,39 +7,34 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameRenderer.GameObjectRendererModificators;
 
-public class PhysicRendererModificator : IGameObjectRendererModificator
+public class PhysicRendererModificator : BaseRendererObjectHandler<IPhysicalGameObject>, IRendererObjectHandler
 {
     public Gravity Gravity { get; set; }
 
-
     private readonly PhysicsV2 _physics = new();
 
-    public void Update(IGameObject gameObject, GameTime gameTime)
+    protected override void UpdateCore(IPhysicalGameObject obj, GameTime gameTime)
     {
-        if (gameObject is IPhysicalGameObject obj)
+        var forces = new List<ForceDelegate>();
+
+        if (obj is ITrustForcePhysicalGameObject trustForcedGameObject)
         {
-            var forces = new List<ForceDelegate>();
-
-            if (obj is ITrustForcePhysicalGameObject trustForcedGameObject)
-            {
-                ForceDelegate thrustForce = Force.CreateThrustForce(trustForcedGameObject);
-                forces.Add(thrustForce);
-            }
-
-            if (this.Gravity != null)
-            {
-                ForceDelegate gravityForce = Force.CreateGravityForce(Gravity.Center, Gravity.Strength);
-                forces.Add(gravityForce);
-            }
-
-            ForceDelegate combinedForces = Force.Combine(forces);
-
-            _physics.ApplyForces(obj, combinedForces, gameTime);
+            ForceDelegate thrustForce = Force.CreateThrustForce(trustForcedGameObject);
+            forces.Add(thrustForce);
         }
+
+        if (this.Gravity != null)
+        {
+            ForceDelegate gravityForce = Force.CreateGravityForce(Gravity.Center, Gravity.Strength);
+            forces.Add(gravityForce);
+        }
+
+        ForceDelegate combinedForces = Force.Combine(forces);
+
+        _physics.ApplyForces(obj, combinedForces, gameTime);
     }
 
-    public void Draw(IGameObject gameObject, GameTime gameTime, SpriteBatch spriteBatch)
+    protected override void DrawCore(IPhysicalGameObject obj, GameTime gameTime, SpriteBatch spriteBatch)
     {
-        
     }
 }

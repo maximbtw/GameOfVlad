@@ -1,6 +1,6 @@
 using System;
-using GameOfVlad.GameObjects.Entities;
-using GameOfVlad.GameObjects.Entities.Interfaces;
+using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 

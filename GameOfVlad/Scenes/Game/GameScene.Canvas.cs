@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using GameOfVlad.GameObjects.UI.Components.Forms.GamePause;
 using GameOfVlad.GameObjects.UI.Interfaces;
-using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Scenes.Game;
 
@@ -9,7 +8,7 @@ public partial class GameScene
 {
     private GamePauseForm _gamePauseForm;
     
-    protected override IEnumerable<IUiComponent> InitUiComponentsCore()
+    protected override IEnumerable<IUiComponent> InitRenderObjectsCore()
     {
         _gamePauseForm = CreatePauseForm();
 
@@ -24,6 +23,7 @@ public partial class GameScene
     private void VisiblyUiUpdate(GameState gameState)
     {
         _gamePauseForm.IsActive = gameState == GameState.Pause;
+        _gamePauseForm.Visible = gameState == GameState.Pause;
     }
 
     private GamePauseForm CreatePauseForm()

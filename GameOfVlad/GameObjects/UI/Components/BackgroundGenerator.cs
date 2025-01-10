@@ -7,35 +7,35 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.UI.Components;
 
-public class BackgroundGenerator : UiComponentBase, IUiComponent
+public class BackgroundGenerator : UiComponent, IUiComponent
 {
     public int DrawOrder => (int)DrawOrderType.Background;
     public int UpdateOrder => 1;
 
-    private readonly Vector2 _startPoint;
-    private readonly Size _size;
+    private const int DrawOffset = 1000;
+
+    private readonly Rectangle _levelBounds;
 
     private int _horizontalTiles;
     private int _verticalTiles;
 
-    public BackgroundGenerator(ContentManager contentManager, Texture2D texture, Vector2 startPoint, Size size) :
+    public BackgroundGenerator(ContentManager contentManager, Texture2D texture, Rectangle levelBounds) :
         base(contentManager)
     {
         this.Texture = texture;
 
-        _startPoint = startPoint;
-        _size = size;
+        _levelBounds = levelBounds;
     }
 
-    public override void Init()
+    protected override void LoadCore()
     {
         int textureWidth = this.Texture.Width;
         int textureHeight = this.Texture.Height;
-        
-        _horizontalTiles = (int)Math.Ceiling(_size.Width / textureWidth);
-        _verticalTiles = (int)Math.Ceiling(_size.Height / textureHeight);
-        
-        base.Init();
+
+        _horizontalTiles = (int)Math.Ceiling((_levelBounds.Width + DrawOffset * 2) / (float)textureWidth);
+        _verticalTiles = (int)Math.Ceiling((_levelBounds.Height + DrawOffset * 2) / (float)textureHeight);
+
+        base.LoadCore();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -45,10 +45,10 @@ public class BackgroundGenerator : UiComponentBase, IUiComponent
             for (int x = 0; x < _horizontalTiles; x++)
             {
                 var position = new Vector2(
-                    _startPoint.X + x * this.Texture.Width,
-                    _startPoint.Y + y * this.Texture.Height
+                    _levelBounds.X - DrawOffset + x * this.Texture.Width,
+                    _levelBounds.Y - DrawOffset + y * this.Texture.Height
                 );
-                
+
                 spriteBatch.Draw(this.Texture, position, this.Color);
             }
         }

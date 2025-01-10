@@ -1,31 +1,44 @@
 using System;
 using System.Collections.Generic;
-using GameOfVlad.GameObjects;
-using GameOfVlad.GameObjects.Entities.Interfaces;
-using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
+using GameOfVlad.GameRenderer.GameObjectRendererModificators;
+using GameOfVlad.Services.Camera;
+using GameOfVlad.Services.Mouse;
 using GameOfVlad.Utils.Keyboards;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Scenes;
 
 public abstract class SceneBase(ContentManager contentManager) : IDisposable
 {
-    private GameObjectRenderer _renderer;
-
-    protected KeyboardInputObserver KeyboardInputObserver;
+    private RendererObjectDispatcher _renderer;
     
     protected readonly ContentManager ContentManager = contentManager;
+    
+    protected KeyboardInputObserver KeyboardInputObserver;
+    protected ICameraService CameraService => this.ContentManager.ServiceProvider.GetRequiredService<ICameraService>();
+    protected IMouseService MouseService => this.ContentManager.ServiceProvider.GetRequiredService<IMouseService>();
 
     public void Load()
     {
-        _renderer = new GameObjectRenderer();
+        _renderer = new RendererObjectDispatcher();
         this.KeyboardInputObserver = new KeyboardInputObserver();
 
-        InitUiComponents();
-        InitGameGameObjects();
+        RegisterRendererHandler(new MouseCursorRendererHandler(this.CameraService, this.MouseService));
+        
+        this.KeyboardInputObserver.KeyDown += e =>
+        {
+            if (e.Key == Keys.Q)
+            {
+                Settings.ShowCollider = !Settings.ShowCollider;
+            }
+        };
+
+        InitRenderObjects();
 
         LoadCore();
     }
@@ -47,31 +60,23 @@ public abstract class SceneBase(ContentManager contentManager) : IDisposable
 
     public void Update(GameTime gameTime)
     {
-        KeyboardInputObserver.Update();
+        this.KeyboardInputObserver.Update();
         _renderer.Update(gameTime);
 
         UpdateCore(gameTime);
     }
 
-    protected void AddGameObjects(IEnumerable<IGameObject> gameObjects)
+    protected void AddRenderObject(params IRendererObject[] rendererObjects)
     {
-        foreach (IGameObject gameObject in gameObjects)
+        foreach (IRendererObject gameObject in rendererObjects)
         {
-            _renderer.AddGameObject(gameObject);
+            _renderer.Add(gameObject);
         }
     }
-    
-    protected void AddRendererModificators(IEnumerable<IGameObjectRendererModificator> modificators)
+
+    protected void RegisterRendererHandler(IRendererObjectHandler handler)
     {
-        foreach (IGameObjectRendererModificator modificator in modificators)
-        {
-            _renderer.AddModificator(modificator);
-        }
-    }
-    
-    protected void ResetModificators()
-    {
-        _renderer.ResetModificators();
+        _renderer.RegisterHandler(handler);
     }
 
     protected virtual void LoadCore()
@@ -90,22 +95,13 @@ public abstract class SceneBase(ContentManager contentManager) : IDisposable
     {
     }
     
-    protected abstract IEnumerable<IGameGameObject> InitInitGameGameObjectsCore();
-    protected abstract IEnumerable<IUiComponent> InitUiComponentsCore();
+    protected abstract IEnumerable<IRendererObject> InitRenderObjectsCore();
     
-    private void InitGameGameObjects()
+    private void InitRenderObjects()
     {
-        foreach (IGameGameObject gameObject in InitInitGameGameObjectsCore())
+        foreach (IRendererObject obj in InitRenderObjectsCore())
         {
-            _renderer.AddGameObject(gameObject);
-        }
-    }
-
-    private void InitUiComponents()
-    {
-        foreach (IUiComponent uiComponent in InitUiComponentsCore())
-        {
-            _renderer.AddGameObject(uiComponent);
+            _renderer.Add(obj);
         }
     }
 

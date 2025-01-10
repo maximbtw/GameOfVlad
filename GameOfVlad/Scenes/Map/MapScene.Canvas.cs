@@ -10,7 +10,7 @@ namespace GameOfVlad.Scenes.Map;
 
 public partial class MapScene
 {
-    protected override IEnumerable<IUiComponent> InitUiComponentsCore()
+    protected override IEnumerable<IUiComponent> InitRenderObjectsCore()
     {
         var font = this.ContentManager.Load<SpriteFont>("Pages/MapLevels/Font");
         

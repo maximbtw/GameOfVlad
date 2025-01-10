@@ -23,7 +23,7 @@ public static class Force
                 (float)Math.Sin(trustForce.Rotation)
             );
             
-            float force = trustForce.TrustPower;
+            float force = trustForce.GetTrustForce();
             
             return direction * force;
         };

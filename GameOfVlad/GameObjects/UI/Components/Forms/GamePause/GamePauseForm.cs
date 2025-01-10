@@ -2,30 +2,17 @@ using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 using GameOfVlad.GameObjects.UI.Interfaces;
-using GameOfVlad.Utils.Camera;
+using GameOfVlad.GameRenderer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.UI.Components.Forms.GamePause;
 
-public class GamePauseForm(ContentManager contentManager) : UiComponentBase(contentManager), IUiComponent
+public class GamePauseForm(ContentManager contentManager) : UiComponent(contentManager), IUiComponent
 {
     public int DrawOrder => (int)DrawOrderType.FrontCanvas;
     public int UpdateOrder => 1;
-
-    public override IEnumerable<IGameObject> Children
-    {
-        get
-        {
-            yield return this.BtnContinueGame;
-            yield return this.BtnRestartGame;
-            yield return this.BtnToMapScene;
-            yield return this.BtnToSettingsScene;
-            yield return this.BtnToMainMenuScene;
-        }
-        set => throw new NotSupportedException();
-    }
 
     public Button BtnContinueGame { get; } = new(contentManager);
     public Button BtnRestartGame { get; } = new(contentManager);
@@ -33,15 +20,27 @@ public class GamePauseForm(ContentManager contentManager) : UiComponentBase(cont
     public Button BtnToSettingsScene { get; } = new(contentManager);
     public Button BtnToMainMenuScene { get; } = new(contentManager);
     
+    public override IEnumerable<IRendererObject> Children
+    {
+        get
+        {
+            yield return this.BtnContinueGame;
+            yield return this.BtnRestartGame;
+            yield return this.BtnToMapScene;
+            yield return this.BtnToSettingsScene;
+            yield return this.BtnToMainMenuScene;   
+        }
+        set => throw new NotSupportedException();
+    }
 
-    public override void Init()
+    protected override void LoadCore()
     {
         this.Texture = this.ContentManager.Load<Texture2D>("Interfaces/Pause/Backgraund");
         this.Position = new Vector2(Settings.ScreenWidth / 2 - 345, Settings.ScreenHeight / 2 - 400);
 
         InitButtons();
 
-        base.Init();
+        base.LoadCore();
     }
     
     private void InitButtons()
@@ -64,6 +63,6 @@ public class GamePauseForm(ContentManager contentManager) : UiComponentBase(cont
 
         this.BtnToMainMenuScene.Texture = this.ContentManager.Load<Texture2D>("Buttons/MainMenu");
         this.BtnToMainMenuScene.Position = new Vector2(190, 675);
-        this.BtnToMainMenuScene.Parent = this;
+        this.BtnToMainMenuScene.Parent = this;;
     }
 }

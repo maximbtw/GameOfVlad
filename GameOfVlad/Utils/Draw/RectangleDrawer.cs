@@ -1,16 +1,15 @@
 using System;
-using GameOfVlad.GameObjects.UI.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Utils.Draw;
 
-public class UiColliderDrawer(IUiComponent component) : IDisposable
+public class RectangleDrawer : IDisposable
 {
     // Статическая текстура 1x1 пиксель (общая для всех сущностей)
     private Texture2D _pixelTexture;
 
-    public void DrawCollider(SpriteBatch spriteBatch)
+    public void DrawCollider(SpriteBatch spriteBatch, Rectangle rectangle, Color color)
     {
         if (_pixelTexture == null)
         {
@@ -18,34 +17,32 @@ public class UiColliderDrawer(IUiComponent component) : IDisposable
             _pixelTexture.SetData([Color.White]);
         }
 
-        var rectangle = component.BoundingBox;
-
         // Верхняя линия
         DrawHelper.DrawLine(spriteBatch, 
             new Vector2(rectangle.Left, rectangle.Top), 
             new Vector2(rectangle.Right, rectangle.Top), 
-            Color.Red, 
+            color, 
             _pixelTexture);
 
         // Правая линия
         DrawHelper.DrawLine(spriteBatch, 
             new Vector2(rectangle.Right, rectangle.Top), 
             new Vector2(rectangle.Right, rectangle.Bottom), 
-            Color.Red, 
+            color, 
             _pixelTexture);
 
         // Нижняя линия
         DrawHelper.DrawLine(spriteBatch, 
             new Vector2(rectangle.Right, rectangle.Bottom), 
             new Vector2(rectangle.Left, rectangle.Bottom), 
-            Color.Red, 
+            color, 
             _pixelTexture);
 
         // Левая линия
         DrawHelper.DrawLine(spriteBatch, 
             new Vector2(rectangle.Left, rectangle.Bottom), 
             new Vector2(rectangle.Left, rectangle.Top), 
-            Color.Red, 
+            color, 
             _pixelTexture);
     }
 

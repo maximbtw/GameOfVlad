@@ -1,65 +1,103 @@
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using GameOfVlad.GameObjects;
-using GameOfVlad.GameObjects.Entities.Interfaces;
-using GameOfVlad.GameObjects.UI.Interfaces;
-using GameOfVlad.Scenes.Game;
+using GameOfVlad.GameRenderer;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Game;
 
-public abstract class LevelBase(ContentManager contentManager)
+public abstract class LevelBase(ContentManager contentManager) : IRendererObject
 {
+    public int DrawOrder => (int)DrawOrderType.Player;
+    public int UpdateOrder => 1;
+    public Guid Guid => Guid.NewGuid();
+    public bool Destroyed { get; set; } = false;
+    public virtual bool Loaded => _loaded;
+    public bool IsActive { get; set; } = true;
+    public bool Visible { get; set; } = true;
+    public IRendererObject Parent
+    {
+        get => null;
+        set => throw new NotSupportedException();
+    }
+
+    public IEnumerable<IRendererObject> Children
+    {
+        get => [];
+        set => throw new NotSupportedException();
+    }
+
     protected readonly ContentManager ContentManager = contentManager;
-    
-    private readonly List<IGameObject> _alwaysVisiblyGameObjects = new();
+
+    // TODO: Либо объеденить и добавить функционал в диспатчер.
+    private RendererObjectDispatcher _renderer;
     private readonly List<IGameObject> _gameObjects = new();
 
-    public IEnumerable<IGameObject> GetGameObjects() => _gameObjects.Concat(_alwaysVisiblyGameObjects);
-    
+    private bool _loaded;
+
+    public IRendererObject GetParent() => null;
+
+    public IEnumerable<IRendererObject> GetChildren() => _gameObjects;
+
     public void Load()
     {
-        foreach (IGameGameObject gameObject in LoadGameGameObjects())
+        if (_loaded)
         {
-            _gameObjects.Add(gameObject);
+            throw new Exception("Object is already loaded");
         }
         
-        foreach (IUiComponent gameObject in LoadUiComponents())
-        {
-            _gameObjects.Add(gameObject);
-        }
+        _renderer = new RendererObjectDispatcher();
         
-        foreach (IGameGameObject gameObject in LoadAlwaysVisiblyGameGameObjects())
-        {
-            _alwaysVisiblyGameObjects.Add(gameObject);
-        }
-        
-        foreach (IUiComponent gameObject in LoadAlwaysVisiblyUiComponents())
-        {
-            _alwaysVisiblyGameObjects.Add(gameObject);
-        }
+        InitGameObjects();
+        LoadCore();
+
+        _loaded = true;
     }
 
     public void Unload()
     {
-        _gameObjects.ForEach(x=>x.Destroyed = true);
-        _gameObjects.Clear();
-    }
+        UnloadCore();
 
-    public void GameStateChanged(GameState state)
-    {
-        if (state == GameState.Play)
-        {
-            _gameObjects.ForEach(x => x.IsActive = true);
-        }
-        else if (state == GameState.Pause)
-        {
-            _gameObjects.ForEach(x => x.IsActive = false);
-        }
+        _gameObjects.ForEach(x => x.Destroyed = true);
+        _gameObjects.Clear();
+        _renderer.Clear();
+
+        _loaded = false;
     }
     
-    protected abstract IEnumerable<IUiComponent> LoadAlwaysVisiblyUiComponents();
-    protected abstract IEnumerable<IGameGameObject> LoadAlwaysVisiblyGameGameObjects();
-    protected abstract IEnumerable<IUiComponent> LoadUiComponents();
-    protected abstract IEnumerable<IGameGameObject> LoadGameGameObjects();
+    public void Update(GameTime gameTime)
+    {
+        _renderer.Update(gameTime);
+    }
+
+    public void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+        _renderer.Draw(gameTime, spriteBatch);
+    }
+    
+    protected virtual void LoadCore()
+    {
+    }
+
+    protected virtual void UnloadCore()
+    {
+    }
+    
+    protected void RegisterRendererHandler(IRendererObjectHandler handler)
+    {
+        _renderer.RegisterHandler(handler);
+    }
+    
+    protected abstract IEnumerable<IGameObject> InitGameObjectsCore();
+    
+    private void InitGameObjects()
+    {
+        foreach (IGameObject obj in InitGameObjectsCore())
+        {
+            _renderer.Add(obj);
+            _gameObjects.Add(obj);
+        }
+    }
 }

@@ -1,8 +1,9 @@
+using GameOfVlad.GameRenderer;
 using Microsoft.Xna.Framework;
 
-namespace GameOfVlad.GameObjects;
+namespace GameOfVlad.GameObjects.Interfaces;
 
-public interface IMouseHoverable
+public interface IMouseHoverable : IRendererObject
 {
     /// <summary>
     /// Вызывается, когда курсор наведен на элемент.

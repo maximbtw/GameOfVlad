@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
+using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Entities;
-using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.UI.Components;
-using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.GameObjectRendererModificators;
-using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,51 +12,35 @@ namespace GameOfVlad.Game.Levels;
 
 public class Level1(ContentManager contentManager) : LevelBase(contentManager), ILevel
 {
-    public Size LevelSize => new(Width: 2000, Height: 2000);
-    
+    public Rectangle LevelBounds => new(0, 0, 2000, 2000);
     public LevelType LevelType => LevelType.Level1;
 
-    public IEnumerable<IGameObjectRendererModificator> GetLevelModificators()
+    protected override void LoadCore()
     {
-        yield return new PhysicRendererModificator
+        RegisterRendererHandler(new PhysicRendererModificator
         {
             //Gravity = new Gravity(new Vector2(800, 800), 5000f)
-        };
+        });
         
-        yield return new LevelBorderRendererModificator(Vector2.Zero, this.LevelSize);
+        RegisterRendererHandler(new LevelBorderRendererModificator(this.LevelBounds));
     }
-    
-    protected override IEnumerable<IUiComponent> LoadAlwaysVisiblyUiComponents()
+
+    protected override IEnumerable<IGameObject> InitGameObjectsCore()
     {
         yield return new BackgroundGenerator(
             this.ContentManager,
             this.ContentManager.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_04-512x512"), 
-            new Vector2(-1000,-1000),
-            Size.Create(width: 5000, height: 5000));
-    }
-
-    protected override IEnumerable<IGameGameObject> LoadAlwaysVisiblyGameGameObjects()
-    {
-        yield break;
-    }
-
-    protected override IEnumerable<IUiComponent> LoadUiComponents()
-    {
-        yield break;
-    }
-
-    protected override IEnumerable<IGameGameObject> LoadGameGameObjects()
-    {
+            this.LevelBounds);
+        
         yield return new PlayerV2(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Sprite/Rocket/Rocket"),
             Position = new Vector2(100, 100),
-            TrustPower = 5000,
+            TrustPower = 10000,
             Mass = 100
         };
     }
-
-
+    
     /*public Level1(GameOfVlad game, GraphicsDevice graphicsDevice, ContentManager content)
         : base(game, graphicsDevice, content)
     {
