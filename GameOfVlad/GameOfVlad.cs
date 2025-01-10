@@ -112,7 +112,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     {
         this.GraphicsDevice.Clear(Color.White);
         
-        _spriteBatch.Begin(transformMatrix: _camera.View);
+        _spriteBatch.Begin( SpriteSortMode.Deferred, BlendState.AlphaBlend, transformMatrix: _camera.View);
 
         _gameSceneRenderer?.Draw(gameTime, _spriteBatch);
 

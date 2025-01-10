@@ -2,6 +2,7 @@
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Entities;
 using GameOfVlad.GameObjects.UI.Components;
+using GameOfVlad.GameObjects.UI.Effects;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.GameObjectRendererModificators;
 using Microsoft.Xna.Framework;
@@ -31,6 +32,8 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
             this.ContentManager,
             this.ContentManager.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_04-512x512"), 
             this.LevelBounds);
+
+        yield return new StarfallGenerator(this.ContentManager, this.LevelBounds);
         
         yield return new PlayerV2(this.ContentManager)
         {

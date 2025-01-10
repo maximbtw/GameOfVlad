@@ -46,7 +46,7 @@ public abstract class ColliderGameObject : GameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        if (Settings.ShowCollider)
+        if (Settings.Debug)
         {
             _colliderDrawer?.DrawCollider(spriteBatch);
         }

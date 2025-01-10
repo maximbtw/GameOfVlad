@@ -34,7 +34,7 @@ public abstract class SceneBase(ContentManager contentManager) : IDisposable
         {
             if (e.Key == Keys.Q)
             {
-                Settings.ShowCollider = !Settings.ShowCollider;
+                Settings.Debug = !Settings.Debug;
             }
         };
 

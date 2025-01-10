@@ -65,7 +65,7 @@ public class LevelBorderRendererModificator(Rectangle levelBounds)
 
     protected override void DrawCore(ILevelBorderRestrictedGameObject obj, GameTime gameTime, SpriteBatch spriteBatch)
     {
-        if (Settings.ShowCollider)
+        if (Settings.Debug)
         {
             _rectangleDrawer.DrawCollider(spriteBatch, levelBounds, Color.Red);
         }
