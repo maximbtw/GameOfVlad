@@ -15,8 +15,7 @@ namespace GameOfVlad.OldProject.Sprites
     {
         public enum State 
         { 
-            Rocket,
-            Run 
+            Rocket
         }
 
         public enum WeaponState
@@ -42,10 +41,7 @@ namespace GameOfVlad.OldProject.Sprites
             Stay
         }
         public State StateGame = State.Rocket;
-
-        private Animation animationLeft;
-        private Animation animationRight;
-        private Animation animationStay;
+        
 
         public Turn turnState = Turn.None;
         public WeaponState _WeaponState = WeaponState.Standart;
@@ -66,10 +62,6 @@ namespace GameOfVlad.OldProject.Sprites
         public Player(ContentManager content, Texture2D texture, Vector2 location, Level level)
             : base(content, texture, location, level)
         {
-            animationLeft = new Animation(Content, "PersonRun/Left/", 4, 10);
-            animationRight = new Animation(Content, "PersonRun/Right/", 4, 10);
-            animationStay = new Animation(Content, "PersonRun/Stay/", 4, 1);
-
             Origin = new Vector2(Texture.Width / 2, Texture.Height / 2);
             Speed = 0.001f;
             //Speed = 5f;
@@ -101,9 +93,6 @@ namespace GameOfVlad.OldProject.Sprites
                 case State.Rocket:
                     DrawRocket(gameTime, spriteBatch);
                     break;
-                case State.Run:
-                    DrawRun(gameTime, spriteBatch);
-                    break;
             }
         }
 
@@ -114,9 +103,6 @@ namespace GameOfVlad.OldProject.Sprites
                 case State.Rocket:
                     UpdateRocket(gameTime);
                     break;
-                case State.Run:
-                    UpdateRun(gameTime);
-                    break;
             }
         }
 
@@ -126,36 +112,7 @@ namespace GameOfVlad.OldProject.Sprites
             Boost.Draw(gameTime, spriteBatch);
             Shield.Draw(gameTime, spriteBatch);
         }
-
-        public void DrawRun(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (turnState == Turn.Right)
-            {
-                animationRight.Update(gameTime);
-                if (animationRight.Next)
-                {
-                    Texture = animationRight.GetTexture;
-                }
-            }
-            else if (turnState == Turn.Left)
-            {
-                animationLeft.Update(gameTime);
-                if (animationLeft.Next)
-                {
-                    Texture = animationLeft.GetTexture;
-                }
-            }
-            else
-            {
-                animationStay.Update(gameTime);
-                if (animationStay.Next)
-                {
-                    Texture = animationStay.GetTexture;
-                }
-            }
-
-            base.Draw(gameTime, spriteBatch);
-        }
+        
 
         public void UpdateRocket(GameTime gameTime)
         {
@@ -176,62 +133,7 @@ namespace GameOfVlad.OldProject.Sprites
             //if (Keyboard.GetState().IsKeyDown(Keys.S))
             //    Location += new Vector2(0, 5);
         }
-
-
-        public bool hasJumped = false;
-        public void UpdateRun(GameTime gameTime)
-        {
-            Location += Velocity;
-            #region jopa
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
-                Velocity.X = -3.5f;
-                turnState = Turn.Left;
-            }
-            else if (Keyboard.GetState().IsKeyDown(Keys.D))
-            {
-                Velocity.X = 3.5f;
-                turnState = Turn.Right;
-            }
-            else
-            {
-                Velocity.X = 0f;
-                turnState = Turn.Stay;
-            }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space) && !hasJumped)
-            {
-                Location.Y -= 14f;
-                Velocity.Y = -7f;
-                hasJumped = true;
-                //turnState = Turn.Up;
-            }
-            if (hasJumped)
-            {
-                float i = 1;
-                Velocity.Y += 0.15f * i;
-            }
-
-            if (!hasJumped)
-                Velocity.Y = 0;
-
-            int count = 0;
-            foreach (var wall in Level.Walls)
-            {
-                if ((this.Velocity.X > 0 && this.IsTouchingLeft(wall)) ||
-                    (this.Velocity.X < 0 & this.IsTouchingRight(wall)))
-                    this.Velocity.X = 0;
-                if (this.Velocity.Y < 0 & this.IsTouchingBottom(wall))
-                    this.Velocity.Y = 0;
-                if (this.Velocity.Y > 0 && this.IsTouchingTop(wall))
-                {
-                    this.Velocity.Y = 0;
-                    hasJumped = false;
-                    count++;
-                }
-                else if (count == 0) hasJumped = true;
-            }
-            #endregion
-        }
+        
 
         private void UpdateRocketMove(GameTime gameTime)
         {
