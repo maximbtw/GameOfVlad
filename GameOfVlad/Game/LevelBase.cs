@@ -23,7 +23,13 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
         set => throw new NotSupportedException();
     }
 
-    public IEnumerable<IRendererObject> Children
+    public IEnumerable<IRendererObject> ChildrenBefore 
+    {
+        get => [];
+        set => throw new NotSupportedException();
+    }
+    
+    public IEnumerable<IRendererObject> ChildrenAfter
     {
         get => [];
         set => throw new NotSupportedException();

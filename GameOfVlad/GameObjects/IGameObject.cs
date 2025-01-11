@@ -8,24 +8,24 @@ namespace GameOfVlad.GameObjects;
 public interface IGameObject : IRendererObject
 {
     Texture2D Texture { get; set; }
-    
-    public Vector2 Position { get; set; }
-    
-    public Vector2 Origin { get; }
-    
-    public Size Size { get; set; }
-    
-    public Rectangle? SourceRectangle { get; }
-    
-    public Color Color { get; set; }
-    
-    public float Rotation { get; set; }
-    
-    public Vector2 Scale { get; set; }
-    
-    public SpriteEffects SpriteEffects { get; set; }
-    
-    public float LayerDepth { get; set; }
-    
-    public Vector2 DrawPosition { get; }
+
+    Vector2 Position { get; set; }
+
+    Vector2 Origin { get; }
+
+    Size Size { get; set; }
+
+    Rectangle? SourceRectangle { get; }
+
+    Color Color { get; set; }
+
+    float Rotation { get; set; }
+
+    Vector2 Scale { get; set; }
+
+    SpriteEffects SpriteEffects { get; set; }
+
+    float LayerDepth { get; set; }
+
+    Vector2 DrawPosition { get; }
 }

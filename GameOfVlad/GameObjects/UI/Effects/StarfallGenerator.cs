@@ -14,7 +14,7 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
     public int DrawOrder => (int)DrawOrderType.Background;
     public int UpdateOrder => 1;
 
-    public override IEnumerable<IRendererObject> Children
+    public override IEnumerable<IRendererObject> ChildrenAfter
     {
         get => _stars;
         set => throw new NotSupportedException();

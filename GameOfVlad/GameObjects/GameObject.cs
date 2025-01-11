@@ -13,7 +13,8 @@ public abstract class GameObject
 
     public virtual IRendererObject Parent { get; set; } = null;
 
-    public virtual IEnumerable<IRendererObject> Children { get; set; } = [];
+    public virtual IEnumerable<IRendererObject> ChildrenAfter  { get; set; } = [];
+    public virtual IEnumerable<IRendererObject> ChildrenBefore  { get; set; } = [];
 
     public virtual bool Destroyed { get; set; } = false;
     public virtual bool IsActive { get; set; } = true;

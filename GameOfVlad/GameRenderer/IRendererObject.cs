@@ -48,9 +48,14 @@ public interface IRendererObject
     IRendererObject Parent { get; set; }
 
     /// <summary>
-    /// Возвращает или устанавливает дочерние элементы объекта.
+    /// Возвращает или устанавливает дочерние элементы, которые отрисовываются перед объектом.
     /// </summary>
-    IEnumerable<IRendererObject> Children { get; set; }
+    IEnumerable<IRendererObject> ChildrenBefore { get; set; }
+
+    /// <summary>
+    /// Возвращает или устанавливает дочерние элементы, которые отрисовываются после объекта.
+    /// </summary>
+    IEnumerable<IRendererObject> ChildrenAfter { get; set; }
 
     void Load();
 

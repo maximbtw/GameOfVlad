@@ -87,10 +87,15 @@ public class RendererObjectDispatcher
             gameObject.Load();
         }
         
+        foreach (IRendererObject child in gameObject.ChildrenBefore.OrderBy(x => x.UpdateOrder))
+        {
+            UpdateGameObject(gameTime, child, ref destroy);
+        }
+        
         gameObject.Update(gameTime);
         UpdateByHandler(gameTime, gameObject);
         
-        foreach (IRendererObject child in gameObject.Children.OrderBy(x => x.UpdateOrder))
+        foreach (IRendererObject child in gameObject.ChildrenAfter.OrderBy(x => x.UpdateOrder))
         {
             UpdateGameObject(gameTime, child, ref destroy);
         }
@@ -103,10 +108,15 @@ public class RendererObjectDispatcher
             return;
         }
         
+        foreach (IRendererObject child in gameObject.ChildrenBefore.OrderBy(x => x.UpdateOrder))
+        {
+            DrawGameObject(gameTime, spriteBatch, child);
+        }
+        
         gameObject.Draw(gameTime, spriteBatch);
         DrawByHandler(gameTime, spriteBatch, gameObject);
         
-        foreach (IRendererObject child in gameObject.Children.OrderBy(x => x.UpdateOrder))
+        foreach (IRendererObject child in gameObject.ChildrenAfter.OrderBy(x => x.UpdateOrder))
         {
             DrawGameObject(gameTime, spriteBatch, child);
         }

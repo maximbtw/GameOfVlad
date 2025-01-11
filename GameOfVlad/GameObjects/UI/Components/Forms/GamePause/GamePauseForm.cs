@@ -20,7 +20,7 @@ public class GamePauseForm(ContentManager contentManager) : UiComponent(contentM
     public Button BtnToSettingsScene { get; } = new(contentManager);
     public Button BtnToMainMenuScene { get; } = new(contentManager);
     
-    public override IEnumerable<IRendererObject> Children
+    public override IEnumerable<IRendererObject> ChildrenAfter 
     {
         get
         {
