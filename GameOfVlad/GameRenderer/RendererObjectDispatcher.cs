@@ -126,7 +126,7 @@ public class RendererObjectDispatcher
     {
         foreach (IRendererObjectHandler handler in _handlers)
         {
-            handler.Update(obj, gameTime);
+            handler.Update(gameTime, obj, _gameObjects);
         }
     }
     
@@ -134,7 +134,7 @@ public class RendererObjectDispatcher
     {
         foreach (IRendererObjectHandler handler in _handlers)
         {
-            handler.Draw(obj, gameTime, spriteBatch);
+            handler.Draw(gameTime, spriteBatch, obj);
         }
     }
 }

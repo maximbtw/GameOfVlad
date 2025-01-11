@@ -91,9 +91,12 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
     {
     }
     
-    protected void RegisterRendererHandler(IRendererObjectHandler handler)
+    protected void RegisterRendererHandlers(params IRendererObjectHandler[] handlers)
     {
-        _renderer.RegisterHandler(handler);
+        foreach (IRendererObjectHandler handler in handlers)
+        {
+            _renderer.RegisterHandler(handler);
+        }
     }
     
     protected abstract IEnumerable<IGameObject> InitGameObjectsCore();

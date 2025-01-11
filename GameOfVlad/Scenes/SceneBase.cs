@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GameOfVlad.GameRenderer;
-using GameOfVlad.GameRenderer.GameObjectRendererModificators;
+using GameOfVlad.GameRenderer.Handlers;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Mouse;
 using GameOfVlad.Utils.Keyboards;

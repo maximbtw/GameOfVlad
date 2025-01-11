@@ -30,4 +30,13 @@ public static class GameHelper
 
         return direction;
     }
+    
+    public static Vector2 CenterObjectOnScreen(Texture2D texture, Viewport viewport)
+    {
+        var screenCenter = new Vector2(viewport.Width / 2f, viewport.Height / 2f);
+        
+        var textureCenter = new Vector2(texture.Width / 2f, texture.Height / 2f);
+        
+        return screenCenter - textureCenter;
+    }
 }

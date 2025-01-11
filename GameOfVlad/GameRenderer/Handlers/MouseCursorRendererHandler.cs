@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
-using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Mouse;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.GameRenderer.GameObjectRendererModificators;
+namespace GameOfVlad.GameRenderer.Handlers;
 
 public class MouseCursorRendererHandler(ICameraService cameraService, IMouseService mouseService)
     : BaseRendererObjectHandler<IMouseHoverable>, IRendererObjectHandler
@@ -15,7 +14,7 @@ public class MouseCursorRendererHandler(ICameraService cameraService, IMouseServ
     // TODO: разростаться может будет?
     private readonly Dictionary<Guid, bool> _gameObjectGuidToMouseHoverIndex = new();
 
-    protected override void UpdateCore(IMouseHoverable obj, GameTime gameTime)
+    protected override void UpdateCore(GameTime gameTime, IMouseHoverable obj)
     {
         _gameObjectGuidToMouseHoverIndex.TryGetValue(obj.Guid, out bool oldStateIsHover);
 
@@ -42,9 +41,5 @@ public class MouseCursorRendererHandler(ICameraService cameraService, IMouseServ
         }
 
         _gameObjectGuidToMouseHoverIndex[obj.Guid] = newStateIsHover;
-    }
-
-    protected override void DrawCore(IMouseHoverable obj, GameTime gameTime, SpriteBatch spriteBatch)
-    {
     }
 }

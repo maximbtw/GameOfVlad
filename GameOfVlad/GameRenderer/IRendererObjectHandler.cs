@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -5,7 +6,7 @@ namespace GameOfVlad.GameRenderer;
 
 public interface IRendererObjectHandler
 {
-    void Update(IRendererObject obj, GameTime gameTime);
+    void Update(GameTime gameTime, IRendererObject obj, IEnumerable<IRendererObject> objects);
     
-    void Draw(IRendererObject obj, GameTime gameTime, SpriteBatch spriteBatch);
+    void Draw(GameTime gameTime, SpriteBatch spriteBatch, IRendererObject obj);
 }

@@ -1,10 +1,8 @@
-using System;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Utils.Camera;
 
-public class Camera(GraphicsDevice graphicsDevice)
+public class Camera
 {
     public Matrix View { get; private set; }
     

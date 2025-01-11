@@ -1,19 +1,17 @@
 using System;
-using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Entities.Interfaces;
-using GameOfVlad.Utils;
 using GameOfVlad.Utils.Draw;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.GameRenderer.GameObjectRendererModificators;
+namespace GameOfVlad.GameRenderer.Handlers;
 
-public class LevelBorderRendererModificator(Rectangle levelBounds)
+public class LevelBorderRendererHandler(Rectangle levelBounds)
     : BaseRendererObjectHandler<ILevelBorderRestrictedGameObject>, IRendererObjectHandler
 {
     private readonly RectangleDrawer _rectangleDrawer = new();
 
-    protected override void UpdateCore(ILevelBorderRestrictedGameObject obj, GameTime gameTime)
+    protected override void UpdateCore(GameTime gameTime, ILevelBorderRestrictedGameObject obj)
     {
         // Получаем вершины коллайдера
         Vector2[] colliderCorners = obj.GetCorners();
@@ -63,7 +61,7 @@ public class LevelBorderRendererModificator(Rectangle levelBounds)
         }
     }
 
-    protected override void DrawCore(ILevelBorderRestrictedGameObject obj, GameTime gameTime, SpriteBatch spriteBatch)
+    protected override void DrawCore(GameTime gameTime, SpriteBatch spriteBatch, ILevelBorderRestrictedGameObject obj)
     {
         if (Settings.Debug)
         {

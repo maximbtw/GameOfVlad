@@ -10,7 +10,8 @@ public class GameSceneStateManager(ContentManager contentManager)
 {
     private readonly Dictionary<LevelType, Func<ContentManager, ILevel>> _levelTypeToLevelFabricIndex = new()
     {
-        { LevelType.Level1 , x=> new Level1(x)}
+        { LevelType.Level1 , x=> new Level1(x)},
+        { LevelType.Level2 , x=> new Level2(x)}
     };
     
     private GameState _state = GameState.Loading;
@@ -21,14 +22,20 @@ public class GameSceneStateManager(ContentManager contentManager)
     
     public GameState GetState() => _state;
     
+    public LevelType GetCurrentLevelType() => _level.LevelType;
+
+    public LevelType GetNextLevelType() => _level.LevelType + 1;
+    
     public void SetLevel(LevelType levelType)
     {
         ILevel newLevel = _levelTypeToLevelFabricIndex[levelType].Invoke(contentManager);
         
         var eventArgs = new GameLevelChangeEventArgs(_level, newLevel);
-        
+
+        newLevel.OnLevelEnd += OnLevelEnd;
         _level = newLevel;
-        
+
+        SetState(GameState.Play);
         OnLevelChanged?.Invoke(this, eventArgs);
     }
 
@@ -41,5 +48,20 @@ public class GameSceneStateManager(ContentManager contentManager)
             OnGameStateChanged?.Invoke(this, new GameStateChangeEventArgs(state));
         }
         _state = state;
+    }
+    
+    private void OnLevelEnd(object sender, LevelEndEventArgs e)
+    {
+        switch (e.Reason)
+        {
+            case LevelEndReason.Completed:
+                SetState(GameState.LevelCompleted);
+                break;
+            case LevelEndReason.PlayerDead:
+                SetState(GameState.PlayerDead);
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 }

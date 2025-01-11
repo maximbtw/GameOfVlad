@@ -55,6 +55,27 @@ public abstract class CollierUiComponent(ContentManager contentManager) : UiComp
         base.Draw(gameTime, spriteBatch);
     }
     
+    public bool Intersects(IColliderGameObject other)
+    {
+        // Для UI компонентов не обрабатываем
+        return false;
+    }
+
+    public void OnCollision(IColliderGameObject other)
+    {
+        // Для UI компонентов не обрабатываем
+    }
+    
+    public void OnCollisionEnter(IColliderGameObject other)
+    {
+        // Для UI компонентов не обрабатываем
+    }
+
+    public void OnCollisionExit(IColliderGameObject other)
+    {
+        // Для UI компонентов не обрабатываем
+    }
+    
     private Vector2 RotatePoint(Vector2 point, Vector2 center, float angle)
     {
         float cos = MathF.Cos(angle);

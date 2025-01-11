@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Entities;
-using GameOfVlad.GameObjects.UI.Components;
 using GameOfVlad.GameObjects.UI.Effects;
-using GameOfVlad.GameRenderer;
-using GameOfVlad.GameRenderer.GameObjectRendererModificators;
+using GameOfVlad.GameRenderer.Handlers;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -15,15 +14,15 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
 {
     public Rectangle LevelBounds => new(0, 0, 2000, 2000);
     public LevelType LevelType => LevelType.Level1;
+    public event EventHandler<LevelEndEventArgs> OnLevelEnd;
 
     protected override void LoadCore()
     {
-        RegisterRendererHandler(new PhysicRendererModificator
-        {
-            //Gravity = new Gravity(new Vector2(800, 800), 5000f)
-        });
-        
-        RegisterRendererHandler(new LevelBorderRendererModificator(this.LevelBounds));
+        RegisterRendererHandlers(
+            new PhysicRendererHandler(),
+            new LevelBorderRendererHandler(this.LevelBounds),
+            new GameObjectCollisionRendererHandler()
+        );
     }
 
     protected override IEnumerable<IGameObject> InitGameObjectsCore()
@@ -34,6 +33,17 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
 
         yield return new StarfallGenerator(this.ContentManager, this.LevelBounds);
         
+        var planet = new Planet
+        {
+            Texture = this.ContentManager.Load<Texture2D>("Sprite/Earth/Earth"),
+            Position = new Vector2(1000, 1000),
+        };
+
+        planet.OnPlayerCollisionWithPlanet += () =>
+            OnLevelEnd?.Invoke(this, new LevelEndEventArgs { Reason = LevelEndReason.Completed });
+
+        yield return planet;
+        
         yield return new PlayerV2(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Sprite/Rocket/Rocket"),
@@ -42,46 +52,4 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
             Mass = 100
         };
     }
-    
-    /*public Level1(GameOfVlad game, GraphicsDevice graphicsDevice, ContentManager content)
-        : base(game, graphicsDevice, content)
-    {
-        Backgraund = content.Load<Texture2D>("Pages/GamePlay/Backgraund1080");
-        LevelSize = new Size(Backgraund.Width, Backgraund.Height);
-        _StateGame = StateGame.Space;
-        StateProcess = State.Play;
-
-        PauseMenu = new PauseMenu(game, content, graphicsDevice, this);
-        DeathMenu = new DeathMenu(game, content, graphicsDevice, this);
-        CompliteMenu = new CompliteMenu(game, content, graphicsDevice, this);
-
-        Name = "Level1";
-        DeathCount = Game.DataManager.GetAllDeath(Name);
-        IndexLevel = 1;
-
-        InitializeSprites();
-    }
-
-    public override void InitializeSprites()
-    {
-        Stars = new List<Star>();
-        for (int i = 0; i < 5; i++)
-            Stars.Add(new Star(Content, this));
-
-        Gravity = new Gravity((size, vector) => Vector2.Zero);
-
-        Player = new Player(Content,
-            Content.Load<Texture2D>("Sprite/Rocket/Rocket"),
-            new Vector2(100, LevelSize.Height - 200),
-            this);
-
-        Earth = new Sprite(Content,
-            Content.Load<Texture2D>("Sprite/Earth/Earth"),
-            new Vector2(LevelSize.Width - 300, 600),
-            this);
-
-        HostileMobs = new List<Mob>()
-        {
-        };
-    }*/
 }

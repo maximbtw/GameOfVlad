@@ -5,6 +5,6 @@ public enum GameState
     Loading,
     Play,
     Pause,
-    LevelComplete,
-    Death
+    LevelCompleted,
+    PlayerDead
 }

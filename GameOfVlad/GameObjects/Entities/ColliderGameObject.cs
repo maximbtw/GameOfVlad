@@ -1,5 +1,6 @@
 using System;
 using GameOfVlad.GameObjects.Interfaces;
+using GameOfVlad.Utils;
 using GameOfVlad.Utils.Draw;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -46,15 +47,20 @@ public abstract class ColliderGameObject : GameObject
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        base.Draw(gameTime, spriteBatch);
+        
         if (Settings.Debug)
         {
             _colliderDrawer?.DrawCollider(spriteBatch);
         }
-        
-        base.Draw(gameTime, spriteBatch);
     }
 
-    private Vector2 RotatePoint(Vector2 point, Vector2 center, float angle)
+    public bool Intersects(IColliderGameObject other)
+    {
+        return CollisionHelper.CheckCollision(this.GetCorners(), other.GetCorners());
+    }
+
+    protected Vector2 RotatePoint(Vector2 point, Vector2 center, float angle)
     {
         float cos = MathF.Cos(angle);
         float sin = MathF.Sin(angle);

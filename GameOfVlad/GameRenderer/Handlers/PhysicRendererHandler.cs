@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using GameOfVlad.Game.Physics;
-using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.GameRenderer.GameObjectRendererModificators;
+namespace GameOfVlad.GameRenderer.Handlers;
 
-public class PhysicRendererModificator : BaseRendererObjectHandler<IPhysicalGameObject>, IRendererObjectHandler
+public class PhysicRendererHandler : BaseRendererObjectHandler<IPhysicalGameObject>, IRendererObjectHandler
 {
     public Gravity Gravity { get; set; }
     public float DragCoefficient { get; set; } = 0.1f;
@@ -15,7 +14,7 @@ public class PhysicRendererModificator : BaseRendererObjectHandler<IPhysicalGame
 
     private readonly PhysicsV2 _physics = new();
 
-    protected override void UpdateCore(IPhysicalGameObject obj, GameTime gameTime)
+    protected override void UpdateCore(GameTime gameTime, IPhysicalGameObject obj)
     {
         var forces = new List<ForceDelegate>();
 
@@ -36,9 +35,5 @@ public class PhysicRendererModificator : BaseRendererObjectHandler<IPhysicalGame
         ForceDelegate combinedForces = Force.Combine(forces);
 
         _physics.ApplyForces(obj, combinedForces, gameTime);
-    }
-
-    protected override void DrawCore(IPhysicalGameObject obj, GameTime gameTime, SpriteBatch spriteBatch)
-    {
     }
 }

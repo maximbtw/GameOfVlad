@@ -21,7 +21,6 @@ public partial class GameScene(ContentManager contentManager) : SceneBase(conten
         _stateManager.OnLevelChanged += OnLevelChanged;
         
         _stateManager.SetLevel(LevelType.Level1);
-        _stateManager.SetState(GameState.Play);
 
         this.KeyboardInputObserver.KeyDown += HandleKeyDawn;
     }

@@ -8,12 +8,8 @@ namespace GameOfVlad.Utils;
 public static class CollisionHelper
 {
     // Проверяет пересечение двух коллайдеров
-    public static bool CheckCollision(IColliderGameObject obj1, IColliderGameObject obj2)
+    public static bool CheckCollision(Vector2[] obj1Corners, Vector2[] obj2Corners)
     {
-        // Получаем вершины
-        Vector2[] obj1Corners = obj1.GetCorners();
-        Vector2[] obj2Corners = obj2.GetCorners();
-
         // Проверяем оси для двух полигонов
         if (!HasSeparatingAxis(obj1Corners, obj2Corners) && !HasSeparatingAxis(obj2Corners, obj1Corners))
         {

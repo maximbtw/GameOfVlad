@@ -56,7 +56,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         _graphics.ApplyChanges();
         
         _spriteBatch = new SpriteBatch(this.GraphicsDevice);
-        _camera = new Camera(this.GraphicsDevice);
+        _camera = new Camera();
         _mouseInput = new MouseInput();
         _gameSceneRenderer = new GameSceneRenderer();
 

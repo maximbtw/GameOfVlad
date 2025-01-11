@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects.Entities.Interfaces;
+using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.GameObjects.UI.Effects;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Services.Camera;
@@ -33,7 +34,7 @@ public class PlayerV2(ContentManager contentManager)
     public float MaxVelocity { get; set; } = 300f;
     public Vector2 Velocity { get; set; } = Vector2.Zero;
     public float TrustPower { get; set; } = 50f;
-    public float RotationVelocity { get; set; } = 5f;
+    public float RotationVelocity { get; set; } = 3f;
 
     private SpriteFont _font;
     
@@ -147,5 +148,19 @@ public class PlayerV2(ContentManager contentManager)
     public float GetTrustForce()
     {
         return _trustPowerActive ? this.TrustPower : 0f;
+    }
+
+    public void OnCollision(IColliderGameObject other)
+    {
+    }
+
+    public void OnCollisionEnter(IColliderGameObject other)
+    {
+        Console.WriteLine("Player Collision Enter");
+    }
+
+    public void OnCollisionExit(IColliderGameObject other)
+    {
+        Console.WriteLine("Player Collision Exit");
     }
 }
