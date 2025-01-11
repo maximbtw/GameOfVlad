@@ -23,7 +23,7 @@ public partial class MapScene
         {
             Texture = this.ContentManager.Load<Texture2D>("Pages/MapLevels/Buttons/LevelSelect"),
             Position = new Vector2(954, Settings.ScreenHeight - 165),
-            Text = ButtonText.Create(font, "1", Color.AliceBlue)
+            Text = ButtonText.Create(font, "1", Color.AliceBlue),
         };
 
         btnLevel1.OnBtnClick += () =>

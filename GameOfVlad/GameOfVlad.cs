@@ -1,13 +1,12 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
-using GameOfVlad.GameRenderer;
-using GameOfVlad.OldProject;
 using GameOfVlad.Scenes;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Mouse;
 using GameOfVlad.Services.Scene;
+using GameOfVlad.Services.Storage;
 using GameOfVlad.Utils.Camera;
 using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,10 +28,6 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     public Song BackgraundMusic;
 
     private float timeMusic = 0;
-
-    //
-    public DataManager DataManager;
-    public DataCenter DataCenter;
 
     // private PageStateMachine currentState;
     // private PageStateMachine nextState;
@@ -70,6 +65,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         this.Services.AddService(typeof(ISceneService), new SceneService(this.Services, _gameSceneRenderer));
         this.Services.AddService(typeof(ICameraService), new CameraService(_camera));
         this.Services.AddService(typeof(IMouseService),new MouseService(_mouseInput));
+        this.Services.AddService(typeof(IStorageService), new StorageService());
     }
 
     protected override void Initialize()
@@ -81,14 +77,6 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         // NextMusic = BackgraundMusic;
 
         base.Initialize();
-    }
-
-    protected override void LoadContent()
-    {
-        DataManager = new DataManager();
-        DataManager.CreateFile();
-        DataCenter = new DataCenter();
-        DataCenter.LoadData(this);
     }
 
     protected override void Update(GameTime gameTime)

@@ -1,5 +1,6 @@
 ﻿using GameOfVlad.Game;
 using GameOfVlad.Services.Scene;
+using GameOfVlad.Services.Storage;
 using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework.Content;
@@ -12,6 +13,7 @@ public partial class GameScene(ContentManager contentManager) : SceneBase(conten
     public SceneType Type => SceneType.Game;
     
     private ISceneService SceneService => this.ContentManager.ServiceProvider.GetRequiredService<ISceneService>();
+    private IStorageService StorageService => this.ContentManager.ServiceProvider.GetRequiredService<IStorageService>();
     
     private readonly GameSceneStateManager _stateManager = new(contentManager);
 

@@ -1,4 +1,5 @@
 ﻿using GameOfVlad.Services.Scene;
+using GameOfVlad.Services.Storage;
 using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework.Content;
@@ -11,6 +12,7 @@ public partial class MapScene(ContentManager contentManager) : SceneBase(content
     public SceneType Type => SceneType.Map;
     
     private ISceneService SceneService => this.ContentManager.ServiceProvider.GetRequiredService<ISceneService>();
+    private IStorageService StorageService => this.ContentManager.ServiceProvider.GetRequiredService<IStorageService>();
 
     protected override void LoadCore()
     {

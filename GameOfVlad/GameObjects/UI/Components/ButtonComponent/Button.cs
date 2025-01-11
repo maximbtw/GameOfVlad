@@ -12,7 +12,7 @@ public sealed class Button(ContentManager contentManager)
 {
     public int UpdateOrder => (int)DrawOrderType.FrontCanvas;
     public int DrawOrder => 1;
-
+    
     public event Action OnBtnClick;
     public ButtonText Text { get; set; }
     public int HoverOffset { get; set; } = 3;

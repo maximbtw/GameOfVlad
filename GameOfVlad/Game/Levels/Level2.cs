@@ -21,8 +21,6 @@ public class Level2(ContentManager contentManager) :  LevelBase(contentManager),
     public Rectangle LevelBounds => new(0, 0, 2000, 2000);
     public LevelType LevelType => LevelType.Level2;
     
-    public event EventHandler<LevelEndEventArgs> OnLevelEnd;
-    
     protected override void LoadCore()
     {
         RegisterRendererHandlers(
@@ -62,7 +60,7 @@ public class Level2(ContentManager contentManager) :  LevelBase(contentManager),
         CompliteMenu = new CompliteMenu(game, content, graphicsDevice, this);
 
         Name = "Level2";
-        DeathCount = Game.DataManager.GetAllDeath(Name);
+
         IndexLevel = 2;
 
         InitializeSprites();

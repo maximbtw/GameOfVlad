@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using GameOfVlad.Game;
 using GameOfVlad.Game.Levels;
+using GameOfVlad.Services.Storage;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Scenes.Game;
@@ -55,6 +57,10 @@ public class GameSceneStateManager(ContentManager contentManager)
         switch (e.Reason)
         {
             case LevelEndReason.Completed:
+                var storageService = contentManager.ServiceProvider.GetRequiredService<IStorageService>();
+                
+                storageService.CompleteLevel(_level.LevelType, (TimeSpan)e.PlayTime!);
+                
                 SetState(GameState.LevelCompleted);
                 break;
             case LevelEndReason.PlayerDead:

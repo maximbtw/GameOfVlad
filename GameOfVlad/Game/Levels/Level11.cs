@@ -30,7 +30,6 @@ namespace GameOfVlad.Game.Levels
             DeathMenu = new DeathMenu(game, content, graphicsDevice, this);
 
             Name = "Level12";
-            DeathCount = Game.DataManager.GetAllDeath(Name);
             IndexLevel = 12;
             random = new Random();
 

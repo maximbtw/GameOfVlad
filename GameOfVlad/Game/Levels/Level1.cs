@@ -14,7 +14,6 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
 {
     public Rectangle LevelBounds => new(0, 0, 2000, 2000);
     public LevelType LevelType => LevelType.Level1;
-    public event EventHandler<LevelEndEventArgs> OnLevelEnd;
 
     protected override void LoadCore()
     {
@@ -39,8 +38,7 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
             Position = new Vector2(1000, 1000),
         };
 
-        planet.OnPlayerCollisionWithPlanet += () =>
-            OnLevelEnd?.Invoke(this, new LevelEndEventArgs { Reason = LevelEndReason.Completed });
+        planet.OnPlayerCollisionWithPlanet += OnLevelCompleted;
 
         yield return planet;
         

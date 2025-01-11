@@ -37,7 +37,12 @@ public partial class GameScene
         var form = new GamePauseForm(this.ContentManager);
 
         form.BtnContinueGame.OnBtnClick += () => _stateManager.SetState(GameState.Play);
-        form.BtnRestartLevel.OnBtnClick += () => _stateManager.SetLevel(_stateManager.GetCurrentLevelType());
+        form.BtnRestartLevel.OnBtnClick += () =>
+        {
+            this.StorageService.IncreaseRetriesInLevel(_stateManager.GetCurrentLevelType());
+            
+            _stateManager.SetLevel(_stateManager.GetCurrentLevelType());
+        };
         form.BtnToMapScene.OnBtnClick += () => this.SceneService.PushScene(SceneType.Map);
         form.BtnToSettingsScene.OnBtnClick += () => { };
         form.BtnToMainMenuScene.OnBtnClick += () => this.SceneService.PopScene();

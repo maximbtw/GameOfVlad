@@ -13,6 +13,9 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
     public int DrawOrder => (int)DrawOrderType.Player;
     public int UpdateOrder => 1;
     public Guid Guid => Guid.NewGuid();
+    
+    public event EventHandler<LevelEndEventArgs> OnLevelEnd;
+    
     public bool Destroyed { get; set; } = false;
     public virtual bool Loaded => _loaded;
     public bool IsActive { get; set; } = true;
@@ -89,6 +92,13 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
 
     protected virtual void UnloadCore()
     {
+    }
+
+    protected void OnLevelCompleted()
+    {
+        // TODO: Timer
+        OnLevelEnd?.Invoke(this,
+            new LevelEndEventArgs { Reason = LevelEndReason.Completed, PlayTime = TimeSpan.MaxValue });
     }
     
     protected void RegisterRendererHandlers(params IRendererObjectHandler[] handlers)

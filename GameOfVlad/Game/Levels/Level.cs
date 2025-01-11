@@ -383,17 +383,13 @@ namespace GameOfVlad.Game.Levels
         protected void Save()
         {
             var time = (float)Math.Round(playTime,2);
-            Game.DataManager.AddScore(Name, time);
             CompliteMenu.СurrentTime = time.ToString();
-            CompliteMenu.BestTime = Game.DataManager.GetBestScore(Name);
             StateProcess = State.LevelComplite;
         }
 
         public void Death()
         {
             StateProcess = State.Death;
-            Game.DataManager.AddDeath(Name);
-            DeathCount = Game.DataManager.GetAllDeath(Name);
         }
     }
 }

@@ -26,7 +26,6 @@ namespace GameOfVlad.Game.Levels
             CompliteMenu = new CompliteMenu(game, content, graphicsDevice, this);
 
             Name = "Level27";
-            DeathCount = Game.DataManager.GetAllDeath(Name);
             IndexLevel = 27;
 
             InitializeSprites();
