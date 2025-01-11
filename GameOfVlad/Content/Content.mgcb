@@ -13,6 +13,390 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_01-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_01-512x512.png
+
+#begin 2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_02-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_02-512x512.png
+
+#begin 2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_03-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_03-512x512.png
+
+#begin 2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_04-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_04-512x512.png
+
+#begin 2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_05-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_05-512x512.png
+
+#begin 2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_06-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_06-512x512.png
+
+#begin 2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_07-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_07-512x512.png
+
+#begin 2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_08-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_08-512x512.png
+
+#begin 2025/Backgrounds/Game/Green Nebula/Green_Nebula_01-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Green Nebula/Green_Nebula_01-512x512.png
+
+#begin 2025/Backgrounds/Game/Green Nebula/Green_Nebula_02-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Green Nebula/Green_Nebula_02-512x512.png
+
+#begin 2025/Backgrounds/Game/Green Nebula/Green_Nebula_03-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Green Nebula/Green_Nebula_03-512x512.png
+
+#begin 2025/Backgrounds/Game/Green Nebula/Green_Nebula_04-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Green Nebula/Green_Nebula_04-512x512.png
+
+#begin 2025/Backgrounds/Game/Green Nebula/Green_Nebula_05-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Green Nebula/Green_Nebula_05-512x512.png
+
+#begin 2025/Backgrounds/Game/Green Nebula/Green_Nebula_06-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Green Nebula/Green_Nebula_06-512x512.png
+
+#begin 2025/Backgrounds/Game/Green Nebula/Green_Nebula_07-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Green Nebula/Green_Nebula_07-512x512.png
+
+#begin 2025/Backgrounds/Game/Green Nebula/Green_Nebula_08-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Green Nebula/Green_Nebula_08-512x512.png
+
+#begin 2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_01-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_01-512x512.png
+
+#begin 2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_02-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_02-512x512.png
+
+#begin 2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_03-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_03-512x512.png
+
+#begin 2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_04-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_04-512x512.png
+
+#begin 2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_05-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_05-512x512.png
+
+#begin 2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_06-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_06-512x512.png
+
+#begin 2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_07-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_07-512x512.png
+
+#begin 2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_08-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Purple Nebula/Purple_Nebula_08-512x512.png
+
+#begin 2025/Backgrounds/Game/Starfields/Starfield_01-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Starfields/Starfield_01-512x512.png
+
+#begin 2025/Backgrounds/Game/Starfields/Starfield_02-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Starfields/Starfield_02-512x512.png
+
+#begin 2025/Backgrounds/Game/Starfields/Starfield_03-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Starfields/Starfield_03-512x512.png
+
+#begin 2025/Backgrounds/Game/Starfields/Starfield_04-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Starfields/Starfield_04-512x512.png
+
+#begin 2025/Backgrounds/Game/Starfields/Starfield_05-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Starfields/Starfield_05-512x512.png
+
+#begin 2025/Backgrounds/Game/Starfields/Starfield_06-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Starfields/Starfield_06-512x512.png
+
+#begin 2025/Backgrounds/Game/Starfields/Starfield_07-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Starfields/Starfield_07-512x512.png
+
+#begin 2025/Backgrounds/Game/Starfields/Starfield_08-512x512.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Backgrounds/Game/Starfields/Starfield_08-512x512.png
+
 #begin Abilitie/1.png
 /importer:TextureImporter
 /processor:TextureProcessor
