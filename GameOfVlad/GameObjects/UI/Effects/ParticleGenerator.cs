@@ -57,7 +57,8 @@ public class ParticleGenerator(Configuration configuration) : GameObject, IGameO
     {
         Vector2 baseDirection = configuration.GetDirection();
 
-        Vector2 direction = GetOffsetDirection(baseDirection, configuration.OffsetAngleRange);
+        Vector2 direction =
+            GameHelper.GetOffsetDirectionByRandom(_random, baseDirection, configuration.OffsetAngleRange);
 
         float rotationSpeed = _random.Next(configuration.RotationSpeedRange.MinValue,
             configuration.RotationSpeedRange.MaxValue);
@@ -84,20 +85,7 @@ public class ParticleGenerator(Configuration configuration) : GameObject, IGameO
 
         return particle;
     }
-
-    private Vector2 GetOffsetDirection(Vector2 direction, Range<int> offsetAngle)
-    {
-        float randomAngleInDegrees = _random.Next(offsetAngle.MinValue, offsetAngle.MaxValue + 1);
-        float randomAngleInRadians = GameHelper.AngleToRadians(randomAngleInDegrees);
-        
-        float cos = MathF.Cos(randomAngleInRadians);
-        float sin = MathF.Sin(randomAngleInRadians);
-        
-        return new Vector2(
-            direction.X * cos - direction.Y * sin,
-            direction.X * sin + direction.Y * cos
-        );
-    }
+    
 
     public class Configuration(ContentManager contentManager)
     {

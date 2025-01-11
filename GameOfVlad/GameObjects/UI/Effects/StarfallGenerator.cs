@@ -65,26 +65,17 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
 
     private Star GenerateStar()
     {
-        Vector2 position = GenerateStarPosition();
+        Vector2 position = PositionHelper.GeneratePositionBehindLevel(_random, levelBounds, SpawnOffset);
 
         // Рассчитываем направление внутрь уровня
         var levelCenter =
             new Vector2(levelBounds.X + levelBounds.Width / 2, levelBounds.Y + levelBounds.Height / 2);
         
         Vector2 directionToCenter = levelCenter - position;
-        directionToCenter.Normalize(); // Нормализуем направление к центру
-
-        // Добавляем случайный угол погрешности от -5 до +5 градусов
-        float angleOffset = (float)(_random.NextDouble() * 90 - 5); // Угол в градусах
-        float radiansOffset = MathF.PI * angleOffset / 180f; // Конвертируем в радианы
-
-        // Применяем поворот вектора направления
-        float cos = MathF.Cos(radiansOffset);
-        float sin = MathF.Sin(radiansOffset);
-        var rotatedDirection = new Vector2(
-            directionToCenter.X * cos - directionToCenter.Y * sin,
-            directionToCenter.X * sin + directionToCenter.Y * cos
-        );
+        directionToCenter.Normalize();
+        
+        Vector2 rotatedDirection =
+            GameHelper.GetOffsetDirectionByRandom(_random, directionToCenter, Range<int>.Create(-5, 5));
         
         int speed = _random.Next(StarSpeedRange.MinValue, StarSpeedRange.MaxValue);
         Vector2 velocity = rotatedDirection * speed;
@@ -99,31 +90,7 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
 
         return star;
     }
-
-    private Vector2 GenerateStarPosition()
-    {
-        int minX = levelBounds.X - SpawnOffset;
-        int maxX = levelBounds.X + levelBounds.Width + SpawnOffset;
-
-        int minY = levelBounds.Y - SpawnOffset;
-        int maxY = levelBounds.Y + levelBounds.Height + SpawnOffset;
-
-        int x, y;
-        
-        var isBoundedByHorizontal = _random.Next(0, 2) == 0;
-        if (isBoundedByHorizontal)
-        {
-            x = _random.Next(0, 2) == 0 ? minX : maxX;
-            y = _random.Next(minY, maxY);
-        }
-        else
-        {
-            x = _random.Next(minX, maxX);
-            y = _random.Next(0, 2) == 0 ? minY : maxY;
-        }
-
-        return new Vector2(x, y);
-    }
+    
 
     private class Star(ContentManager contentManager, Rectangle levelBounds) : UiComponent(contentManager), IUiComponent
     {
@@ -137,11 +104,7 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
         {
             this.Position += this.Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            bool needToDestroy =
-                this.Position.X > levelBounds.X + levelBounds.Width + SpawnOffset ||
-                this.Position.X < levelBounds.X - SpawnOffset ||
-                this.Position.Y > levelBounds.Y + levelBounds.Height + SpawnOffset ||
-                this.Position.Y < levelBounds.Y - SpawnOffset;
+            bool needToDestroy = PositionHelper.IsPositionBehindLevel(this.Position, levelBounds, SpawnOffset);
 
             if (needToDestroy)
             {
