@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Utils;
+using GameOfVlad.Utils.GameObject;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,7 +32,7 @@ public class ParticleGenerator(Configuration configuration) : GameObject, IGameO
         _timeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
         
         _particles.RemoveAll(p => p.Destroyed);
-
+        
         if (!configuration.CanProduceParticle())
         {
             return;
@@ -137,19 +138,21 @@ public class ParticleGenerator(Configuration configuration) : GameObject, IGameO
         public float RotationSpeed { get; init; }
         public int LifetimeFrequency { get; init; }
 
-        private int _tick;
+        private TickUpdater _lifetimeUpdater;
+
+        protected override void LoadCore()
+        {
+            _lifetimeUpdater = new TickUpdater(this.LifetimeFrequency, () => this.Destroyed = true);
+            base.LoadCore();
+        }
 
         public override void Update(GameTime gameTime)
         {
+            _lifetimeUpdater.Update();
+            
             this.Position += this.Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
             this.Rotation += this.RotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
-            this.Color *= 1f - (float)_tick / LifetimeFrequency;
-
-            _tick++;
-            if (_tick >= LifetimeFrequency)
-            {
-                Destroyed = true;
-            }
+            this.Color *= 1f - (float)_lifetimeUpdater.Tick / LifetimeFrequency;
 
             base.Update(gameTime);
         }

@@ -59,8 +59,8 @@ public class PlayerV2(ContentManager contentManager)
                 return new Vector2((bottomLeft.X + bottomRight.X) / 2, (bottomLeft.Y + bottomRight.Y) / 2);
             },
             GetDirection = () => GameHelper.GetDirectionByRotationInRadians(this.Rotation) * -1,
-            SpawnRate = 100,
-            ParticleLifetime = 4,
+            SpawnRate = 50,
+            ParticleLifetime = 10,
             SpeedRange = Range<int>.Create(200, 500),
             OffsetAngleRange = Range<int>.Create(-45, 45),
             Colors = [

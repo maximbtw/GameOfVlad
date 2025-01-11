@@ -30,6 +30,23 @@ public static class Force
     }
 
     /// <summary>
+    /// Создаёт силу сопротивления, направленную противоположно скорости объекта
+    /// </summary>
+    public static ForceDelegate CreateDragForce(ITrustForcePhysicalGameObject trustForce, float dragCoefficient)
+    {
+        return obj =>
+        {
+            Vector2 velocity = trustForce.Velocity;
+            
+            Vector2 dragDirection = velocity != Vector2.Zero ? -Vector2.Normalize(velocity) : Vector2.Zero;
+            
+            Vector2 dragForce = dragDirection * dragCoefficient * velocity.LengthSquared();
+
+            return dragForce;
+        };
+    }
+
+    /// <summary>
     /// Создаёт силу гравитации, направленную к центру
     /// </summary>
     public static ForceDelegate CreateGravityForce(Vector2 gravityCenter, float gravityStrength)

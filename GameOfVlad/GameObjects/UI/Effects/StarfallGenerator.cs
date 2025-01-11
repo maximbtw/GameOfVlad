@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
+using GameOfVlad.Utils;
+using GameOfVlad.Utils.GameObject;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -20,9 +22,8 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
         set => throw new NotSupportedException();
     }
     
-    public int SpawnFrequency { get; set; } = 10;
-    public int MinStarSpeed { get; set; } = 100;
-    public int MaxStarSpeed { get; set; } = 1000;
+    public int SpawnFrequency { get; set; } = 5;
+    public Range<int> StarSpeedRange { get; set; } = Range<int>.Create(100, 1000);
 
     private const int SpawnOffset = 1000;
 
@@ -36,16 +37,22 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
         contentManager.Load<Texture2D>("Sprite/Stars/4")
     ];
 
-    private int _tick;
+    private TickUpdater _spawnUpdater;
 
-    public override void Update(GameTime gameTime)
+    protected override void LoadCore()
     {
-        _tick++;
-        if (this._tick % SpawnFrequency == 0)
+        _spawnUpdater = new TickUpdater(this.SpawnFrequency, () =>
         {
             Star star = GenerateStar();
             _stars.Add(star);
-        }
+        });
+        
+        base.LoadCore();
+    }
+
+    public override void Update(GameTime gameTime)
+    {
+        _spawnUpdater.Update();
 
         _stars.RemoveAll(star => star.Destroyed);
 
@@ -79,7 +86,7 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
             directionToCenter.X * sin + directionToCenter.Y * cos
         );
         
-        int speed = _random.Next(MinStarSpeed, MaxStarSpeed);
+        int speed = _random.Next(StarSpeedRange.MinValue, StarSpeedRange.MaxValue);
         Vector2 velocity = rotatedDirection * speed;
         
         var star = new Star(this.ContentManager, levelBounds)
