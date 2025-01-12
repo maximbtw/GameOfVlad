@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.GameObjects.UI.Components.Forms;
+namespace GameOfVlad.GameObjects.UI.Components.Game.Forms;
 
 public class LevelCompletedForm(ContentManager contentManager) : UiComponent(contentManager), IUiComponent
 {

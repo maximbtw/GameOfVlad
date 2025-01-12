@@ -54,16 +54,18 @@ public class GameSceneStateManager(ContentManager contentManager)
     
     private void OnLevelEnd(object sender, LevelEndEventArgs e)
     {
+        var storageService = contentManager.ServiceProvider.GetRequiredService<IStorageService>();
+        
         switch (e.Reason)
         {
             case LevelEndReason.Completed:
-                var storageService = contentManager.ServiceProvider.GetRequiredService<IStorageService>();
-                
-                storageService.CompleteLevel(_level.LevelType, (TimeSpan)e.PlayTime!);
+                storageService.CompleteLevel(_level.LevelType, e.PlayTime);
                 
                 SetState(GameState.LevelCompleted);
                 break;
             case LevelEndReason.PlayerDead:
+                storageService.AddPlayerDeath();
+                
                 SetState(GameState.PlayerDead);
                 break;
             default:

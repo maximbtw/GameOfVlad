@@ -162,8 +162,10 @@ public class MeteoriteGenerator(ContentManager contentManager, Rectangle levelBo
 
         public void OnCollisionEnter(IColliderGameObject other)
         {
-            if (other is PlayerV2)
+            if (other is PlayerV2 player)
             {
+                player.TakeDamage(amount: DamageStorage.MeteoriteDamage);
+                
                 this.Destroyed = true;
             }
         }

@@ -9,5 +9,5 @@ public class LevelEndEventArgs : EventArgs
     /// <summary>
     /// Возвращает или устанавливает игровое время уровня.
     /// </summary>
-    public TimeSpan? PlayTime { get; init; }
+    public TimeSpan PlayTime { get; init; }
 }

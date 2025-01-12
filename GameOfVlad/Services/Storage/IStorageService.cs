@@ -11,4 +11,6 @@ public interface IStorageService
      void CompleteLevel(LevelType level, TimeSpan time);
      
      void IncreaseRetriesInLevel(LevelType level);
+
+     void AddPlayerDeath();
 }

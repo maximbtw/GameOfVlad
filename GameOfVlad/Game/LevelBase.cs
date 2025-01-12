@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Entities;
+using GameOfVlad.GameObjects.UI.Components.Game;
 using GameOfVlad.GameRenderer;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -39,6 +42,9 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
     }
 
     protected readonly ContentManager ContentManager = contentManager;
+
+    protected IGraphicsDeviceService GraphicsDeviceService =>
+        this.ContentManager.ServiceProvider.GetRequiredService<IGraphicsDeviceService>();
 
     // TODO: Либо объеденить и добавить функционал в диспатчер.
     private RendererObjectDispatcher _renderer;
@@ -101,12 +107,51 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
             new LevelEndEventArgs { Reason = LevelEndReason.Completed, PlayTime = TimeSpan.MaxValue });
     }
     
+    protected void OnPlayerDead()
+    {
+        // TODO: Timer
+        OnLevelEnd?.Invoke(this,
+            new LevelEndEventArgs { Reason = LevelEndReason.PlayerDead, PlayTime = TimeSpan.MaxValue });
+    }
+    
     protected void RegisterRendererHandlers(params IRendererObjectHandler[] handlers)
     {
         foreach (IRendererObjectHandler handler in handlers)
         {
             _renderer.RegisterHandler(handler);
         }
+    }
+
+    protected HealthBar CreateHealthBar(PlayerV2 player)
+    {
+        var healthBar = new HealthBar(this.ContentManager,
+            new HealthBar.Configuration(player.MaxHP, () => player.CurrentHP))
+        {
+            Position = CalculateHealthBarPosition(player)
+        };
+
+        return healthBar;
+    }
+    
+    //TODO: поправить после реализации разрешения экрана.
+    private Vector2 CalculateHealthBarPosition(PlayerV2 player)
+    {
+        GraphicsDevice graphicsDevice = GraphicsDeviceService.GraphicsDevice;
+        
+        // Получаем размеры экрана
+        int screenWidth = graphicsDevice.PresentationParameters.BackBufferWidth;
+        int screenHeight = graphicsDevice.PresentationParameters.BackBufferHeight;
+
+        // Количество строк и колонок
+        int totalHearts = player.MaxHP / HealthBar.HeartEachHp;
+        int rows = (int)Math.Ceiling((float)totalHearts / HealthBar.MaxHeartsInRow);
+        int columns = Math.Min(totalHearts, HealthBar.MaxHeartsInRow);
+
+        // Ширина и высота HealthBar
+        int healthBarWidth = columns * (32 + HealthBar.HeartSpacing) - HealthBar.HeartSpacing;
+        int healthBarHeight = rows * (32 + HealthBar.HeartSpacing) - HealthBar.HeartSpacing;
+        
+        return new Vector2(screenWidth - healthBarWidth - 10 - 300, 10); 
     }
     
     protected abstract IEnumerable<IGameObject> InitGameObjectsCore();

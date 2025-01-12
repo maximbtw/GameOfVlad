@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Entities;
+using GameOfVlad.GameObjects.UI.Components.Game;
 using GameOfVlad.GameObjects.UI.Effects;
 using GameOfVlad.GameRenderer.Handlers;
+using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -42,12 +44,24 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
 
         yield return planet;
         
-        yield return new PlayerV2(this.ContentManager)
+        yield return new MeteoriteGenerator(this.ContentManager, this.LevelBounds)
+        {
+            MeteoriteScaleRange = Range<float>.Create(0.75f, 1.5f)
+        };
+        
+        var player = new PlayerV2(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Sprite/Rocket/Rocket"),
             Position = new Vector2(100, 100),
             TrustPower = 10000,
-            Mass = 100
+            Mass = 100,
+            MaxHP = 100
         };
+
+        player.OnPlayerDeath += OnPlayerDead;
+
+        yield return player;
+
+        yield return CreateHealthBar(player);
     }
 }

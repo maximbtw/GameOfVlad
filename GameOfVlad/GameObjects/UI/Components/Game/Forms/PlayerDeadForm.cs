@@ -9,14 +9,13 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.GameObjects.UI.Components.Forms;
+namespace GameOfVlad.GameObjects.UI.Components.Game.Forms;
 
-public class GamePauseForm(ContentManager contentManager) : UiComponent(contentManager), IUiComponent
+public class PlayerDeadForm(ContentManager contentManager) : UiComponent(contentManager), IUiComponent
 {
     public int DrawOrder => (int)DrawOrderType.FrontCanvas;
     public int UpdateOrder => 1;
-
-    public Button BtnContinueGame { get; } = new(contentManager);
+    
     public Button BtnRestartLevel { get; } = new(contentManager);
     public Button BtnToMapScene { get; } = new(contentManager);
     public Button BtnToSettingsScene { get; } = new(contentManager);
@@ -26,7 +25,6 @@ public class GamePauseForm(ContentManager contentManager) : UiComponent(contentM
     {
         get
         {
-            yield return this.BtnContinueGame;
             yield return this.BtnRestartLevel;
             yield return this.BtnToMapScene;
             yield return this.BtnToSettingsScene;
@@ -37,7 +35,7 @@ public class GamePauseForm(ContentManager contentManager) : UiComponent(contentM
 
     protected override void LoadCore()
     {
-        this.Texture = this.ContentManager.Load<Texture2D>("Interfaces/Pause/Backgraund");
+        this.Texture = this.ContentManager.Load<Texture2D>("Interfaces/Dead/Backgraund");
 
         var graphicsDeviceService = this.ContentManager.ServiceProvider.GetRequiredService<IGraphicsDeviceService>();
         
@@ -50,24 +48,20 @@ public class GamePauseForm(ContentManager contentManager) : UiComponent(contentM
     
     private void InitButtons()
     {
-        this.BtnContinueGame.Texture = this.ContentManager.Load<Texture2D>("Buttons/ContinueInMenu");
-        this.BtnContinueGame.Position = new Vector2(125, 175);
-        this.BtnContinueGame.Parent = this;
-
         this.BtnRestartLevel.Texture = this.ContentManager.Load<Texture2D>("Buttons/Restart");
-        this.BtnRestartLevel.Position = new Vector2(173, 300);
+        this.BtnRestartLevel.Position = new Vector2(275, 225);
         this.BtnRestartLevel.Parent = this;
 
         this.BtnToMapScene.Texture = this.ContentManager.Load<Texture2D>("Buttons/Levels");
-        this.BtnToMapScene.Position = new Vector2(183, 425);
+        this.BtnToMapScene.Position = new Vector2(280, 325);
         this.BtnToMapScene.Parent = this;
 
         this.BtnToSettingsScene.Texture = this.ContentManager.Load<Texture2D>("Buttons/SettingInMenu");
-        this.BtnToSettingsScene.Position = new Vector2(175, 550);
+        this.BtnToSettingsScene.Position = new Vector2(280, 425);
         this.BtnToSettingsScene.Parent = this;
 
         this.BtnToMainMenuScene.Texture = this.ContentManager.Load<Texture2D>("Buttons/MainMenu");
-        this.BtnToMainMenuScene.Position = new Vector2(190, 675);
+        this.BtnToMainMenuScene.Position = new Vector2(280, 525);
         this.BtnToMainMenuScene.Parent = this;
     }
 }

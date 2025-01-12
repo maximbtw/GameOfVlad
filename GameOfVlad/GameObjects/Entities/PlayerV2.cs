@@ -16,10 +16,12 @@ using Microsoft.Xna.Framework.Input;
 namespace GameOfVlad.GameObjects.Entities;
 
 public class PlayerV2(ContentManager contentManager)
-    : ColliderGameObject, ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject
+    : ColliderGameObject, ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject, IHealth
 {
     public int DrawOrder => (int)DrawOrderType.Player;
     public int UpdateOrder => 1;
+    
+    public int CurrentHP { get; private set; }
 
     public override IEnumerable<IRendererObject> ChildrenBefore 
     {
@@ -35,15 +37,16 @@ public class PlayerV2(ContentManager contentManager)
     public Vector2 Velocity { get; set; } = Vector2.Zero;
     public float TrustPower { get; set; } = 50f;
     public float RotationVelocity { get; set; } = 3f;
-
-    private SpriteFont _font;
+    public int MaxHP { get; set; } = 100;
     
+    public event Action OnPlayerDeath;
+
     private readonly KeyboardInputObserver _keyboardInputObserver = new();
-    private readonly ICameraService _cameraService =
-        contentManager.ServiceProvider.GetRequiredService<ICameraService>();
+    private readonly ICameraService _cameraService = contentManager.ServiceProvider.GetRequiredService<ICameraService>();
 
     private ParticleGenerator _trustPowerParticleGenerator;
     private bool _trustPowerActive;
+    private SpriteFont _font;
 
     protected override void LoadCore()
     {
@@ -77,18 +80,13 @@ public class PlayerV2(ContentManager contentManager)
         {
             Parent = this
         };
-
+        
+        this.CurrentHP = this.MaxHP;
+        
         _font = contentManager.Load<SpriteFont>("Pages/MapLevels/Font");
         _keyboardInputObserver.KeyPressed += HandleKeyPressed;
 
         base.LoadCore();
-    }
-
-    protected override void UnloadCore()
-    {
-        _trustPowerParticleGenerator.Unload();
-        
-        base.UnloadCore();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
@@ -156,11 +154,33 @@ public class PlayerV2(ContentManager contentManager)
 
     public void OnCollisionEnter(IColliderGameObject other)
     {
-        Console.WriteLine("Player Collision Enter");
     }
 
     public void OnCollisionExit(IColliderGameObject other)
     {
-        Console.WriteLine("Player Collision Exit");
+    }
+
+    public void TakeDamage(int amount)
+    {
+        if (amount < 1)
+        {
+            throw new InvalidOperationException("Amount HP can't be less than 1");
+        }
+        
+        CurrentHP -= amount;
+        if (this.CurrentHP <= 0)
+        {
+            this.OnPlayerDeath?.Invoke();
+        }
+    }
+
+    public void Heal(int amount)
+    {
+        if (amount < 1)
+        {
+            throw new InvalidOperationException("Amount HP can't be less than 1");
+        }
+        
+        CurrentHP += amount;
     }
 }

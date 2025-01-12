@@ -45,6 +45,13 @@ public class StorageService : IStorageService
         SaveChanges();
     }
 
+    public void AddPlayerDeath()
+    {
+        _storageData.GameplayInfo.TotalDeath++;
+        
+        SaveChanges();
+    }
+
     private StorageData LoadStorageFromFileOrCreate()
     {
         if (File.Exists(FileName))
