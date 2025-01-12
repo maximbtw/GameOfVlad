@@ -30,13 +30,13 @@ public class SceneService(IServiceProvider serviceProvider, GameSceneRenderer sc
             _ => throw new ArgumentOutOfRangeException(nameof(sceneType), sceneType, null)
         };
      
-        CameraService.SetCameraPosition(Vector2.Zero);
+        CameraService.ResetCamera();
         sceneRenderer.PushScene(scene);
     }
 
     public void PopScene()
     {
-        CameraService.SetCameraPosition(Vector2.Zero);
+        CameraService.ResetCamera();
         sceneRenderer.PopScene();
     }
 }

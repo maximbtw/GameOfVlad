@@ -14,7 +14,7 @@ namespace GameOfVlad.Game.Levels;
 
 public class Level1(ContentManager contentManager) : LevelBase(contentManager), ILevel
 {
-    public Rectangle LevelBounds => new(0, 0, 2000, 2000);
+    public Rectangle LevelBounds => new(0, 0, 5000, 5000);
     public LevelType LevelType => LevelType.Level1;
 
     protected override void LoadCore()

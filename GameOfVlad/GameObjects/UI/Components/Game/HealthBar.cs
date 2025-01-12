@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
+using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -22,10 +23,34 @@ public class HealthBar(ContentManager contentManager, Configuration configuratio
         set => throw new NotSupportedException();
     }
 
-    public const int HeartEachHp = 25;
-    public const int MaxHeartsInRow = 10; 
-    public const int HeartSpacing = 35; 
-    private const int RowSpacing = 35; 
+    public override Size Size
+    {
+        get
+        {
+            int totalHearts = _hearts.Count;
+            
+            int rows = (int)Math.Ceiling((double)totalHearts / MaxHeartsInRow);
+            int heartsInLastRow = totalHearts % MaxHeartsInRow;
+            if (heartsInLastRow == 0 && totalHearts > 0)
+            {
+                heartsInLastRow = MaxHeartsInRow;
+            }
+            
+            float heartWidth = _fullHeartTexture.Width; 
+            float heartHeight = _fullHeartTexture.Height;
+            
+            float width = heartsInLastRow * (heartWidth + HeartSpacing) - HeartSpacing;
+            float height = rows * (heartHeight + RowSpacing) - RowSpacing;
+            
+            return Size.Create(width, height);
+        }
+        set => throw new NotSupportedException();
+    }
+
+    private const int HeartEachHp = 25;
+    private const int MaxHeartsInRow = 10; 
+    private const int HeartSpacing = 5; 
+    private const int RowSpacing = 5; 
 
     private readonly List<Heart> _hearts = new();
 
@@ -43,10 +68,28 @@ public class HealthBar(ContentManager contentManager, Configuration configuratio
 
         _currentHp = configuration.GetCurrentHp();
         CreateHearts();
-
+        
         base.LoadCore();
     }
 
+    public override void Update(GameTime gameTime)
+    {
+        base.Update(gameTime);
+
+        this.Position = this.CameraService.TopRightCorner(this.Size, -30, 30);
+
+        int currentHp = configuration.GetCurrentHp();
+        if (currentHp != _currentHp)
+        {
+            _currentHp = currentHp;
+            UpdateHeartTextures();
+        }
+    }
+
+    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+    {
+    }
+    
     private void CreateHearts()
     {
         int heartsCount = (int)Math.Ceiling((double)configuration.MaxHp / HeartEachHp);
@@ -66,15 +109,20 @@ public class HealthBar(ContentManager contentManager, Configuration configuratio
 
     private void UpdateHeartPositions()
     {
+        float heartWidth = _fullHeartTexture.Width; 
+        float heartHeight = _fullHeartTexture.Height;
+
         for (int i = 0; i < _hearts.Count; i++)
         {
             int row = i / MaxHeartsInRow;
             int column = i % MaxHeartsInRow;
-
-            int x = -((MaxHeartsInRow * HeartSpacing) - HeartSpacing) + column * HeartSpacing;
-            int y = row * ( RowSpacing);
-
-            _hearts[i].Position = new Vector2(this.Position.X + x, y);
+            
+            var position = new Vector2(
+                column * (heartWidth + HeartSpacing),
+                row * (heartHeight + RowSpacing)
+            );
+            
+            _hearts[i].Position = position;
         }
     }
 
@@ -99,22 +147,6 @@ public class HealthBar(ContentManager contentManager, Configuration configuratio
                 heart.Texture = _emptyHeartTexture;
             }
         }
-    }
-
-    public override void Update(GameTime gameTime)
-    {
-        base.Update(gameTime);
-
-        int currentHp = configuration.GetCurrentHp();
-        if (currentHp != _currentHp)
-        {
-            _currentHp = currentHp;
-            UpdateHeartTextures();
-        }
-    }
-
-    public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-    {
     }
 
     public record Configuration(int MaxHp, Func<int> GetCurrentHp);

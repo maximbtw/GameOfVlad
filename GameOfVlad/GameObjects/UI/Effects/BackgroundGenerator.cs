@@ -17,7 +17,7 @@ public class BackgroundGenerator : GameObject, IGameObject
         set => throw new NotSupportedException();
     }
 
-    private const int DrawOffset = 1000;
+    private const int DrawOffset = 2000;
     
     private readonly Rectangle _levelBounds;
     private readonly List<BackgroundImage> _backgroundImages = new();

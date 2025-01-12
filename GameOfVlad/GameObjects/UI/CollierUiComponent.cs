@@ -47,12 +47,12 @@ public abstract class CollierUiComponent(ContentManager contentManager) : UiComp
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
+        base.Draw(gameTime, spriteBatch);
+        
         if (Settings.Debug)
         {
             _colliderDrawer?.DrawCollider(spriteBatch);
         }
-        
-        base.Draw(gameTime, spriteBatch);
     }
     
     public bool Intersects(IColliderGameObject other)

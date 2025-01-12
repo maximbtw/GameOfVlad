@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
-using GameOfVlad.Utils;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -21,8 +19,8 @@ public class GamePauseForm(ContentManager contentManager) : UiComponent(contentM
     public Button BtnToMapScene { get; } = new(contentManager);
     public Button BtnToSettingsScene { get; } = new(contentManager);
     public Button BtnToMainMenuScene { get; } = new(contentManager);
-    
-    public override IEnumerable<IRendererObject> ChildrenAfter 
+
+    public override IEnumerable<IRendererObject> ChildrenAfter
     {
         get
         {
@@ -30,7 +28,7 @@ public class GamePauseForm(ContentManager contentManager) : UiComponent(contentM
             yield return this.BtnRestartLevel;
             yield return this.BtnToMapScene;
             yield return this.BtnToSettingsScene;
-            yield return this.BtnToMainMenuScene;   
+            yield return this.BtnToMainMenuScene;
         }
         set => throw new NotSupportedException();
     }
@@ -39,15 +37,18 @@ public class GamePauseForm(ContentManager contentManager) : UiComponent(contentM
     {
         this.Texture = this.ContentManager.Load<Texture2D>("Interfaces/Pause/Backgraund");
 
-        var graphicsDeviceService = this.ContentManager.ServiceProvider.GetRequiredService<IGraphicsDeviceService>();
-        
-        this.Position = GameHelper.CenterObjectOnScreen(this.Texture, graphicsDeviceService.GraphicsDevice.Viewport);
-
         InitButtons();
 
         base.LoadCore();
     }
-    
+
+    public override void Update(GameTime gameTime)
+    {
+        this.Position = this.CameraService.CenterObjectOnScreen(this.Origin);
+        
+        base.Update(gameTime);
+    }
+
     private void InitButtons()
     {
         this.BtnContinueGame.Texture = this.ContentManager.Load<Texture2D>("Buttons/ContinueInMenu");

@@ -85,14 +85,13 @@ public class PlayerV2(ContentManager contentManager)
         
         _font = contentManager.Load<SpriteFont>("Pages/MapLevels/Font");
         _keyboardInputObserver.KeyPressed += HandleKeyPressed;
+        _cameraService.SetTargetPosition( () =>this.Position);
 
         base.LoadCore();
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
-        _cameraService.SetCameraPosition(this.Position);
-
         if (Settings.Debug)
         {
             spriteBatch.DrawString(_font, this.Position.ToString(),

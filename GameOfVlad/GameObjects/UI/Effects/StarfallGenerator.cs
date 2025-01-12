@@ -25,7 +25,7 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
     public int SpawnFrequency { get; set; } = 5;
     public Range<int> StarSpeedRange { get; set; } = Range<int>.Create(100, 1000);
 
-    private const int SpawnOffset = 1000;
+    private const int SpawnOffset = 2000;
 
     private readonly Random _random = new();
     private readonly List<Star> _stars = new();

@@ -37,15 +37,18 @@ public class PlayerDeadForm(ContentManager contentManager) : UiComponent(content
     {
         this.Texture = this.ContentManager.Load<Texture2D>("Interfaces/Dead/Backgraund");
 
-        var graphicsDeviceService = this.ContentManager.ServiceProvider.GetRequiredService<IGraphicsDeviceService>();
-        
-        this.Position = GameHelper.CenterObjectOnScreen(this.Texture, graphicsDeviceService.GraphicsDevice.Viewport);
-
         InitButtons();
 
         base.LoadCore();
     }
-    
+
+    protected override void UnloadCore()
+    {
+        this.Position = this.CameraService.CenterObjectOnScreen(this.Origin);
+        
+        base.UnloadCore();
+    }
+
     private void InitButtons()
     {
         this.BtnRestartLevel.Texture = this.ContentManager.Load<Texture2D>("Buttons/Restart");

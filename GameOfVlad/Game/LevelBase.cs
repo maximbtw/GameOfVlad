@@ -125,33 +125,9 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
     protected HealthBar CreateHealthBar(PlayerV2 player)
     {
         var healthBar = new HealthBar(this.ContentManager,
-            new HealthBar.Configuration(player.MaxHP, () => player.CurrentHP))
-        {
-            Position = CalculateHealthBarPosition(player)
-        };
+            new HealthBar.Configuration(player.MaxHP, () => player.CurrentHP));
 
         return healthBar;
-    }
-    
-    //TODO: поправить после реализации разрешения экрана.
-    private Vector2 CalculateHealthBarPosition(PlayerV2 player)
-    {
-        GraphicsDevice graphicsDevice = GraphicsDeviceService.GraphicsDevice;
-        
-        // Получаем размеры экрана
-        int screenWidth = graphicsDevice.PresentationParameters.BackBufferWidth;
-        int screenHeight = graphicsDevice.PresentationParameters.BackBufferHeight;
-
-        // Количество строк и колонок
-        int totalHearts = player.MaxHP / HealthBar.HeartEachHp;
-        int rows = (int)Math.Ceiling((float)totalHearts / HealthBar.MaxHeartsInRow);
-        int columns = Math.Min(totalHearts, HealthBar.MaxHeartsInRow);
-
-        // Ширина и высота HealthBar
-        int healthBarWidth = columns * (32 + HealthBar.HeartSpacing) - HealthBar.HeartSpacing;
-        int healthBarHeight = rows * (32 + HealthBar.HeartSpacing) - HealthBar.HeartSpacing;
-        
-        return new Vector2(screenWidth - healthBarWidth - 10 - 300, 10); 
     }
     
     protected abstract IEnumerable<IGameObject> InitGameObjectsCore();

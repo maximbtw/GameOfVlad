@@ -11,7 +11,7 @@ public partial class MainMenuScene
 {
     protected override IEnumerable<IUiComponent> InitRenderObjectsCore()
     {
-        yield return new Image(this.ContentManager)
+        var background = new Image(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Pages/MainMenu/Backgraund")
         };
@@ -19,7 +19,7 @@ public partial class MainMenuScene
         var btnStartGame = new Button(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Buttons/Start"),
-            Position = new Vector2(1420, 150),
+            Position = new Vector2(1420, 150)
         };
 
         var btnMap= new Button(this.ContentManager)
@@ -56,6 +56,7 @@ public partial class MainMenuScene
         btnMap.OnBtnClick += () => this.SceneService.PushScene(SceneType.Map);
         btnExit.OnBtnClick += () => this.GameService.ExitGame();
 
+        yield return background;
         yield return btnStartGame;
         yield return btnMap;
         yield return btnMiniGames;

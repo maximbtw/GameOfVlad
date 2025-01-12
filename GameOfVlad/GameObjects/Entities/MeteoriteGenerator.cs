@@ -26,7 +26,7 @@ public class MeteoriteGenerator(ContentManager contentManager, Rectangle levelBo
     public Range<int> MeteoriteSpeedRange { get; set; } = Range<int>.Create(200, 500);
     public Range<float> MeteoriteScaleRange { get; set; } = Range<float>.Create(1, 1);
 
-    private const int SpawnOffset = 1000;
+    private const int SpawnOffset = 2000;
 
     private readonly Random _random = new();
     private readonly List<Meteorite> _meteorites = new();

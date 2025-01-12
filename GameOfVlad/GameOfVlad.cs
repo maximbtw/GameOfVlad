@@ -7,71 +7,90 @@ using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Mouse;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Services.Storage;
-using GameOfVlad.Utils.Camera;
+using GameOfVlad.Utils.Keyboards;
 using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad;
 
 public class GameOfVlad : Microsoft.Xna.Framework.Game
 {
-    private readonly GraphicsDeviceManager _graphics;
-    private readonly SpriteBatch _spriteBatch;
+    private readonly ResolutionManager _resolutionManager;
+    private SpriteBatch _spriteBatch;
 
     private readonly GameSceneRenderer _gameSceneRenderer;
     private readonly Camera _camera;
     private readonly MouseInput _mouseInput;
+    private readonly KeyboardInputObserver _keyboardInputObserver;
 
     //Music
     public Song CurrentMusic;
     public Song NextMusic;
     public Song BackgraundMusic;
-
     private float timeMusic = 0;
-
-    // private PageStateMachine currentState;
-    // private PageStateMachine nextState;
-    // public void ChangeState(PageStateMachine state)
-    // {
-    //     nextState = state;
-    // }
 
     public GameOfVlad()
     {
-        //this.Content.RootDirectory = "Content";
         this.IsMouseVisible = true;
 
-        _graphics = new GraphicsDeviceManager(this);
-        _graphics.PreferredBackBufferWidth = 1920;
-        _graphics.PreferredBackBufferHeight = 1080;
-
-        // graphics.IsFullScreen = true;
-        //this.Window.ClientSizeChanged += OnClientSizeChanged;
-
-        _graphics.ApplyChanges();
+        var graphicsDeviceManager = new GraphicsDeviceManager(this);
         
-        _spriteBatch = new SpriteBatch(this.GraphicsDevice);
+        _resolutionManager = new ResolutionManager(graphicsDeviceManager);
         _camera = new Camera();
         _mouseInput = new MouseInput();
         _gameSceneRenderer = new GameSceneRenderer();
+        _keyboardInputObserver = new KeyboardInputObserver();
+
+        // TODO: в settings
+        _keyboardInputObserver.KeyDown += args =>
+        {
+            if (args.Key == Keys.F10)
+            {
+                _resolutionManager.SetResolution(1920, 1080, isFullScreen: false);
+            }
+
+            if (args.Key == Keys.F11)
+            {
+                _resolutionManager.SetResolution(2560, 1440, isFullScreen: false);
+            }
+
+            if (args.Key == Keys.F12)
+            {
+                _resolutionManager.ChangeFullScreen();
+            }
+        };
 
         ConfigureServices();
     }
-    
+
 
     private void ConfigureServices()
     {
         this.Services.AddService(typeof(IGameService), new GameService(this));
         this.Services.AddService(typeof(ISceneService), new SceneService(this.Services, _gameSceneRenderer));
-        this.Services.AddService(typeof(ICameraService), new CameraService(_camera));
-        this.Services.AddService(typeof(IMouseService),new MouseService(_mouseInput));
+        
+        this.Services.AddService(typeof(ICameraService),
+            new CameraService(_camera, this.Services.GetRequiredService<IGraphicsDeviceService>()));
+        
+        this.Services.AddService(typeof(IMouseService), new MouseService(_mouseInput));
         this.Services.AddService(typeof(IStorageService), new StorageService());
+    }
+
+    protected override void LoadContent()
+    {
+        _spriteBatch = new SpriteBatch(this.GraphicsDevice);
+
+        base.LoadContent();
     }
 
     protected override void Initialize()
     {
+        _resolutionManager.SetResolution(2560, 1440, false);
+
         var sceneService = this.Services.GetRequiredService<ISceneService>();
         sceneService.PushScene(SceneType.MainMenu);
+
 
         // BackgraundMusic = Content.Load<Song>("Pages/MainMenu/Music");
         // NextMusic = BackgraundMusic;
@@ -91,6 +110,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
 
         _camera.Update();
         _mouseInput.Update();
+        _keyboardInputObserver.Update();
         _gameSceneRenderer?.Update(gameTime);
 
         base.Update(gameTime);
@@ -99,8 +119,8 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     protected override void Draw(GameTime gameTime)
     {
         this.GraphicsDevice.Clear(Color.White);
-        
-        _spriteBatch.Begin( SpriteSortMode.Deferred, BlendState.AlphaBlend, transformMatrix: _camera.View);
+
+        _spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, transformMatrix: _camera.GetTransformMatrix());
 
         _gameSceneRenderer?.Draw(gameTime, _spriteBatch);
 
@@ -108,22 +128,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
 
         base.Draw(gameTime);
     }
-
-    /*private void OnClientSizeChanged(object sender, EventArgs e)
-    {
-        if (_graphics.IsFullScreen)
-        {
-            _graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            _graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-        }
-        else
-        {
-            _graphics.PreferredBackBufferWidth = Settings.ScreenWidth;
-            _graphics.PreferredBackBufferHeight = Settings.ScreenHeight;
-        }
-
-        _graphics.ApplyChanges();
-    }
+    /*
 
     private void UpdateSounds(GameTime gameTime)
     {
