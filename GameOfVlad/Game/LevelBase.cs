@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Entities;
+using GameOfVlad.GameObjects.Entities.Player;
 using GameOfVlad.GameObjects.UI.Components.Game;
 using GameOfVlad.GameRenderer;
 using Microsoft.Extensions.DependencyInjection;

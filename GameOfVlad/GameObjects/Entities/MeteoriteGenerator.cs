@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameOfVlad.GameObjects.Entities.Player;
 using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.GameObjects.UI.Effects;
 using GameOfVlad.GameRenderer;
@@ -30,9 +31,14 @@ public class MeteoriteGenerator(ContentManager contentManager, Rectangle levelBo
 
     private readonly Random _random = new();
     private readonly List<Meteorite> _meteorites = new();
-    private readonly Texture2D[] _texture =
+    private readonly Texture2D[] _textures =
     [
-        contentManager.Load<Texture2D>("Sprite/Meteorit/Meteorit")
+        contentManager.Load<Texture2D>("2025/Sprites/Game/Asteroids/asteroid-01-64x64"),
+        contentManager.Load<Texture2D>("2025/Sprites/Game/Asteroids/asteroid-02-64x64"),
+        contentManager.Load<Texture2D>("2025/Sprites/Game/Asteroids/asteroid-03-64x64"),
+        contentManager.Load<Texture2D>("2025/Sprites/Game/Asteroids/asteroid-04-64x64"),
+        contentManager.Load<Texture2D>("2025/Sprites/Game/Asteroids/asteroid-05-64x64"),
+        contentManager.Load<Texture2D>("2025/Sprites/Game/Asteroids/asteroid-06-64x64")
     ];
 
     private TickUpdater _spawnUpdater;
@@ -87,7 +93,7 @@ public class MeteoriteGenerator(ContentManager contentManager, Rectangle levelBo
         
         var meteorite = new Meteorite(contentManager, levelBounds)
         {
-            Texture = _texture[_random.Next(0, _texture.Length)],
+            Texture = _textures[_random.Next(0, _textures.Length)],
             Position = position,
             Velocity = velocity,
             Scale = scale,

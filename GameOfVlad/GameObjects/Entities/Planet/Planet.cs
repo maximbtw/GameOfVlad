@@ -1,11 +1,13 @@
 using System;
+using GameOfVlad.GameObjects.Entities.Player;
 using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
-namespace GameOfVlad.GameObjects.Entities;
+namespace GameOfVlad.GameObjects.Entities.Planet;
 
-public class Planet : ColliderGameObject, IColliderGameObject
+public class Planet(ContentManager contentManager, PlanetType type) : ColliderGameObject, IColliderGameObject
 {
     public int DrawOrder => (int)DrawOrderType.Background;
     public int UpdateOrder => 1;
@@ -16,6 +18,21 @@ public class Planet : ColliderGameObject, IColliderGameObject
     {
         get => new(Texture?.Width / 2 ?? 0, Texture?.Height / 2 ?? 0);
         set => throw new NotSupportedException();
+    }
+    
+    private PlanetAnimation _planetAnimation;
+
+    protected override void LoadCore()
+    {
+        _planetAnimation = PlanetAnimation.CreateAnimation(contentManager, this, type);
+        base.LoadCore();
+    }
+    
+    public override void Update(GameTime gameTime)
+    {
+        _planetAnimation.Update(gameTime);
+        
+        base.Update(gameTime);
     }
 
     public override Vector2[] GetCorners()

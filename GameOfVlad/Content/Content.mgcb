@@ -469,6 +469,150 @@
 /processorParam:TextureFormat=Color
 /build:2025/GameUI/HealthBar/health-bar-half-heart-64x64.png
 
+#begin 2025/Sprites/Game/Asteroids/asteroid-01-64x64.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Asteroids/asteroid-01-64x64.png
+
+#begin 2025/Sprites/Game/Asteroids/asteroid-02-64x64.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Asteroids/asteroid-02-64x64.png
+
+#begin 2025/Sprites/Game/Asteroids/asteroid-02-64x64.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Asteroids/asteroid-02-64x64.png
+
+#begin 2025/Sprites/Game/Asteroids/asteroid-03-64x64.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Asteroids/asteroid-03-64x64.png
+
+#begin 2025/Sprites/Game/Asteroids/asteroid-04-64x64.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Asteroids/asteroid-04-64x64.png
+
+#begin 2025/Sprites/Game/Asteroids/asteroid-05-64x64.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Asteroids/asteroid-05-64x64.png
+
+#begin 2025/Sprites/Game/Asteroids/asteroid-06-64x64.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Asteroids/asteroid-06-64x64.png
+
+#begin 2025/Sprites/Game/Planet/Earth/Terrestrial_01-256x256.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Planet/Earth/Terrestrial_01-256x256.png
+
+#begin 2025/Sprites/Game/Planet/Earth/Terrestrial_02-256x256.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Planet/Earth/Terrestrial_02-256x256.png
+
+#begin 2025/Sprites/Game/Planet/Earth/Terrestrial_03-256x256.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Planet/Earth/Terrestrial_03-256x256.png
+
+#begin 2025/Sprites/Game/Planet/Earth/Terrestrial_04-256x256.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Planet/Earth/Terrestrial_04-256x256.png
+
+#begin 2025/Sprites/Game/Planet/Earth/Terrestrial_05-256x256.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Planet/Earth/Terrestrial_05-256x256.png
+
 #begin Abilitie/1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -1424,18 +1568,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Pages/GamePlay/Смерть.png;Pages/GamePlay/DeadIcon
-
-#begin Pages/MainMenu/GameBackgraund.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Pages/MainMenu/GameBackgraund.png;Pages/MainMenu/Backgraund
 
 #begin Pages/MainMenu/GameBackgraund.png
 /importer:TextureImporter

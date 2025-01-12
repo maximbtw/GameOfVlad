@@ -15,20 +15,30 @@ public abstract class ColliderGameObject : GameObject
 
     public virtual Vector2[] GetCorners()
     {
-        Vector2 topLeft = this.Position;
-        Vector2 topRight = this.Position + new Vector2(this.Size.Width, 0);
-        Vector2 bottomLeft = this.Position + new Vector2(0, this.Size.Height);
-        Vector2 bottomRight = this.Position + new Vector2(this.Size.Width, this.Size.Height);
+        // Учитываем масштабированные размеры
+        float scaledWidth = this.Size.Width * this.Scale.X;
+        float scaledHeight = this.Size.Height * this.Scale.Y;
 
-        Vector2 center = this.Position + this.Origin;
+        // Перерассчитываем позицию с учетом масштаба
+        Vector2 adjustedPosition = this.Position - (this.Origin * this.Scale - this.Origin);
 
-        return
-        [
+        // Углы объекта до вращения
+        Vector2 topLeft = adjustedPosition;
+        Vector2 topRight = adjustedPosition + new Vector2(scaledWidth, 0);
+        Vector2 bottomLeft = adjustedPosition + new Vector2(0, scaledHeight);
+        Vector2 bottomRight = adjustedPosition + new Vector2(scaledWidth, scaledHeight);
+
+        // Центр вращения с учетом новой позиции
+        Vector2 center = adjustedPosition + (this.Origin * this.Scale);
+
+        // Возвращаем углы с учетом вращения
+        return new Vector2[]
+        {
             RotatePoint(topLeft, center, Rotation),
             RotatePoint(topRight, center, Rotation),
             RotatePoint(bottomRight, center, Rotation),
             RotatePoint(bottomLeft, center, Rotation)
-        ];
+        };
     }
 
     protected override void LoadCore()

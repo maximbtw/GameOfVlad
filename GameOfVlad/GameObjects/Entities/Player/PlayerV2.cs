@@ -2,10 +2,8 @@ using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.Interfaces;
-using GameOfVlad.GameObjects.UI.Effects;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Services.Camera;
-using GameOfVlad.Utils;
 using GameOfVlad.Utils.Keyboards;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
@@ -13,9 +11,9 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace GameOfVlad.GameObjects.Entities;
+namespace GameOfVlad.GameObjects.Entities.Player;
 
-public class PlayerV2(ContentManager contentManager)
+public partial class PlayerV2(ContentManager contentManager)
     : ColliderGameObject, ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject, IHealth
 {
     public int DrawOrder => (int)DrawOrderType.Player;
@@ -43,43 +41,13 @@ public class PlayerV2(ContentManager contentManager)
 
     private readonly KeyboardInputObserver _keyboardInputObserver = new();
     private readonly ICameraService _cameraService = contentManager.ServiceProvider.GetRequiredService<ICameraService>();
-
-    private ParticleGenerator _trustPowerParticleGenerator;
+    
     private bool _trustPowerActive;
     private SpriteFont _font;
 
     protected override void LoadCore()
     {
-        _trustPowerParticleGenerator = new ParticleGenerator(new ParticleGenerator.Configuration(contentManager)
-        {
-            CanProduceParticle = () => _trustPowerActive,
-            GetSpawnPosition = () =>
-            {
-                Vector2[] corners = this.GetCorners();
-
-                Vector2 bottomLeft = corners[0];
-                Vector2 bottomRight = corners[3];
-
-                return new Vector2((bottomLeft.X + bottomRight.X) / 2, (bottomLeft.Y + bottomRight.Y) / 2);
-            },
-            GetDirection = () => GameHelper.GetDirectionByRotationInRadians(this.Rotation) * -1,
-            SpawnRate = 50,
-            ParticleLifetime = 10,
-            SpeedRange = Range<int>.Create(200, 500),
-            OffsetAngleRange = Range<int>.Create(-45, 45),
-            Colors = [
-                Color.OrangeRed, 
-                Color.OrangeRed, 
-                Color.OrangeRed, 
-                Color.White,     
-                Color.DarkRed,
-                Color.DarkRed,
-                Color.DarkRed,
-            ]
-        })
-        {
-            Parent = this
-        };
+        CreateParticleEffects();
         
         this.CurrentHP = this.MaxHP;
         
