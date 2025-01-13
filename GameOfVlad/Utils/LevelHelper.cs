@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.Utils;
 
-public static class PositionHelper
+public static class LevelHelper
 {
     public static Vector2 GeneratePositionBehindLevel(Random random, Rectangle levelBounds, int offset)
     {

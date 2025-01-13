@@ -36,6 +36,7 @@ public class GamePauseForm(ContentManager contentManager) : UiComponent(contentM
     protected override void LoadCore()
     {
         this.Texture = this.ContentManager.Load<Texture2D>("Interfaces/Pause/Backgraund");
+        this.Position = this.CameraService.CenterObjectOnScreen(this.Origin);
 
         InitButtons();
 

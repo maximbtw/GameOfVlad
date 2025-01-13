@@ -11,18 +11,18 @@ public abstract class GameObject
 {
     public Guid Guid { get; } = Guid.NewGuid();
 
-    public virtual IRendererObject Parent { get; set; } = null;
+    public virtual IRendererObject Parent { get; set; }
 
     public virtual IEnumerable<IRendererObject> ChildrenAfter  { get; set; } = [];
     public virtual IEnumerable<IRendererObject> ChildrenBefore  { get; set; } = [];
 
-    public virtual bool Destroyed { get; set; } = false;
+    public virtual bool Destroyed { get; set; } 
     public virtual bool IsActive { get; set; } = true;
     public virtual bool Visible { get; set; } = true;
     public Texture2D Texture { get; set; }
     public Vector2 Position { get; set; } = Vector2.Zero;
     public Color Color { get; set; } = Color.White;
-    public float Rotation { get; set; } = 0f;
+    public float Rotation { get; set; } 
     public Vector2 Scale { get; set; } = Vector2.One;
     public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
     public float LayerDepth { get; set; } = 0f;
@@ -81,11 +81,25 @@ public abstract class GameObject
     {
     }
     
+    public virtual void Destroy()
+    {
+        this.Destroyed = true;
+    }
+    
     protected virtual void LoadCore()
     {
     }
 
     protected virtual void UnloadCore()
+    {
+    }
+    
+    public virtual bool OnDestroyCompleted(GameTime gameTime)
+    {
+        return true;
+    }
+
+    public virtual void OnDestroyDraw(GameTime gameTime, SpriteBatch spriteBatch)
     {
     }
 }

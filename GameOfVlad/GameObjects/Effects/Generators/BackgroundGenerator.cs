@@ -1,31 +1,24 @@
 using System;
-using System.Collections.Generic;
-using GameOfVlad.GameRenderer;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.GameObjects.UI.Effects;
+namespace GameOfVlad.GameObjects.Effects.Generators;
 
 public class BackgroundGenerator : GameObject, IGameObject
 {
     public int DrawOrder => (int)DrawOrderType.Background;
     public int UpdateOrder => 1;
 
-    public override IEnumerable<IRendererObject> ChildrenAfter
-    {
-        get => _backgroundImages;
-        set => throw new NotSupportedException();
-    }
-
     private const int DrawOffset = 2000;
     
     private readonly Rectangle _levelBounds;
-    private readonly List<BackgroundImage> _backgroundImages = new();
+    private readonly IEffectDrawer _effectDrawer;
     
-    public BackgroundGenerator(Texture2D texture, Rectangle levelBounds)
+    public BackgroundGenerator(IEffectDrawer effectDrawer, Texture2D texture, Rectangle levelBounds)
     {
         this.Texture = texture;
 
+        _effectDrawer = effectDrawer;
         _levelBounds = levelBounds;
     }
 
@@ -52,7 +45,7 @@ public class BackgroundGenerator : GameObject, IGameObject
                     Position = position
                 };
 
-                _backgroundImages.Add(image);
+                _effectDrawer.AddEffect(image);
             }
         }
 
@@ -63,7 +56,7 @@ public class BackgroundGenerator : GameObject, IGameObject
     {
     }
     
-    private class BackgroundImage : GameObject, IGameObject
+    private class BackgroundImage : GameObject, IEffect
     {
         public int DrawOrder => (int)DrawOrderType.Background;
         public int UpdateOrder => 1;

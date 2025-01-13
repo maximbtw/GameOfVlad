@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using System.Linq;
+using GameOfVlad.GameObjects.Effects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,7 +12,7 @@ public abstract class BaseRendererObjectHandler<TObject> where TObject : IRender
         if (obj is TObject castedObj)
         {
             UpdateCore(gameTime, castedObj);
-            UpdateCore(gameTime, castedObj, objects.Where(x=>x is TObject).Cast<TObject>());
+            UpdateCore(gameTime, castedObj, GetAllCastedObjects(objects));
         }
     }
 
@@ -26,16 +26,39 @@ public abstract class BaseRendererObjectHandler<TObject> where TObject : IRender
 
     protected virtual void UpdateCore(GameTime gameTime, TObject obj, IEnumerable<TObject> objects)
     {
-
     }
 
     protected virtual void UpdateCore(GameTime gameTime, TObject obj)
     {
-
     }
 
     protected virtual void DrawCore(GameTime gameTime, SpriteBatch spriteBatch, TObject obj)
     {
+    }
 
+    private IEnumerable<TObject> GetAllCastedObjects(IEnumerable<IRendererObject> objects)
+    {
+        foreach (IRendererObject obj in objects)
+        {
+            if (obj is null or IEffectDrawer)
+            {
+                continue;
+            }
+            
+            if (obj is TObject castedObj)
+            {
+                yield return castedObj;
+            }
+
+            foreach (TObject child in GetAllCastedObjects(obj.ChildrenBefore))
+            {
+                yield return child;
+            }
+
+            foreach (TObject child in GetAllCastedObjects(obj.ChildrenAfter))
+            {
+                yield return child;
+            }
+        }
     }
 }

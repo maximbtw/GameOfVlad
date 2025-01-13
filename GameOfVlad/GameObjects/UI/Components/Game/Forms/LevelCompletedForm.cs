@@ -34,17 +34,18 @@ public class LevelCompletedForm(ContentManager contentManager) : UiComponent(con
     protected override void LoadCore()
     {
         this.Texture = this.ContentManager.Load<Texture2D>("Interfaces/Complite/Backgraund");
+        this.Position = this.CameraService.CenterObjectOnScreen(this.Origin);
 
         InitButtons();
 
         base.LoadCore();
     }
 
-    protected override void UnloadCore()
+    public override void Update(GameTime gameTime)
     {
         this.Position = this.CameraService.CenterObjectOnScreen(this.Origin);
         
-        base.UnloadCore();
+        base.Update(gameTime);
     }
 
     private void InitButtons()

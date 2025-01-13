@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Effects.Generators;
 using GameOfVlad.GameObjects.Entities;
+using GameOfVlad.GameObjects.Entities.Asteroid;
 using GameOfVlad.GameObjects.Entities.Planet;
 using GameOfVlad.GameObjects.Entities.Player;
-using GameOfVlad.GameObjects.UI.Components.Game;
-using GameOfVlad.GameObjects.UI.Effects;
 using GameOfVlad.GameRenderer.Handlers;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
@@ -31,10 +30,11 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
     protected override IEnumerable<IGameObject> InitGameObjectsCore()
     {
         yield return new BackgroundGenerator(
+            this.EffectDrawer,
             this.ContentManager.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_04-512x512"), 
             this.LevelBounds);
 
-        yield return new StarfallGenerator(this.ContentManager, this.LevelBounds);
+        yield return new StarfallGenerator(this.ContentManager, this.EffectDrawer, this.LevelBounds);
         
         var planet = new Planet(this.ContentManager, PlanetType.Earth)
         {
@@ -45,12 +45,12 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
 
         yield return planet;
         
-        yield return new MeteoriteGenerator(this.ContentManager, this.LevelBounds)
+        yield return new AsteroidGenerator(this.ContentManager, this.EffectDrawer, this.LevelBounds)
         {
             MeteoriteScaleRange = Range<float>.Create(0.4f, 0.75f)
         };
         
-        var player = new PlayerV2(this.ContentManager)
+        var player = new PlayerV2(this.ContentManager, this.EffectDrawer)
         {
             Texture = this.ContentManager.Load<Texture2D>("Sprite/Rocket/Rocket"),
             Position = new Vector2(100, 100),

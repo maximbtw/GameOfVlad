@@ -2,7 +2,7 @@ using GameOfVlad.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.Utils;
+namespace GameOfVlad.Utils.GameObject;
 
 public class TextureAnimation<TGameObject>
     where TGameObject : IGameObject
@@ -11,9 +11,9 @@ public class TextureAnimation<TGameObject>
     private readonly Texture2D[] _textures;
     private readonly float _timePerFrame;
     private readonly bool _looping;
-
+    private readonly Timer _timer = new();
+    
     private int _currentFrame;
-    private float _timer;
 
     public TextureAnimation(
         TGameObject gameObject,
@@ -31,12 +31,12 @@ public class TextureAnimation<TGameObject>
 
     public void Update(GameTime gameTime)
     {
-        _timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        
+        _timer.Update(gameTime);
+
         bool needSwitchTexture = false;
-        if (_timer >= _timePerFrame)
+        if (_timer.Time >= _timePerFrame)
         {
-            _timer = 0f;
+            _timer.Reset();
             _currentFrame++;
             needSwitchTexture = true;
 

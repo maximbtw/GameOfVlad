@@ -65,8 +65,10 @@ public class HealthBar(ContentManager contentManager, Configuration configuratio
         _fullHeartTexture = this.ContentManager.Load<Texture2D>("2025/GameUI/HealthBar/health-bar-full-heart-32x32");
         _halfHeartTexture = this.ContentManager.Load<Texture2D>("2025/GameUI/HealthBar/health-bar-half-heart-32x32");
         _emptyHeartTexture = this.ContentManager.Load<Texture2D>("2025/GameUI/HealthBar/health-bar-empty-heart-32x32");
-
         _currentHp = configuration.GetCurrentHp();
+        
+        this.Position = this.CameraService.TopRightCorner(this.Size, -30, 30);
+        
         CreateHearts();
         
         base.LoadCore();

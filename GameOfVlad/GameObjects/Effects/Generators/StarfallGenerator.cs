@@ -1,26 +1,20 @@
 using System;
-using System.Collections.Generic;
+using GameOfVlad.GameObjects.UI;
 using GameOfVlad.GameObjects.UI.Interfaces;
-using GameOfVlad.GameRenderer;
 using GameOfVlad.Utils;
 using GameOfVlad.Utils.GameObject;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GameOfVlad.GameObjects.UI.Effects;
+namespace GameOfVlad.GameObjects.Effects.Generators;
 
-public class StarfallGenerator(ContentManager contentManager, Rectangle levelBounds)
+public class StarfallGenerator(ContentManager contentManager, IEffectDrawer effectDrawer, Rectangle levelBounds)
     : UiComponent(contentManager), IUiComponent
 {
     public int DrawOrder => (int)DrawOrderType.Background;
     public int UpdateOrder => 1;
-
-    public override IEnumerable<IRendererObject> ChildrenAfter
-    {
-        get => _stars;
-        set => throw new NotSupportedException();
-    }
+    
     
     public int SpawnFrequency { get; set; } = 5;
     public Range<int> StarSpeedRange { get; set; } = Range<int>.Create(100, 1000);
@@ -28,8 +22,7 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
     private const int SpawnOffset = 2000;
 
     private readonly Random _random = new();
-    private readonly List<Star> _stars = new();
-    private readonly Texture2D[] _texture =
+    private readonly Texture2D[] _textures =
     [
         contentManager.Load<Texture2D>("Sprite/Stars/1"),
         contentManager.Load<Texture2D>("Sprite/Stars/2"),
@@ -44,7 +37,8 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
         _spawnUpdater = new TickUpdater(this.SpawnFrequency, () =>
         {
             Star star = GenerateStar();
-            _stars.Add(star);
+            
+            effectDrawer.AddEffect(star);
         });
         
         base.LoadCore();
@@ -53,8 +47,6 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
     public override void Update(GameTime gameTime)
     {
         _spawnUpdater.Update();
-
-        _stars.RemoveAll(star => star.Destroyed);
 
         base.Update(gameTime);
     }
@@ -65,10 +57,11 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
 
     private Star GenerateStar()
     {
-        Vector2 position = PositionHelper.GeneratePositionBehindLevel(_random, levelBounds, SpawnOffset);
+        Vector2 position = LevelHelper.GeneratePositionBehindLevel(_random, levelBounds, SpawnOffset);
 
         // Рассчитываем направление внутрь уровня
         var levelCenter =
+            // ReSharper disable PossibleLossOfFraction
             new Vector2(levelBounds.X + levelBounds.Width / 2, levelBounds.Y + levelBounds.Height / 2);
         
         Vector2 directionToCenter = levelCenter - position;
@@ -80,9 +73,9 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
         int speed = _random.Next(StarSpeedRange.MinValue, StarSpeedRange.MaxValue);
         Vector2 velocity = rotatedDirection * speed;
         
-        var star = new Star(this.ContentManager, levelBounds)
+        var star = new Star(levelBounds)
         {
-            Texture = _texture[_random.Next(0, _texture.Length)],
+            Texture = _textures[_random.Next(0, _textures.Length)],
             Position = position,
             Velocity = velocity,
             Parent = this,
@@ -92,7 +85,7 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
     }
     
 
-    private class Star(ContentManager contentManager, Rectangle levelBounds) : UiComponent(contentManager), IUiComponent
+    private class Star(Rectangle levelBounds) : GameObject, IEffect
     {
         public int DrawOrder => (int)DrawOrderType.Background;
         public int UpdateOrder => 1;
@@ -104,7 +97,7 @@ public class StarfallGenerator(ContentManager contentManager, Rectangle levelBou
         {
             this.Position += this.Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            bool needToDestroy = PositionHelper.IsPositionBehindLevel(this.Position, levelBounds, SpawnOffset);
+            bool needToDestroy = LevelHelper.IsPositionBehindLevel(this.Position, levelBounds, SpawnOffset);
 
             if (needToDestroy)
             {

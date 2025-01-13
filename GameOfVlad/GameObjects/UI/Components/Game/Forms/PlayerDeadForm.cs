@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 using GameOfVlad.GameObjects.UI.Interfaces;
 using GameOfVlad.GameRenderer;
-using GameOfVlad.Utils;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -36,17 +34,18 @@ public class PlayerDeadForm(ContentManager contentManager) : UiComponent(content
     protected override void LoadCore()
     {
         this.Texture = this.ContentManager.Load<Texture2D>("Interfaces/Dead/Backgraund");
+        this.Position = this.CameraService.CenterObjectOnScreen(this.Origin);
 
         InitButtons();
 
         base.LoadCore();
     }
 
-    protected override void UnloadCore()
+    public override void Update(GameTime gameTime)
     {
         this.Position = this.CameraService.CenterObjectOnScreen(this.Origin);
         
-        base.UnloadCore();
+        base.Update(gameTime);
     }
 
     private void InitButtons()

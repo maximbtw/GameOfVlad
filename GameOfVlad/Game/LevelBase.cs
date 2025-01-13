@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects;
-using GameOfVlad.GameObjects.Entities;
+using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.GameObjects.Entities.Player;
 using GameOfVlad.GameObjects.UI.Components.Game;
 using GameOfVlad.GameRenderer;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -16,11 +15,11 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
 {
     public int DrawOrder => (int)DrawOrderType.Player;
     public int UpdateOrder => 1;
-    public Guid Guid => Guid.NewGuid();
+    public Guid Guid { get; } = Guid.NewGuid();
     
     public event EventHandler<LevelEndEventArgs> OnLevelEnd;
     
-    public bool Destroyed { get; set; } = false;
+    public bool Destroyed { get; set; }
     public virtual bool Loaded => _loaded;
     public bool IsActive { get; set; } = true;
     public bool Visible { get; set; } = true;
@@ -43,19 +42,13 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
     }
 
     protected readonly ContentManager ContentManager = contentManager;
-
-    protected IGraphicsDeviceService GraphicsDeviceService =>
-        this.ContentManager.ServiceProvider.GetRequiredService<IGraphicsDeviceService>();
+    protected readonly IEffectDrawer EffectDrawer = new EffectDrawer();
 
     // TODO: Либо объеденить и добавить функционал в диспатчер.
     private RendererObjectDispatcher _renderer;
     private readonly List<IGameObject> _gameObjects = new();
 
     private bool _loaded;
-
-    public IRendererObject GetParent() => null;
-
-    public IEnumerable<IRendererObject> GetChildren() => _gameObjects;
 
     public void Load()
     {
@@ -65,6 +58,7 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
         }
         
         _renderer = new RendererObjectDispatcher();
+        _renderer.Add(this.EffectDrawer);
         
         InitGameObjects();
         LoadCore();
@@ -76,7 +70,8 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
     {
         UnloadCore();
 
-        _gameObjects.ForEach(x => x.Destroyed = true);
+        this.EffectDrawer.ClearEffects();
+        _gameObjects.ForEach(x => x.Destroy());
         _gameObjects.Clear();
         _renderer.Clear();
 
@@ -86,6 +81,11 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
     public void Update(GameTime gameTime)
     {
         _renderer.Update(gameTime);
+    }
+
+    public void Destroy()
+    {
+        this.Destroyed = true;
     }
 
     public void Draw(GameTime gameTime, SpriteBatch spriteBatch)

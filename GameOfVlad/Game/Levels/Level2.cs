@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Effects.Generators;
 using GameOfVlad.GameObjects.Entities;
 using GameOfVlad.GameObjects.Entities.Player;
-using GameOfVlad.GameObjects.UI.Effects;
 using GameOfVlad.GameRenderer.Handlers;
 using GameOfVlad.OldProject;
 using GameOfVlad.OldProject.GameEffects;
@@ -34,12 +34,13 @@ public class Level2(ContentManager contentManager) :  LevelBase(contentManager),
     protected override IEnumerable<IGameObject> InitGameObjectsCore()
     {
         yield return new BackgroundGenerator(
+            this.EffectDrawer,
             this.ContentManager.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_05-512x512"), 
             this.LevelBounds);
 
-        yield return new StarfallGenerator(this.ContentManager, this.LevelBounds);
+        yield return new StarfallGenerator(this.ContentManager, this.EffectDrawer, this.LevelBounds);
         
-        yield return new PlayerV2(this.ContentManager)
+        yield return new PlayerV2(this.ContentManager, this.EffectDrawer)
         {
             Texture = this.ContentManager.Load<Texture2D>("Sprite/Rocket/Rocket"),
             Position = new Vector2(500, 500),

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.GameRenderer;
@@ -13,7 +14,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.GameObjects.Entities.Player;
 
-public partial class PlayerV2(ContentManager contentManager)
+public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effectDrawer)
     : ColliderGameObject, ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject, IHealth
 {
     public int DrawOrder => (int)DrawOrderType.Player;

@@ -25,7 +25,7 @@ public interface IRendererObject
     /// <summary>
     /// Возвращает или устанавливает признак того, что объект следует удалить.
     /// </summary>
-    bool Destroyed { get; set; }
+    bool Destroyed { get; protected set; }
 
     /// <summary>
     /// Возвращает признак того, что объект загружен.
@@ -64,4 +64,6 @@ public interface IRendererObject
     void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
     void Update(GameTime gameTime);
+    
+    void Destroy();
 }
