@@ -1,8 +1,8 @@
 using System;
 using System.Collections.Generic;
+using GameOfVlad.Game.WeaponSystem;
 using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.GameObjects.Entities.Interfaces;
-using GameOfVlad.GameObjects.Entities.WeaponSystem;
 using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Services.Camera;

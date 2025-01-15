@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
+using GameOfVlad.Game.WeaponSystem;
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.GameObjects.Entities.Player;
-using GameOfVlad.GameObjects.Entities.WeaponSystem;
 using GameOfVlad.GameObjects.UI.Components.Game;
 using GameOfVlad.GameRenderer;
 using Microsoft.Xna.Framework;

@@ -601,6 +601,102 @@
 /processorParam:TextureFormat=Color
 /build:2025/Sprites/Game/Planet/Earth/Terrestrial_05-256x256.png
 
+#begin 2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-01-24x24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-01-24x24.png
+
+#begin 2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-02-24x24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-02-24x24.png
+
+#begin 2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-03-24x24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-03-24x24.png
+
+#begin 2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-04-24x24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-04-24x24.png
+
+#begin 2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-05-24x24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-05-24x24.png
+
+#begin 2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-06-24x24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-06-24x24.png
+
+#begin 2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-07-24x24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-07-24x24.png
+
+#begin 2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-08-24x24.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Weapons/Projectiles/Dartcaster/dartcaster-projectile-08-24x24.png
+
 #begin 2025/Sprites/Game/Weapons/Projectiles/PlasmaBlaster/plasma-bluster-projectile-39x24.png
 /importer:TextureImporter
 /processor:TextureProcessor

@@ -1,8 +1,9 @@
+using GameOfVlad.GameObjects;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
-namespace GameOfVlad.GameObjects.Entities.WeaponSystem;
+namespace GameOfVlad.Game.WeaponSystem;
 
 public abstract class WeaponBase<TProjectile>(ContentManager contentManager, IProjectileDrawer projectileDrawer)
     where TProjectile : IProjectile

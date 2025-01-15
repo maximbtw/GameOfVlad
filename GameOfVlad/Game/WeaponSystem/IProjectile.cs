@@ -1,6 +1,6 @@
 using GameOfVlad.GameObjects.Interfaces;
 
-namespace GameOfVlad.GameObjects.Entities.WeaponSystem;
+namespace GameOfVlad.Game.WeaponSystem;
 
 public interface IProjectile : IColliderGameObject
 {

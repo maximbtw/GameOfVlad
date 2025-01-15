@@ -1,4 +1,4 @@
-using GameOfVlad.GameObjects.Entities.WeaponSystem.Weapons;
+using GameOfVlad.Game.WeaponSystem.Weapons;
 using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.GameObjects.Entities.Player;
@@ -10,6 +10,7 @@ public partial class PlayerV2
     private void InitWeaponManager()
     {
         _weaponManager.AddWeapon(new PlasmaBlasterWeapon(contentManager, projectileDrawer));
+        _weaponManager.AddWeapon(new DartcasterWeapon(contentManager, projectileDrawer));
 
         _mouseInput.OnScrollWheelUp += (_, _) => _weaponManager.NextWeapon();
         _mouseInput.OnScrollWheelDown += (_, _) => _weaponManager.PrevWeapon();

@@ -1,4 +1,6 @@
-namespace GameOfVlad.GameObjects.Entities.WeaponSystem;
+using GameOfVlad.GameObjects;
+
+namespace GameOfVlad.Game.WeaponSystem;
 
 public class ProjectileDrawer : DrawerGameObject, IProjectileDrawer
 {

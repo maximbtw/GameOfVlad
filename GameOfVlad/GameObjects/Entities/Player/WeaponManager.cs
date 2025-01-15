@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using GameOfVlad.GameObjects.Entities.WeaponSystem;
+using GameOfVlad.Game.WeaponSystem;
 using Microsoft.Xna.Framework;
 
 namespace GameOfVlad.GameObjects.Entities.Player;

@@ -1,12 +1,15 @@
+using GameOfVlad.GameObjects;
 using Microsoft.Xna.Framework;
 
-namespace GameOfVlad.GameObjects.Entities.WeaponSystem;
+namespace GameOfVlad.Game.WeaponSystem;
 
 public interface IWeapon
 {
     WeaponType Type { get; }
     
     float FireRate { get; set; }
+    
+    int Damage { get; set; }
     
     void Update(GameTime gameTime);
 

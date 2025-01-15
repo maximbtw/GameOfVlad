@@ -1,6 +1,6 @@
 using GameOfVlad.GameRenderer;
 
-namespace GameOfVlad.GameObjects.Entities.WeaponSystem;
+namespace GameOfVlad.Game.WeaponSystem;
 
 public interface IProjectileDrawer : IRendererObject
 {
