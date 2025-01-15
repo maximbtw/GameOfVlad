@@ -6,6 +6,7 @@ using GameOfVlad.GameObjects.Entities.WeaponSystem;
 using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Services.Camera;
+using GameOfVlad.Services.Game;
 using GameOfVlad.Utils.Keyboards;
 using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,6 +46,7 @@ public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effec
     private readonly MouseInput _mouseInput = new();
     
     private ICameraService CameraService => contentManager.ServiceProvider.GetRequiredService<ICameraService>();
+    private IGameService GameService => contentManager.ServiceProvider.GetRequiredService<IGameService>();
     
     private bool _trustPowerActive;
     private SpriteFont _font;
@@ -65,11 +67,23 @@ public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effec
     {
         if (Settings.Debug)
         {
-            spriteBatch.DrawString(_font, this.Position.ToString(),
-                new Vector2(this.Position.X - 900, this.Position.Y - 500), Color.Red);
+            spriteBatch.DrawString(
+                _font, 
+                this.Position.ToString(),
+                new Vector2(this.Position.X - 1200, this.Position.Y - 700), 
+                Color.Green);
             
-            spriteBatch.DrawString(_font, _weaponManager.GetCurrentWeaponType().ToString(),
-                new Vector2(this.Position.X - 900, this.Position.Y - 400), Color.Red);
+            spriteBatch.DrawString(
+                _font, 
+                _weaponManager.GetCurrentWeaponType().ToString(),
+                new Vector2(this.Position.X - 1200, this.Position.Y - 650),
+                Color.Green);
+            
+            spriteBatch.DrawString(
+                _font, 
+                $"{this.GameService.GetCurrentFps()} FPS",
+                new Vector2(this.Position.X - 1200, this.Position.Y - 600), 
+                Color.Green);
         }
 
         base.Draw(gameTime, spriteBatch);

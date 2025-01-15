@@ -6,7 +6,7 @@ using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Services.Storage;
-using GameOfVlad.Utils.Mouse;
+using GameOfVlad.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework.Input;
 using KeyboardInput = GameOfVlad.Utils.Keyboards.KeyboardInput;
@@ -21,6 +21,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     private readonly GameSceneRenderer _gameSceneRenderer;
     private readonly Camera _camera;
     private readonly KeyboardInput _keyboardInput;
+    private readonly FpsUpdater _fpsUpdater;
 
     //Music
     public Song CurrentMusic;
@@ -38,6 +39,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         _camera = new Camera();
         _gameSceneRenderer = new GameSceneRenderer();
         _keyboardInput = new KeyboardInput();
+        _fpsUpdater = new FpsUpdater();
 
         // TODO: в settings
         _keyboardInput.KeyDown += args =>
@@ -64,7 +66,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
 
     private void ConfigureServices()
     {
-        this.Services.AddService(typeof(IGameService), new GameService(this));
+        this.Services.AddService(typeof(IGameService), new GameService(this, _fpsUpdater));
         this.Services.AddService(typeof(ISceneService), new SceneService(this.Services, _gameSceneRenderer));
         
         this.Services.AddService(typeof(ICameraService),
@@ -107,6 +109,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         _camera.Update();
         _keyboardInput.Update();
         _gameSceneRenderer?.Update(gameTime);
+        _fpsUpdater.Update(gameTime);
 
         base.Update(gameTime);
     }

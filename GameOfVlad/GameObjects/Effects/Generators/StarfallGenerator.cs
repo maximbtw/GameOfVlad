@@ -16,7 +16,7 @@ public class StarfallGenerator(ContentManager contentManager, IEffectDrawer effe
     public int UpdateOrder => 1;
     
     
-    public int SpawnFrequency { get; set; } = 5;
+    public int SpawnFrequency { get; set; } = 10;
     public Range<int> StarSpeedRange { get; set; } = Range<int>.Create(100, 1000);
 
     private const int SpawnOffset = 2000;
