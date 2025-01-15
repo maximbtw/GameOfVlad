@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Effects.Generators;
-using GameOfVlad.GameObjects.Entities;
 using GameOfVlad.GameObjects.Entities.Asteroid;
 using GameOfVlad.GameObjects.Entities.Planet;
 using GameOfVlad.GameObjects.Entities.Player;
@@ -50,7 +49,7 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
             MeteoriteScaleRange = Range<float>.Create(0.4f, 0.75f)
         };
         
-        var player = new PlayerV2(this.ContentManager, this.EffectDrawer)
+        var player = new PlayerV2(this.ContentManager, this.EffectDrawer, this.ProjectileDrawer)
         {
             Texture = this.ContentManager.Load<Texture2D>("Sprite/Rocket/Rocket"),
             Position = new Vector2(100, 100),

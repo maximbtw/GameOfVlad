@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.GameObjects.Entities.Player;
+using GameOfVlad.GameObjects.Entities.WeaponSystem;
 using GameOfVlad.GameObjects.UI.Components.Game;
 using GameOfVlad.GameRenderer;
 using Microsoft.Xna.Framework;
@@ -43,6 +44,7 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
 
     protected readonly ContentManager ContentManager = contentManager;
     protected readonly IEffectDrawer EffectDrawer = new EffectDrawer();
+    protected readonly IProjectileDrawer ProjectileDrawer = new ProjectileDrawer();
 
     // TODO: Либо объеденить и добавить функционал в диспатчер.
     private RendererObjectDispatcher _renderer;
@@ -59,6 +61,7 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
         
         _renderer = new RendererObjectDispatcher();
         _renderer.Add(this.EffectDrawer);
+        _renderer.Add(this.ProjectileDrawer);
         
         InitGameObjects();
         LoadCore();
@@ -71,6 +74,7 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
         UnloadCore();
 
         this.EffectDrawer.ClearEffects();
+        this.ProjectileDrawer.ClearProjectiles();
         _gameObjects.ForEach(x => x.Destroy());
         _gameObjects.Clear();
         _renderer.Clear();

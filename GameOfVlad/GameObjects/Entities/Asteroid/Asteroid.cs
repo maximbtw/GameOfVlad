@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects.Effects;
+using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.Entities.Player;
 using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.GameRenderer;
@@ -11,7 +12,7 @@ using Microsoft.Xna.Framework.Content;
 namespace GameOfVlad.GameObjects.Entities.Asteroid;
 
 internal partial class Asteroid(ContentManager contentManager, IEffectDrawer effectDrawer, Rectangle levelBounds)
-    : ColliderGameObject, IColliderGameObject
+    : HealthGameObject, IHealth
 {
     public int DrawOrder => (int)DrawOrderType.Effect;
     public int UpdateOrder => 1;
@@ -24,6 +25,7 @@ internal partial class Asteroid(ContentManager contentManager, IEffectDrawer eff
 
     public Vector2 Velocity { get; init; }
     public float RotationSpeed { get; init; }
+    
 
     private const int SpawnOffset = 2000;
 
@@ -33,7 +35,6 @@ internal partial class Asteroid(ContentManager contentManager, IEffectDrawer eff
 
         base.LoadCore();
     }
-
 
     public override void Update(GameTime gameTime)
     {
@@ -69,5 +70,12 @@ internal partial class Asteroid(ContentManager contentManager, IEffectDrawer eff
     public void OnCollisionExit(IColliderGameObject other)
     {
 
+    }
+
+    protected override void OnZeroHP()
+    {
+        PlayDestroyEffect();
+        
+        base.OnZeroHP();
     }
 }

@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Input;
 
 namespace GameOfVlad.Utils.Keyboards;
 
-public class KeyboardInputObserver
+public class KeyboardInput
 {
     private KeyboardState _previousKeyboardState;
     private KeyboardState _currentKeyboardState;
@@ -14,7 +14,7 @@ public class KeyboardInputObserver
     
     public event Action<KeyEventArgs> KeyUp;
 
-    public KeyboardInputObserver()
+    public KeyboardInput()
     {
         _previousKeyboardState = Keyboard.GetState();
         _currentKeyboardState = _previousKeyboardState;

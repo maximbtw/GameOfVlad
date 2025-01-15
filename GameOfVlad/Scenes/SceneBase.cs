@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.Handlers;
 using GameOfVlad.Services.Camera;
-using GameOfVlad.Services.Mouse;
-using GameOfVlad.Utils.Keyboards;
+using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using KeyboardInput = GameOfVlad.Utils.Keyboards.KeyboardInput;
 
 namespace GameOfVlad.Scenes;
 
@@ -19,18 +19,20 @@ public abstract class SceneBase(ContentManager contentManager) : IDisposable
     
     protected readonly ContentManager ContentManager = contentManager;
     
-    protected KeyboardInputObserver KeyboardInputObserver;
+    protected KeyboardInput KeyboardInput;
+    protected MouseInput MouseInput;
+    
     protected ICameraService CameraService => this.ContentManager.ServiceProvider.GetRequiredService<ICameraService>();
-    protected IMouseService MouseService => this.ContentManager.ServiceProvider.GetRequiredService<IMouseService>();
-
+    
     public void Load()
     {
         _renderer = new RendererObjectDispatcher();
-        this.KeyboardInputObserver = new KeyboardInputObserver();
+        this.KeyboardInput = new KeyboardInput();
+        this.MouseInput = new MouseInput();
 
-        RegisterRendererHandler(new MouseCursorRendererHandler(this.CameraService, this.MouseService));
+        RegisterRendererHandler(new MouseCursorRendererHandler(this.CameraService, this.MouseInput));
         
-        this.KeyboardInputObserver.KeyDown += e =>
+        this.KeyboardInput.KeyDown += e =>
         {
             if (e.Key == Keys.Q)
             {
@@ -60,7 +62,9 @@ public abstract class SceneBase(ContentManager contentManager) : IDisposable
 
     public void Update(GameTime gameTime)
     {
-        this.KeyboardInputObserver.Update();
+        this.KeyboardInput.Update();
+        this.MouseInput.Update();
+        
         _renderer.Update(gameTime);
 
         UpdateCore(gameTime);

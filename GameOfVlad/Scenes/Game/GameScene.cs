@@ -24,7 +24,7 @@ public partial class GameScene(ContentManager contentManager) : SceneBase(conten
         
         _stateManager.SetLevel(LevelType.Level1);
 
-        this.KeyboardInputObserver.KeyDown += HandleKeyDawn;
+        this.KeyboardInput.KeyDown += HandleKeyDawn;
     }
 
     private void HandleKeyDawn(KeyEventArgs e)

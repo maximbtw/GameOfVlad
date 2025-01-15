@@ -1,6 +1,8 @@
+using GameOfVlad.GameObjects.Interfaces;
+
 namespace GameOfVlad.GameObjects.Entities.Interfaces;
 
-public interface IHealth
+public interface IHealth : IColliderGameObject
 {
     int CurrentHP { get; }
     

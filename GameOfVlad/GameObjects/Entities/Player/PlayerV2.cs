@@ -2,25 +2,27 @@ using System;
 using System.Collections.Generic;
 using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.GameObjects.Entities.Interfaces;
+using GameOfVlad.GameObjects.Entities.WeaponSystem;
 using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Utils.Keyboards;
+using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using KeyboardInput = GameOfVlad.Utils.Keyboards.KeyboardInput;
 
 namespace GameOfVlad.GameObjects.Entities.Player;
 
-public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effectDrawer)
-    : ColliderGameObject, ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject, IHealth
+public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effectDrawer, IProjectileDrawer projectileDrawer)
+    : HealthGameObject, ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject, IHealth
 {
     public int DrawOrder => (int)DrawOrderType.Player;
     public int UpdateOrder => 1;
     
-    public int CurrentHP { get; private set; }
 
     public override IEnumerable<IRendererObject> ChildrenBefore 
     {
@@ -36,25 +38,25 @@ public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effec
     public Vector2 Velocity { get; set; } = Vector2.Zero;
     public float TrustPower { get; set; } = 50f;
     public float RotationVelocity { get; set; } = 3f;
-    public int MaxHP { get; set; } = 100;
     
     public event Action OnPlayerDeath;
 
-    private readonly KeyboardInputObserver _keyboardInputObserver = new();
-    private readonly ICameraService _cameraService = contentManager.ServiceProvider.GetRequiredService<ICameraService>();
+    private readonly KeyboardInput _keyboardInput = new();
+    private readonly MouseInput _mouseInput = new();
+    
+    private ICameraService CameraService => contentManager.ServiceProvider.GetRequiredService<ICameraService>();
     
     private bool _trustPowerActive;
     private SpriteFont _font;
 
     protected override void LoadCore()
     {
-        CreateParticleEffects();
-        
-        this.CurrentHP = this.MaxHP;
+        InitParticleEffects();
+        InitWeaponManager();
         
         _font = contentManager.Load<SpriteFont>("Pages/MapLevels/Font");
-        _keyboardInputObserver.KeyPressed += HandleKeyPressed;
-        _cameraService.SetTargetPosition( () =>this.Position);
+        _keyboardInput.KeyPressed += HandleKeyPressed;
+        CameraService.SetTargetPosition( () =>this.Position);
 
         base.LoadCore();
     }
@@ -65,6 +67,9 @@ public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effec
         {
             spriteBatch.DrawString(_font, this.Position.ToString(),
                 new Vector2(this.Position.X - 900, this.Position.Y - 500), Color.Red);
+            
+            spriteBatch.DrawString(_font, _weaponManager.GetCurrentWeaponType().ToString(),
+                new Vector2(this.Position.X - 900, this.Position.Y - 400), Color.Red);
         }
 
         base.Draw(gameTime, spriteBatch);
@@ -73,7 +78,9 @@ public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effec
     public override void Update(GameTime gameTime)
     {
         _trustPowerActive = false;
-        _keyboardInputObserver.Update();
+        _keyboardInput.Update();
+        _mouseInput.Update();
+        UpdateWeapons(gameTime);
     }
 
     public void OnLevelBorderCollision(Vector2 collisionNormal)
@@ -128,27 +135,8 @@ public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effec
     {
     }
 
-    public void TakeDamage(int amount)
+    protected override void OnZeroHP()
     {
-        if (amount < 1)
-        {
-            throw new InvalidOperationException("Amount HP can't be less than 1");
-        }
-        
-        CurrentHP -= amount;
-        if (this.CurrentHP <= 0)
-        {
-            this.OnPlayerDeath?.Invoke();
-        }
-    }
-
-    public void Heal(int amount)
-    {
-        if (amount < 1)
-        {
-            throw new InvalidOperationException("Amount HP can't be less than 1");
-        }
-        
-        CurrentHP += amount;
+        this.OnPlayerDeath?.Invoke();
     }
 }

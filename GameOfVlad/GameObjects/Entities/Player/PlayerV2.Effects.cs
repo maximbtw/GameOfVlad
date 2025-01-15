@@ -10,7 +10,7 @@ public partial class PlayerV2
 {
     private ParticleGenerator _trustPowerParticleGenerator;
 
-    private void CreateParticleEffects()
+    private void InitParticleEffects()
     {
         _trustPowerParticleGenerator = new ParticleGenerator(
             effectDrawer,

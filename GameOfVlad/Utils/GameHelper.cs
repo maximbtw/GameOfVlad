@@ -6,14 +6,6 @@ namespace GameOfVlad.Utils;
 
 public static class GameHelper
 {
-    public static Vector2 GetDirectionByVelocity(Vector2 velocity)
-    {
-        var direction = new Vector2(velocity.X, velocity.Y);
-        direction.Normalize();
-
-        return direction;
-    }
-    
     public static float AngleToRadians(float angle) => MathF.PI * angle / 180f;
 
     public static Vector2 AdjustPositionByTexture(Vector2 position, Texture2D texture)
@@ -36,6 +28,15 @@ public static class GameHelper
         
         direction.Normalize();
 
+        return direction;
+    }
+    
+    public static Vector2 CalculateDirection(Vector2 startPosition, Vector2 endPosition)
+    {
+        Vector2 direction = endPosition - startPosition;
+        
+        direction.Normalize();
+        
         return direction;
     }
     

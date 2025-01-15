@@ -15,7 +15,7 @@ public partial class MainMenuScene(ContentManager contentManager) : SceneBase(co
 
     protected override void LoadCore()
     {
-        this.KeyboardInputObserver.KeyUp += e =>
+        this.KeyboardInput.KeyUp += e =>
         {
             if (e.Key == Keys.Escape)
             {

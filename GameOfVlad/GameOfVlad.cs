@@ -4,13 +4,12 @@ using Microsoft.Xna.Framework;
 using GameOfVlad.Scenes;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Game;
-using GameOfVlad.Services.Mouse;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Services.Storage;
-using GameOfVlad.Utils.Keyboards;
 using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework.Input;
+using KeyboardInput = GameOfVlad.Utils.Keyboards.KeyboardInput;
 
 namespace GameOfVlad;
 
@@ -21,8 +20,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
 
     private readonly GameSceneRenderer _gameSceneRenderer;
     private readonly Camera _camera;
-    private readonly MouseInput _mouseInput;
-    private readonly KeyboardInputObserver _keyboardInputObserver;
+    private readonly KeyboardInput _keyboardInput;
 
     //Music
     public Song CurrentMusic;
@@ -38,12 +36,11 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         
         _resolutionManager = new ResolutionManager(graphicsDeviceManager);
         _camera = new Camera();
-        _mouseInput = new MouseInput();
         _gameSceneRenderer = new GameSceneRenderer();
-        _keyboardInputObserver = new KeyboardInputObserver();
+        _keyboardInput = new KeyboardInput();
 
         // TODO: в settings
-        _keyboardInputObserver.KeyDown += args =>
+        _keyboardInput.KeyDown += args =>
         {
             if (args.Key == Keys.F10)
             {
@@ -73,7 +70,6 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         this.Services.AddService(typeof(ICameraService),
             new CameraService(_camera, this.Services.GetRequiredService<IGraphicsDeviceService>()));
         
-        this.Services.AddService(typeof(IMouseService), new MouseService(_mouseInput));
         this.Services.AddService(typeof(IStorageService), new StorageService());
     }
 
@@ -109,8 +105,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         // UpdateSounds(gameTime);
 
         _camera.Update();
-        _mouseInput.Update();
-        _keyboardInputObserver.Update();
+        _keyboardInput.Update();
         _gameSceneRenderer?.Update(gameTime);
 
         base.Update(gameTime);

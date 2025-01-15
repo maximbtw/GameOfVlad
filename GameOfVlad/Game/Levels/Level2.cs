@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Effects.Generators;
-using GameOfVlad.GameObjects.Entities;
 using GameOfVlad.GameObjects.Entities.Player;
 using GameOfVlad.GameRenderer.Handlers;
-using GameOfVlad.OldProject;
-using GameOfVlad.OldProject.GameEffects;
-using GameOfVlad.OldProject.Interfaces;
-using GameOfVlad.OldProject.Sprites;
-using GameOfVlad.OldProject.Sprites.Mobs;
-using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -40,7 +32,7 @@ public class Level2(ContentManager contentManager) :  LevelBase(contentManager),
 
         yield return new StarfallGenerator(this.ContentManager, this.EffectDrawer, this.LevelBounds);
         
-        yield return new PlayerV2(this.ContentManager, this.EffectDrawer)
+        yield return new PlayerV2(this.ContentManager, this.EffectDrawer, this.ProjectileDrawer)
         {
             Texture = this.ContentManager.Load<Texture2D>("Sprite/Rocket/Rocket"),
             Position = new Vector2(500, 500),

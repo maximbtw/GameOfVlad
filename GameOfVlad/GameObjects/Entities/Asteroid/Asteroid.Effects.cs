@@ -16,7 +16,7 @@ internal partial class Asteroid
         {
             CanProduceParticle = () => true,
             GetSpawnPosition = () => this.DrawPosition,
-            GetDirection = () => GameHelper.GetDirectionByVelocity(this.Velocity) * -1,
+            GetDirection = () => Vector2.Normalize(this.Velocity) * -1,
             SpawnRate = 25,
             ParticleLifetime = 5,
             SpeedRange = Range<int>.Create(0, 100),
@@ -44,7 +44,6 @@ internal partial class Asteroid
         
         var conf = new ParticleGeneratorConfiguration
         {
-            CanProduceParticle = () => true,
             GetSpawnPosition = () => position,
             GetDirection = () => Vector2.One,
             SpawnRate = 100,

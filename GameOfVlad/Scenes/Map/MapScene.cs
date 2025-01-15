@@ -16,7 +16,7 @@ public partial class MapScene(ContentManager contentManager) : SceneBase(content
 
     protected override void LoadCore()
     {
-        this.KeyboardInputObserver.KeyUp += HandleKeyUp;
+        this.KeyboardInput.KeyUp += HandleKeyUp;
     }
     
     private void HandleKeyUp(KeyEventArgs e)

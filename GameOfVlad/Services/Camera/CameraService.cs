@@ -32,11 +32,13 @@ public class CameraService(Camera camera, IGraphicsDeviceService graphicsDeviceS
         camera.SetTarget(() => cameraPosition);
     }
     
-    public Vector2 PositionByCamera(Vector2 position)
+    public Vector2 PositionByCamera(Vector2 screenPosition)
     {
-        Matrix inverseView = Matrix.Invert(camera.GetTransformMatrix());
+        Matrix transformMatrix = camera.GetTransformMatrix();
         
-        return Vector2.Transform(position, inverseView);
+        Matrix inverseView = Matrix.Invert(transformMatrix);
+        
+        return Vector2.Transform(screenPosition, inverseView);
     }
 
     public Vector2 CenterObjectOnScreen(Vector2 origin)
