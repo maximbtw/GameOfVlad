@@ -20,14 +20,12 @@ public abstract class CollierUiComponent(ContentManager contentManager) : UiComp
         Vector2 bottomLeft = this.PositionByCamera + new Vector2(0, this.Size.Height);
         Vector2 bottomRight = this.PositionByCamera + new Vector2(this.Size.Width, this.Size.Height);
 
-        Vector2 center = this.PositionByCamera + this.Origin;
-
         return
         [
-            RotatePoint(topLeft, center, this.Rotation),
-            RotatePoint(topRight, center, this.Rotation),
-            RotatePoint(bottomRight, center, this.Rotation),
-            RotatePoint(bottomLeft, center, this.Rotation)
+            RotatePoint(topLeft, this.CenterPosition, this.Rotation),
+            RotatePoint(topRight, this.CenterPosition, this.Rotation),
+            RotatePoint(bottomRight, this.CenterPosition, this.Rotation),
+            RotatePoint(bottomLeft, this.CenterPosition, this.Rotation)
         ];
     }
     

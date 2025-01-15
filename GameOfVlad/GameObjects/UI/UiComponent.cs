@@ -24,7 +24,7 @@ public abstract class UiComponent(ContentManager contentManager) : GameObject
         }
     }
 
-    public override Vector2 DrawPosition => this.PositionByCamera + this.Origin;
+    public override Vector2 CenterPosition => this.PositionByCamera + this.Origin;
 
     protected readonly ContentManager ContentManager = contentManager;
     

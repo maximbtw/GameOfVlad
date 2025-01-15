@@ -44,7 +44,6 @@ public class HealthBar(ContentManager contentManager, Configuration configuratio
             
             return Size.Create(width, height);
         }
-        set => throw new NotSupportedException();
     }
 
     private const int HeartEachHp = 25;

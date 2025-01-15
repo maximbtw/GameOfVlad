@@ -1,3 +1,4 @@
+using System;
 using GameOfVlad.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,6 +15,8 @@ public class TextureAnimation<TGameObject>
     private readonly Timer _timer = new();
     
     private int _currentFrame;
+
+    public event Action OnAnimationEnd;
 
     public TextureAnimation(
         TGameObject gameObject,
@@ -42,6 +45,7 @@ public class TextureAnimation<TGameObject>
 
             if (_currentFrame >= _textures.Length)
             {
+                OnAnimationEnd?.Invoke();
                 if (_looping)
                 {
                     _currentFrame = 0;
@@ -57,6 +61,12 @@ public class TextureAnimation<TGameObject>
         {
             SetTexture();
         }
+    }
+
+    public void Reset()
+    {
+        _timer.Reset();
+        _currentFrame = 0;
     }
 
     private void SetTexture()

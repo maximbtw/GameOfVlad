@@ -17,6 +17,7 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.2.1105" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Content\2025\Animations\Splash\001\" />
     <Folder Include="Content\2025\Backgrounds\" />
     <Folder Include="Content\2025\GameUI\HealthBar\" />
     <Folder Include="Content\2025\Sprites\Game\Asteroids\" />

@@ -63,8 +63,8 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
         _renderer.Add(this.EffectDrawer);
         _renderer.Add(this.ProjectileDrawer);
         
-        InitGameObjects();
         LoadCore();
+        InitGameObjects();
 
         _loaded = true;
     }

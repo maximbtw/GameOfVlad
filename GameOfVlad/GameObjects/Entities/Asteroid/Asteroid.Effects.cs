@@ -15,7 +15,7 @@ internal partial class Asteroid
         var conf = new ParticleGeneratorConfiguration
         {
             CanProduceParticle = () => true,
-            GetSpawnPosition = () => this.DrawPosition,
+            GetSpawnPosition = () => this.CenterPosition,
             GetDirection = () => Vector2.Normalize(this.Velocity) * -1,
             SpawnRate = 25,
             ParticleLifetime = 5,
@@ -40,7 +40,7 @@ internal partial class Asteroid
 
     private void PlayDestroyEffect()
     {
-        Vector2 position = this.DrawPosition;
+        Vector2 position = this.CenterPosition;
         
         var conf = new ParticleGeneratorConfiguration
         {

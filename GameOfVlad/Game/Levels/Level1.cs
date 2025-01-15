@@ -2,6 +2,7 @@
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Effects.Generators;
 using GameOfVlad.GameObjects.Entities.Asteroid;
+using GameOfVlad.GameObjects.Entities.Enemies.Forkfighter;
 using GameOfVlad.GameObjects.Entities.Planet;
 using GameOfVlad.GameObjects.Entities.Player;
 using GameOfVlad.GameRenderer.Handlers;
@@ -16,13 +17,18 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
 {
     public Rectangle LevelBounds => new(0, 0, 5000, 5000);
     public LevelType LevelType => LevelType.Level1;
+    
+    private PlayerV2 _player;
 
     protected override void LoadCore()
     {
+        InitPlayer();
+        
         RegisterRendererHandlers(
             new PhysicRendererHandler(),
             new LevelBorderRendererHandler(this.LevelBounds),
-            new GameObjectCollisionRendererHandler()
+            new GameObjectCollisionRendererHandler(),
+            new PlayerFinderRendererHandler(_player)
         );
     }
 
@@ -49,19 +55,28 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
             MeteoriteScaleRange = Range<float>.Create(0.4f, 0.75f)
         };
         
+        yield return _player;
+        yield return CreateHealthBar(_player);
+
+        yield return new Forkfighter(this.ContentManager, this.EffectDrawer)
+        {
+            Position = new Vector2(1000, 1000),
+        };
+    }
+
+    private void InitPlayer()
+    {
         var player = new PlayerV2(this.ContentManager, this.EffectDrawer, this.ProjectileDrawer)
         {
             Texture = this.ContentManager.Load<Texture2D>("Sprite/Rocket/Rocket"),
             Position = new Vector2(100, 100),
             TrustPower = 10000,
             Mass = 100,
-            MaxHP = 100
+            MaxHP = 1000
         };
 
         player.OnPlayerDeath += OnPlayerDead;
 
-        yield return player;
-
-        yield return CreateHealthBar(player);
+        _player = player;
     }
 }

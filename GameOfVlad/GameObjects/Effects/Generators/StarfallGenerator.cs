@@ -15,7 +15,6 @@ public class StarfallGenerator(ContentManager contentManager, IEffectDrawer effe
     public int DrawOrder => (int)DrawOrderType.Background;
     public int UpdateOrder => 1;
     
-    
     public int SpawnFrequency { get; set; } = 10;
     public Range<int> StarSpeedRange { get; set; } = Range<int>.Create(100, 1000);
 
@@ -90,7 +89,7 @@ public class StarfallGenerator(ContentManager contentManager, IEffectDrawer effe
         public int DrawOrder => (int)DrawOrderType.Background;
         public int UpdateOrder => 1;
 
-        public override Vector2 DrawPosition => this.Position;
+        public override Vector2 CenterPosition => this.Position;
         public Vector2 Velocity { get; set; } 
 
         public override void Update(GameTime gameTime)

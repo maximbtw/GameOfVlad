@@ -11,34 +11,27 @@ public abstract class ColliderGameObject : GameObject
 {
     public Color ColliderColor { get; set; } = Color.Red;
 
+    protected virtual Size ColliderSize => new(this.Texture?.Width ?? 0, this.Texture?.Height ?? 0);
+    
     private ColliderDrawer _colliderDrawer;
 
     public virtual Vector2[] GetCorners()
     {
-        // Учитываем масштабированные размеры
-        float scaledWidth = this.Size.Width * this.Scale.X;
-        float scaledHeight = this.Size.Height * this.Scale.Y;
-
-        // Перерассчитываем позицию с учетом масштаба
-        Vector2 adjustedPosition = this.Position - (this.Origin * this.Scale - this.Origin);
-
-        // Углы объекта до вращения
-        Vector2 topLeft = adjustedPosition;
-        Vector2 topRight = adjustedPosition + new Vector2(scaledWidth, 0);
-        Vector2 bottomLeft = adjustedPosition + new Vector2(0, scaledHeight);
-        Vector2 bottomRight = adjustedPosition + new Vector2(scaledWidth, scaledHeight);
-
-        // Центр вращения с учетом новой позиции
-        Vector2 center = adjustedPosition + (this.Origin * this.Scale);
-
-        // Возвращаем углы с учетом вращения
-        return new Vector2[]
-        {
-            RotatePoint(topLeft, center, Rotation),
-            RotatePoint(topRight, center, Rotation),
-            RotatePoint(bottomRight, center, Rotation),
-            RotatePoint(bottomLeft, center, Rotation)
-        };
+        float scaledWidth = this.ColliderSize.Width * this.Scale.X;
+        float scaledHeight = this.ColliderSize.Height * this.Scale.Y;
+        
+        Vector2 topLeft = this.CenterPosition + new Vector2(-scaledWidth / 2, -scaledHeight / 2);
+        Vector2 topRight = this.CenterPosition + new Vector2(scaledWidth / 2, -scaledHeight / 2);
+        Vector2 bottomLeft = this.CenterPosition + new Vector2(-scaledWidth / 2, scaledHeight / 2);
+        Vector2 bottomRight = this.CenterPosition + new Vector2(scaledWidth / 2, scaledHeight / 2);
+        
+        return
+        [
+            RotatePoint(topLeft, this.CenterPosition, Rotation),
+            RotatePoint(topRight, this.CenterPosition, Rotation),
+            RotatePoint(bottomRight, this.CenterPosition, Rotation),
+            RotatePoint(bottomLeft, this.CenterPosition, Rotation)
+        ];
     }
 
     protected override void LoadCore()

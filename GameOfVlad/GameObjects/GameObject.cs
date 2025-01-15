@@ -26,21 +26,14 @@ public abstract class GameObject
     public Vector2 Scale { get; set; } = Vector2.One;
     public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
     public float LayerDepth { get; set; } = 0f;
-    public virtual Vector2 Origin => new(Size.Width / 2f, Size.Height / 2f);
-
-    public virtual Size Size
-    {
-        get => _size ?? new Size(Texture?.Width ?? 0, Texture?.Height ?? 0);
-        set => _size = value;
-    }
-
-    public virtual Vector2 DrawPosition => this.Position + this.Origin;
     
+    public virtual Vector2 Origin => new(this.Size.Width * 0.5f, this.Size.Height * 0.5f);
+    public virtual Size Size => new(this.Texture?.Width ?? 0, this.Texture?.Height ?? 0);
+    public virtual Vector2 CenterPosition => this.Position + this.Origin;
     public virtual bool Loaded => _loaded;
 
     public virtual Rectangle? SourceRectangle => null;
-
-    private Size? _size;
+    
     private bool _loaded;
 
     public void Load()
@@ -66,7 +59,7 @@ public abstract class GameObject
     {
         spriteBatch.Draw(
             this.Texture,
-            this.DrawPosition,
+            this.CenterPosition,
             this.SourceRectangle,
             this.Color,
             this.Rotation,

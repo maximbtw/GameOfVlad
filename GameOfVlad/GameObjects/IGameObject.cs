@@ -12,9 +12,11 @@ public interface IGameObject : IRendererObject
     Vector2 Position { get; set; }
 
     Vector2 Origin { get; }
-
-    Size Size { get; set; }
-
+    
+    Size Size { get; }
+    
+    Vector2 CenterPosition { get; }
+    
     Rectangle? SourceRectangle { get; }
 
     Color Color { get; set; }
@@ -26,6 +28,4 @@ public interface IGameObject : IRendererObject
     SpriteEffects SpriteEffects { get; set; }
 
     float LayerDepth { get; set; }
-
-    Vector2 DrawPosition { get; }
 }

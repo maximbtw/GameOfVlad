@@ -13,6 +13,102 @@
 
 #---------------------------------- Content ---------------------------------#
 
+#begin 2025/Animations/Splash/001/animation-splash-001-01.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Animations/Splash/001/animation-splash-001-01.png
+
+#begin 2025/Animations/Splash/001/animation-splash-001-02.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Animations/Splash/001/animation-splash-001-02.png
+
+#begin 2025/Animations/Splash/001/animation-splash-001-03.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Animations/Splash/001/animation-splash-001-03.png
+
+#begin 2025/Animations/Splash/001/animation-splash-001-04.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Animations/Splash/001/animation-splash-001-04.png
+
+#begin 2025/Animations/Splash/001/animation-splash-001-05.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Animations/Splash/001/animation-splash-001-05.png
+
+#begin 2025/Animations/Splash/001/animation-splash-001-06.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Animations/Splash/001/animation-splash-001-06.png
+
+#begin 2025/Animations/Splash/001/animation-splash-001-07.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Animations/Splash/001/animation-splash-001-07.png
+
+#begin 2025/Animations/Splash/001/animation-splash-001-08.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Animations/Splash/001/animation-splash-001-08.png
+
 #begin 2025/Backgrounds/Game/Blue Nebula/Blue_Nebula_01-512x512.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -540,6 +636,114 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:2025/Sprites/Game/Asteroids/asteroid-06-64x64.png
+
+#begin 2025/Sprites/Game/Enemies/Forkfighter/attack-particle-forkfighter-01-35x14.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Enemies/Forkfighter/attack-particle-forkfighter-01-35x14.png
+
+#begin 2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-01-125x137.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-01-125x137.png
+
+#begin 2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-02-125x137.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-02-125x137.png
+
+#begin 2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-03-125x137.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-03-125x137.png
+
+#begin 2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-04-125x137.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-04-125x137.png
+
+#begin 2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-05-125x137.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-05-125x137.png
+
+#begin 2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-06-125x137.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-06-125x137.png
+
+#begin 2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-07-125x137.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-07-125x137.png
+
+#begin 2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-08-125x137.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-08-125x137.png
 
 #begin 2025/Sprites/Game/Planet/Earth/Terrestrial_01-256x256.png
 /importer:TextureImporter
@@ -2530,18 +2734,6 @@
 /processorParam:TextureFormat=Color
 /build:Sprite/Bullet/monsterBullet2.png;Sprite/Bullet/Observer
 
-#begin Sprite/Butler/BulletSize1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprite/Butler/BulletSize1.png
-
 #begin Sprite/Butler/BulletSize2.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -2553,18 +2745,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprite/Butler/BulletSize2.png
-
-#begin Sprite/Butler/BulletSize3.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Sprite/Butler/BulletSize3.png
 
 #begin Sprite/Butler/Left/1.png
 /importer:TextureImporter

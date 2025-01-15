@@ -6,7 +6,8 @@ public enum DrawOrderType : int
     Effect = -500,
     BackgroundEntity = -400,
     Projectile = -350,
-    Mob = -250,
+    Entity = -250,
     Player = 0,
+    FrontEntity = 250,
     FrontCanvas = 1000
 }

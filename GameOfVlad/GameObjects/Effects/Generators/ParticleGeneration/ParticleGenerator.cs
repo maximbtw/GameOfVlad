@@ -84,6 +84,13 @@ public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConf
 
         private readonly Timer _lifetimeTimer = new();
 
+        protected override void LoadCore()
+        {
+            this.Rotation = MathF.Atan2(this.Velocity.Y, this.Velocity.X);
+            
+            base.LoadCore();
+        }
+
         public override void Update(GameTime gameTime)
         {
             _lifetimeTimer.Update(gameTime);

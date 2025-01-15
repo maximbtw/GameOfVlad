@@ -14,11 +14,7 @@ public class Planet(ContentManager contentManager, PlanetType type) : ColliderGa
 
     public event Action OnPlayerCollisionWithPlanet;
 
-    public override Size Size
-    {
-        get => new(Texture?.Width / 2 ?? 0, Texture?.Height / 2 ?? 0);
-        set => throw new NotSupportedException();
-    }
+    protected override Size ColliderSize => new(this.Texture.Width * 0.5f, this.Texture.Height * 0.5f);
     
     private PlanetAnimation _planetAnimation;
 
@@ -33,26 +29,6 @@ public class Planet(ContentManager contentManager, PlanetType type) : ColliderGa
         _planetAnimation.Update(gameTime);
         
         base.Update(gameTime);
-    }
-
-    public override Vector2[] GetCorners()
-    {
-        var position  = new Vector2(this.Position.X + this.Size.Width /2, this.Position.Y + this.Size.Height /2);
-        
-        Vector2 topLeft = position;
-        Vector2 topRight = position + new Vector2(this.Size.Width, 0);
-        Vector2 bottomLeft = position + new Vector2(0, this.Size.Height);
-        Vector2 bottomRight = position + new Vector2(this.Size.Width, this.Size.Height);
-
-        Vector2 center = position + this.Origin;
-
-        return
-        [
-            RotatePoint(topLeft, center, Rotation),
-            RotatePoint(topRight, center, Rotation),
-            RotatePoint(bottomRight, center, Rotation),
-            RotatePoint(bottomLeft, center, Rotation)
-        ];
     }
 
     public void OnCollision(IColliderGameObject other)

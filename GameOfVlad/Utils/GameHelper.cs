@@ -53,4 +53,20 @@ public static class GameHelper
             direction.X * sin + direction.Y * cos
         );
     }
+    
+    public static  SpriteEffects GetSpriteEffectByRotation(float rotation)
+    {
+        rotation %= MathHelper.TwoPi;
+        if (rotation < 0)
+        {
+            rotation += MathHelper.TwoPi;
+        }
+        
+        if (rotation is > MathHelper.PiOver2 and <= 3 * MathHelper.PiOver2)
+        {
+            return SpriteEffects.FlipVertically;
+        }
+
+        return SpriteEffects.None;
+    }
 }
