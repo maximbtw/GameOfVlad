@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Game.WeaponSystem.Projectiles;
 
-public class PlasmaBlasterProjectile(ContentManager contentManager) : ProjectileBase, IProjectile
+public class PlasmaBlasterProjectile(ContentManager contentManager) : ProjectileBase(contentManager), IProjectile
 {
     public Vector2 Velocity { get; init; }
     
@@ -17,7 +17,7 @@ public class PlasmaBlasterProjectile(ContentManager contentManager) : Projectile
     {
         _startPosition = this.Position;
         
-        this.Texture = contentManager.Load<Texture2D>(
+        this.Texture = ContentManager.Load<Texture2D>(
             "2025/Sprites/Game/Weapons/Projectiles/PlasmaBlaster/plasma-bluster-projectile-39x24");
         
         base.LoadCore();

@@ -13,6 +13,7 @@ public partial class PlayerV2
     private void InitParticleEffects()
     {
         _trustPowerParticleGenerator = new ParticleGenerator(
+            this.ContentManager,
             effectDrawer,
             new ParticleGeneratorConfiguration
             {
@@ -43,9 +44,9 @@ public partial class PlayerV2
                 ],
                 Textures =
                 [
-                    contentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect1"),
-                    contentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect2"),
-                    contentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect3")
+                    ContentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect1"),
+                    ContentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect2"),
+                    ContentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect3")
                 ]
             })
         {

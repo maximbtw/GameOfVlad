@@ -1,4 +1,5 @@
-﻿using GameOfVlad.Game;
+﻿using GameOfVlad.Audio;
+using GameOfVlad.Game;
 using GameOfVlad.Services.Scene;
 using GameOfVlad.Services.Storage;
 using GameOfVlad.Utils.Keyboards;
@@ -16,6 +17,8 @@ public partial class GameScene(ContentManager contentManager) : SceneBase(conten
     private IStorageService StorageService => this.ContentManager.ServiceProvider.GetRequiredService<IStorageService>();
     
     private readonly GameSceneStateManager _stateManager = new(contentManager);
+    
+    public IAudioLoader GetAudioLoader() => new GameSceneAudioLoader(this.ContentManager);
 
     protected override void LoadCore()
     {

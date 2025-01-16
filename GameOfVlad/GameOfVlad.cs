@@ -1,7 +1,7 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework;
 using GameOfVlad.Scenes;
+using GameOfVlad.Services.Audio;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Scene;
@@ -22,13 +22,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
     private readonly Camera _camera;
     private readonly KeyboardInput _keyboardInput;
     private readonly FpsUpdater _fpsUpdater;
-
-    //Music
-    public Song CurrentMusic;
-    public Song NextMusic;
-    public Song BackgraundMusic;
-    private float timeMusic = 0;
-
+    
     public GameOfVlad()
     {
         this.IsMouseVisible = true;
@@ -73,6 +67,7 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
             new CameraService(_camera, this.Services.GetRequiredService<IGraphicsDeviceService>()));
         
         this.Services.AddService(typeof(IStorageService), new StorageService());
+        this.Services.AddService(typeof(IAudioService), new AudioService());
     }
 
     protected override void LoadContent()
@@ -89,23 +84,11 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
         var sceneService = this.Services.GetRequiredService<ISceneService>();
         sceneService.PushScene(SceneType.MainMenu);
 
-
-        // BackgraundMusic = Content.Load<Song>("Pages/MainMenu/Music");
-        // NextMusic = BackgraundMusic;
-
         base.Initialize();
     }
 
     protected override void Update(GameTime gameTime)
     {
-        // if (nextState != null)
-        // {
-        //     currentState = nextState;
-        //     nextState = null;
-        // }
-        // currentState.Update(gameTime);
-        // UpdateSounds(gameTime);
-
         _camera.Update();
         _keyboardInput.Update();
         _gameSceneRenderer?.Update(gameTime);
@@ -126,25 +109,4 @@ public class GameOfVlad : Microsoft.Xna.Framework.Game
 
         base.Draw(gameTime);
     }
-    /*
-
-    private void UpdateSounds(GameTime gameTime)
-    {
-        if (NextMusic != null)
-        {
-            CurrentMusic = NextMusic;
-            NextMusic = null;
-            MediaPlayer.Stop();
-            MediaPlayer.Play(CurrentMusic);
-        }
-        if (CurrentMusic == BackgraundMusic)
-        {
-            timeMusic += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            if (timeMusic > 18f)
-            {
-                MediaPlayer.Play(BackgraundMusic);
-                timeMusic = 0;
-            }
-
-        }*/
 }

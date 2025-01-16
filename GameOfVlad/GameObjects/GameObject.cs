@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
 using GameOfVlad.GameRenderer;
+using GameOfVlad.Services.Audio;
+using GameOfVlad.Services.Camera;
 using GameOfVlad.Utils;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects;
 
-public abstract class GameObject
+public abstract class GameObject(ContentManager contentManager)
 {
     public Guid Guid { get; } = Guid.NewGuid();
     
@@ -31,6 +35,10 @@ public abstract class GameObject
     public virtual bool Loaded => _loaded;
 
     public virtual Rectangle? SourceRectangle => null;
+
+    protected readonly ContentManager ContentManager = contentManager;
+    protected IAudioService AudioService => this.ContentManager.ServiceProvider.GetRequiredService<IAudioService>();
+    protected ICameraService CameraService => this.ContentManager.ServiceProvider.GetRequiredService<ICameraService>();
     
     private bool _loaded;
 

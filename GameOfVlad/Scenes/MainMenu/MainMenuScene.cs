@@ -1,4 +1,5 @@
-﻿using GameOfVlad.Services.Game;
+﻿using GameOfVlad.Audio;
+using GameOfVlad.Services.Game;
 using GameOfVlad.Services.Scene;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework.Content;
@@ -12,9 +13,13 @@ public partial class MainMenuScene(ContentManager contentManager) : SceneBase(co
     
     private ISceneService SceneService => this.ContentManager.ServiceProvider.GetRequiredService<ISceneService>();
     private IGameService GameService => this.ContentManager.ServiceProvider.GetRequiredService<IGameService>();
+    
+    public IAudioLoader GetAudioLoader() => new MainMenuSceneAudioLoader(this.ContentManager);
 
     protected override void LoadCore()
     {
+        this.AudioService.PlayMusic(Music.MainMenu_01);
+        
         this.KeyboardInput.KeyUp += e =>
         {
             if (e.Key == Keys.Escape)

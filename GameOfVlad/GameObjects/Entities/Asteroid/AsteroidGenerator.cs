@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Graphics;
 namespace GameOfVlad.GameObjects.Entities.Asteroid;
 
 public class AsteroidGenerator(ContentManager contentManager, IEffectDrawer effectDrawer, Rectangle levelBounds)
-    : GameObject, IGameObject
+    : GameObject(contentManager), IGameObject
 {
     public int UpdateOrder => 1;
 
@@ -91,7 +91,7 @@ public class AsteroidGenerator(ContentManager contentManager, IEffectDrawer effe
         int speed = _random.Next(MeteoriteSpeedRange.MinValue, MeteoriteSpeedRange.MaxValue);
         Vector2 velocity = rotatedDirection * speed;
 
-        var meteorite = new Asteroid(contentManager, effectDrawer, levelBounds)
+        var meteorite = new Asteroid(ContentManager, effectDrawer, levelBounds)
         {
             Texture = _textures[_random.Next(0, _textures.Length)],
             Position = position,

@@ -254,7 +254,7 @@ namespace GameOfVlad.Game.Levels
 
         private void UpdateMusic(GameTime gameTime)
         {
-            if (StartMusic)
+            /*if (StartMusic)
             {
                 if (IndexLevel == 16 && MusicSwich == 0)
                 {
@@ -288,7 +288,7 @@ namespace GameOfVlad.Game.Levels
             {
                 StartMusic = true;
                 MusicSwich++;
-            }
+            }*/
         }
 
         private void UpdateBonuses(GameTime gameTime)

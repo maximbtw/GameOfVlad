@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using GameOfVlad.Audio;
 using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.Effects.Generators;
 using GameOfVlad.GameObjects.Entities.Asteroid;
@@ -22,6 +23,8 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
 
     protected override void LoadCore()
     {
+        this.AudioService.PlayMusic(Music.Game_001);
+        
         InitPlayer();
         
         RegisterRendererHandlers(
@@ -35,6 +38,7 @@ public class Level1(ContentManager contentManager) : LevelBase(contentManager), 
     protected override IEnumerable<IGameObject> InitGameObjectsCore()
     {
         yield return new BackgroundGenerator(
+            this.ContentManager,
             this.EffectDrawer,
             this.ContentManager.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_04-512x512"), 
             this.LevelBounds);

@@ -26,6 +26,7 @@ public class Level2(ContentManager contentManager) :  LevelBase(contentManager),
     protected override IEnumerable<IGameObject> InitGameObjectsCore()
     {
         yield return new BackgroundGenerator(
+            this.ContentManager,
             this.EffectDrawer,
             this.ContentManager.Load<Texture2D>("2025/Backgrounds/Game/Starfields/Starfield_05-512x512"), 
             this.LevelBounds);

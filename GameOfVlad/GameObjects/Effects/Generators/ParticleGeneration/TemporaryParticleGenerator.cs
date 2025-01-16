@@ -3,15 +3,17 @@ using System.Collections.Generic;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.Effects.Generators.ParticleGeneration;
 
 public class TemporaryParticleGenerator(
+    ContentManager contentManager,
     IEffectDrawer effectDrawer,
     ParticleGeneratorConfiguration configuration,
     float generationTime)
-    : GameObject, IEffect
+    : GameObject(contentManager), IEffect
 {
     public override float LayerDepth => 0;
     public int UpdateOrder => 1;
@@ -26,7 +28,7 @@ public class TemporaryParticleGenerator(
     }
 
     private readonly Timer _timer = new();
-    private readonly ParticleGenerator _particleGenerator = new(effectDrawer, configuration);
+    private readonly ParticleGenerator _particleGenerator = new(contentManager, effectDrawer, configuration);
 
     public override void Update(GameTime gameTime)
     {

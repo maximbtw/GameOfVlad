@@ -20,7 +20,7 @@ using KeyboardInput = GameOfVlad.Utils.Keyboards.KeyboardInput;
 namespace GameOfVlad.GameObjects.Entities.Player;
 
 public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effectDrawer, IProjectileDrawer projectileDrawer)
-    : HealthGameObject, ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject, IHealth
+    : HealthGameObject(contentManager), ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject, IHealth
 {
     public override float LayerDepth => (float)DrawOrderType.Player / 100f;
     public int UpdateOrder => 1;
@@ -46,8 +46,7 @@ public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effec
     private readonly KeyboardInput _keyboardInput = new();
     private readonly MouseInput _mouseInput = new();
     
-    private ICameraService CameraService => contentManager.ServiceProvider.GetRequiredService<ICameraService>();
-    private IGameService GameService => contentManager.ServiceProvider.GetRequiredService<IGameService>();
+    private IGameService GameService => ContentManager.ServiceProvider.GetRequiredService<IGameService>();
     
     private bool _trustPowerActive;
     private SpriteFont _font;
@@ -57,7 +56,7 @@ public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effec
         InitParticleEffects();
         InitWeaponManager();
         
-        _font = contentManager.Load<SpriteFont>("Pages/MapLevels/Font");
+        _font = ContentManager.Load<SpriteFont>("Pages/MapLevels/Font");
         _keyboardInput.KeyPressed += HandleKeyPressed;
         CameraService.SetTargetPosition( () =>this.Position);
 

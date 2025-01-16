@@ -3,10 +3,11 @@ using GameOfVlad.GameObjects.Entities;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.Interfaces;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Game.WeaponSystem;
 
-public abstract class ProjectileBase : ColliderGameObject
+public abstract class ProjectileBase(ContentManager contentManager) : ColliderGameObject(contentManager)
 {
     public override float LayerDepth => (float)DrawOrderType.Projectile / 100f;
     public int UpdateOrder => 1;

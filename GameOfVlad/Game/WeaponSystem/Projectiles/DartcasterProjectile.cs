@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Game.WeaponSystem.Projectiles;
 
-public class DartcasterProjectile(ContentManager contentManager) : ProjectileBase, IProjectile
+public class DartcasterProjectile(ContentManager contentManager) : ProjectileBase(contentManager), IProjectile
 {
     public Vector2 Velocity { get; set; }
 
@@ -87,6 +87,6 @@ public class DartcasterProjectile(ContentManager contentManager) : ProjectileBas
 
     private Texture2D LoadProjectileTexture(string textureName)
     {
-        return contentManager.Load<Texture2D>($"2025/Sprites/Game/Weapons/Projectiles/Dartcaster/{textureName}");
+        return ContentManager.Load<Texture2D>($"2025/Sprites/Game/Weapons/Projectiles/Dartcaster/{textureName}");
     }
 }

@@ -14,14 +14,14 @@ public partial class Forkfighter
         _movementAnimation = new TextureAnimation<Forkfighter>(
             gameObject: this, 
             textures: [
-                contentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-01-125x137"),
-                contentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-02-125x137"),
-                contentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-03-125x137"),
-                contentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-04-125x137"),
-                contentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-05-125x137"),
-                contentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-06-125x137"),
-                contentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-07-125x137"),
-                contentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-08-125x137"),
+                ContentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-01-125x137"),
+                ContentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-02-125x137"),
+                ContentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-03-125x137"),
+                ContentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-04-125x137"),
+                ContentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-05-125x137"),
+                ContentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-06-125x137"),
+                ContentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-07-125x137"),
+                ContentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/enemy-forkfighter-08-125x137"),
             ], 
             timePerFrame: 0.1f);
     }
@@ -41,12 +41,12 @@ public partial class Forkfighter
             LayerDepth = (float)DrawOrderType.FrontEffect / 100f,
             Textures =
             [
-                contentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/attack-particle-forkfighter-01-35x14")
+                ContentManager.Load<Texture2D>("2025/Sprites/Game/Enemies/Forkfighter/attack-particle-forkfighter-01-35x14")
             ]
         };
 
 
-        var attackGenerator = new TemporaryParticleGenerator(effectDrawer, conf, 0.2f);
+        var attackGenerator = new TemporaryParticleGenerator(this.ContentManager, effectDrawer, conf, 0.2f);
         
         effectDrawer.AddEffect(attackGenerator);
     }

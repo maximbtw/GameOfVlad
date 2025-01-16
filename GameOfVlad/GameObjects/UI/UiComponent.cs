@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.GameObjects.UI;
 
-public abstract class UiComponent(ContentManager contentManager) : GameObject
+public abstract class UiComponent(ContentManager contentManager) : GameObject(contentManager)
 {
     public virtual Vector2 PositionByCamera
     {
@@ -25,8 +25,4 @@ public abstract class UiComponent(ContentManager contentManager) : GameObject
     }
 
     public override Vector2 CenterPosition => this.PositionByCamera + this.Origin;
-
-    protected readonly ContentManager ContentManager = contentManager;
-    
-    protected ICameraService CameraService => this.ContentManager.ServiceProvider.GetRequiredService<ICameraService>();
 }

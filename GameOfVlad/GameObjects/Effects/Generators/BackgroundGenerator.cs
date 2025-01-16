@@ -1,5 +1,6 @@
 using System;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.Effects.Generators;
@@ -12,8 +13,12 @@ public class BackgroundGenerator : GameObject, IGameObject
     
     private readonly Rectangle _levelBounds;
     private readonly IEffectDrawer _effectDrawer;
-    
-    public BackgroundGenerator(IEffectDrawer effectDrawer, Texture2D texture, Rectangle levelBounds)
+
+    public BackgroundGenerator(
+        ContentManager contentManager, 
+        IEffectDrawer effectDrawer, 
+        Texture2D texture,
+        Rectangle levelBounds) : base(contentManager)
     {
         this.Texture = texture;
 
@@ -38,7 +43,7 @@ public class BackgroundGenerator : GameObject, IGameObject
                     _levelBounds.Y - DrawOffset + y * this.Texture.Height
                 );
 
-                var image = new BackgroundImage
+                var image = new BackgroundImage(this.ContentManager)
                 {
                     Texture = this.Texture,
                     Position = position
@@ -55,7 +60,7 @@ public class BackgroundGenerator : GameObject, IGameObject
     {
     }
     
-    private class BackgroundImage : GameObject, IEffect
+    private class BackgroundImage(ContentManager contentManager) : GameObject(contentManager), IEffect
     {
         public override float LayerDepth => (float)DrawOrderType.Background / 100f;
         public int UpdateOrder => 1;

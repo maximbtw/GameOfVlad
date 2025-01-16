@@ -71,7 +71,7 @@ public class StarfallGenerator(ContentManager contentManager, IEffectDrawer effe
         int speed = _random.Next(StarSpeedRange.MinValue, StarSpeedRange.MaxValue);
         Vector2 velocity = rotatedDirection * speed;
         
-        var star = new Star(levelBounds)
+        var star = new Star(this.ContentManager, levelBounds)
         {
             Texture = _textures[_random.Next(0, _textures.Length)],
             Position = position,
@@ -83,7 +83,7 @@ public class StarfallGenerator(ContentManager contentManager, IEffectDrawer effe
     }
     
 
-    private class Star(Rectangle levelBounds) : GameObject, IEffect
+    private class Star(ContentManager contentManager, Rectangle levelBounds) : GameObject(contentManager), IEffect
     {
         public override float LayerDepth => (float)DrawOrderType.BackEffect / 100f;
         public int UpdateOrder => 1;

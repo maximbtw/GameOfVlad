@@ -7,7 +7,7 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.GameObjects.Entities.Planet;
 
-public class Planet(ContentManager contentManager, PlanetType type) : ColliderGameObject, IColliderGameObject
+public class Planet(ContentManager contentManager, PlanetType type) : ColliderGameObject(contentManager), IColliderGameObject
 {
     public override float LayerDepth => (float)DrawOrderType.BackgroundEntity / 100f;
     public int UpdateOrder => 1;
@@ -20,7 +20,7 @@ public class Planet(ContentManager contentManager, PlanetType type) : ColliderGa
 
     protected override void LoadCore()
     {
-        _planetAnimation = PlanetAnimation.CreateAnimation(contentManager, this, type);
+        _planetAnimation = PlanetAnimation.CreateAnimation(ContentManager, this, type);
         base.LoadCore();
     }
     

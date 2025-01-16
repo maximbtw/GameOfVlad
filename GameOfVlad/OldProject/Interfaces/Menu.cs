@@ -63,13 +63,13 @@ namespace GameOfVlad.OldProject.Interfaces
         public void ToMainMenu()
         {
             //game.ChangeState(new MainMenuPage(game, graphicsDevice, content));
-            game.NextMusic = game.BackgraundMusic;
+            //  game.NextMusic = game.BackgraundMusic;
         }
 
         public void ToLevelMap()
         {
             //game.ChangeState(new MapPage(game, graphicsDevice, content));
-            game.NextMusic = game.BackgraundMusic;
+         //   game.NextMusic = game.BackgraundMusic;
         }
 
         public void ToNextLevel(int indexLevel)

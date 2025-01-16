@@ -1,13 +1,13 @@
 using System;
 using GameOfVlad.Utils;
-using GameOfVlad.Utils.GameObject;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.Effects.Generators.ParticleGeneration;
 
-public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConfiguration configuration)
-    : GameObject, IGameObject
+public class ParticleGenerator(ContentManager contentManager, IEffectDrawer effectDrawer, ParticleGeneratorConfiguration configuration)
+    : GameObject(contentManager), IGameObject
 {
     public override float LayerDepth => 0;
     public int UpdateOrder => 1;
@@ -59,7 +59,7 @@ public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConf
         Texture2D texture = configuration.Textures[_random.Next(0, configuration.Textures.Length)];
         Vector2 position = configuration.GetSpawnPosition();
 
-        var particle = new Particle
+        var particle = new Particle(this.ContentManager)
         {
             Position = GameHelper.AdjustPositionByTexture(position, texture),
             Velocity = direction * speed,
@@ -75,7 +75,7 @@ public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConf
         return particle;
     }
 
-    private class Particle : GameObject, IEffect
+    private class Particle(ContentManager contentManager) : GameObject(contentManager), IEffect
     {
         public int UpdateOrder => 1;
 

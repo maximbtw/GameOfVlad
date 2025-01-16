@@ -12,7 +12,7 @@ using Microsoft.Xna.Framework.Content;
 namespace GameOfVlad.GameObjects.Entities.Asteroid;
 
 internal partial class Asteroid(ContentManager contentManager, IEffectDrawer effectDrawer, Rectangle levelBounds)
-    : HealthGameObject, IHealth
+    : HealthGameObject(contentManager), IHealth
 {
     public override float LayerDepth => (float)DrawOrderType.Entity / 100f;
     public int UpdateOrder => 1;

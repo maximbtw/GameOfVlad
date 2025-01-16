@@ -1,3 +1,4 @@
+using GameOfVlad.Audio;
 using GameOfVlad.Game.WeaponSystem.Projectiles;
 using GameOfVlad.GameObjects;
 using GameOfVlad.Utils;
@@ -16,6 +17,8 @@ public class PlasmaBlasterWeapon(ContentManager contentManager, IProjectileDrawe
 
     protected override PlasmaBlasterProjectile CreateShot(IGameObject parent, Vector2 destinationPoint)
     {
+        this.AudioService.PlaySound(Sound.Weapon_PlasmaBlaster_Shoot);
+        
         Vector2 startPosition = parent.Position + parent.Origin;
 
         var projectile = new PlasmaBlasterProjectile(this.ContentManager)

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.GameRenderer.Handlers;
+using GameOfVlad.Services.Audio;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,6 +24,7 @@ public abstract class SceneBase(ContentManager contentManager) : IDisposable
     protected MouseInput MouseInput;
     
     protected ICameraService CameraService => this.ContentManager.ServiceProvider.GetRequiredService<ICameraService>();
+    protected IAudioService AudioService => this.ContentManager.ServiceProvider.GetRequiredService<IAudioService>();
     
     public void Load()
     {

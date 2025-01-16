@@ -1,12 +1,11 @@
 using System;
-using GameOfVlad.GameRenderer;
 using GameOfVlad.Scenes;
 using GameOfVlad.Scenes.Game;
 using GameOfVlad.Scenes.MainMenu;
 using GameOfVlad.Scenes.Map;
+using GameOfVlad.Services.Audio;
 using GameOfVlad.Services.Camera;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Services.Scene;
@@ -14,6 +13,8 @@ namespace GameOfVlad.Services.Scene;
 public class SceneService(IServiceProvider serviceProvider, GameSceneRenderer sceneRenderer) : ISceneService
 {
     private ICameraService CameraService => serviceProvider.GetService<ICameraService>();
+    
+    private IAudioService AudioService => serviceProvider.GetService<IAudioService>();
     
     public void PushScene(SceneType sceneType)
     {
@@ -29,14 +30,18 @@ public class SceneService(IServiceProvider serviceProvider, GameSceneRenderer sc
             SceneType.Settings => throw new NotImplementedException(),
             _ => throw new ArgumentOutOfRangeException(nameof(sceneType), sceneType, null)
         };
-     
-        CameraService.ResetCamera();
+        
+        this.AudioService.Load(scene);
+        this.CameraService.ResetCamera();
+        
         sceneRenderer.PushScene(scene);
     }
 
     public void PopScene()
     {
-        CameraService.ResetCamera();
+        this.AudioService.Unload();
+        this.CameraService.ResetCamera();
+        
         sceneRenderer.PopScene();
     }
 }

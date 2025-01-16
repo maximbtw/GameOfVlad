@@ -6,6 +6,8 @@ using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.GameObjects.Entities.Player;
 using GameOfVlad.GameObjects.UI.Components.Game;
 using GameOfVlad.GameRenderer;
+using GameOfVlad.Services.Audio;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,7 +16,6 @@ namespace GameOfVlad.Game;
 
 public abstract class LevelBase(ContentManager contentManager) : IRendererObject
 {
-    public int DrawOrder => (int)DrawOrderType.Player;
     public int UpdateOrder => 1;
     public Guid Guid { get; } = Guid.NewGuid();
     
@@ -39,6 +40,8 @@ public abstract class LevelBase(ContentManager contentManager) : IRendererObject
     protected readonly ContentManager ContentManager = contentManager;
     protected readonly IEffectDrawer EffectDrawer = new EffectDrawer();
     protected readonly IProjectileDrawer ProjectileDrawer = new ProjectileDrawer();
+
+    protected IAudioService AudioService => this.ContentManager.ServiceProvider.GetRequiredService<IAudioService>();
 
     // TODO: Либо объеденить и добавить функционал в диспатчер.
     private RendererObjectDispatcher _renderer;

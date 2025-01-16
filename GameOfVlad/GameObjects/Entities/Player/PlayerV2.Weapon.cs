@@ -9,8 +9,8 @@ public partial class PlayerV2
 
     private void InitWeaponManager()
     {
-        _weaponManager.AddWeapon(new PlasmaBlasterWeapon(contentManager, projectileDrawer));
-        _weaponManager.AddWeapon(new DartcasterWeapon(contentManager, projectileDrawer));
+        _weaponManager.AddWeapon(new PlasmaBlasterWeapon(ContentManager, projectileDrawer));
+        _weaponManager.AddWeapon(new DartcasterWeapon(ContentManager, projectileDrawer));
 
         _mouseInput.OnScrollWheelUp += (_, _) => _weaponManager.NextWeapon();
         _mouseInput.OnScrollWheelDown += (_, _) => _weaponManager.PrevWeapon();

@@ -1,5 +1,7 @@
 using GameOfVlad.GameObjects;
+using GameOfVlad.Services.Audio;
 using GameOfVlad.Utils;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
@@ -11,6 +13,8 @@ public abstract class WeaponBase<TProjectile>(ContentManager contentManager, IPr
     public abstract float FireRate { get; set; }
 
     protected readonly ContentManager ContentManager = contentManager;
+
+    protected IAudioService AudioService => this.ContentManager.ServiceProvider.GetRequiredService<IAudioService>();
     
     private readonly Timer _fireTimer = new();
     

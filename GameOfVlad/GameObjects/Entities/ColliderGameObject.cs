@@ -3,11 +3,12 @@ using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.Utils;
 using GameOfVlad.Utils.Draw;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.Entities;
 
-public abstract class ColliderGameObject : GameObject
+public abstract class ColliderGameObject(ContentManager contentManager) : GameObject(contentManager)
 {
     public Color ColliderColor { get; set; } = Color.Red;
 

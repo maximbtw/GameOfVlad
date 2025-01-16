@@ -26,13 +26,13 @@ internal partial class Asteroid
             RotationSpeedRange = Range<int>.Create(-20, 20),
             Textures =
             [
-                contentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect1"),
-                contentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect2"),
-                contentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect3")
+                ContentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect1"),
+                ContentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect2"),
+                ContentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect3")
             ]
         };
 
-        _fireConstantEffectParticleGenerator = new ParticleGenerator(effectDrawer, conf)
+        _fireConstantEffectParticleGenerator = new ParticleGenerator(this.ContentManager, effectDrawer, conf)
         {
             Parent = this
         };
@@ -55,13 +55,13 @@ internal partial class Asteroid
             RotationSpeedRange = Range<int>.Create(-20, 20),
             Textures =
             [
-                contentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect1"),
-                contentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect2"),
-                contentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect3")
+                ContentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect1"),
+                ContentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect2"),
+                ContentManager.Load<Texture2D>("Sprite/Meteorit/ParticleEffect3")
             ]
         };
         
-        var temporaryParticleGenerator = new TemporaryParticleGenerator(effectDrawer, conf, generationTime: 0.075f);
+        var temporaryParticleGenerator = new TemporaryParticleGenerator(this.ContentManager, effectDrawer, conf, generationTime: 0.075f);
         
         effectDrawer.AddEffect(temporaryParticleGenerator);
     }

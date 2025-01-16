@@ -1,10 +1,11 @@
 using System;
 using GameOfVlad.GameObjects.Entities;
 using GameOfVlad.GameObjects.Entities.Interfaces;
+using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.GameObjects;
 
-public abstract class HealthGameObject : ColliderGameObject
+public abstract class HealthGameObject(ContentManager contentManager) : ColliderGameObject(contentManager)
 {
     public int CurrentHP { get; private set; }
 
