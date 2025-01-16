@@ -1,14 +1,18 @@
 using GameOfVlad.Audio;
 using GameOfVlad.Game.WeaponSystem.Projectiles;
 using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Game.WeaponSystem.Weapons;
 
-public class PlasmaBlasterWeapon(ContentManager contentManager, IProjectileDrawer projectileDrawer)
-    : WeaponBase<PlasmaBlasterProjectile>(contentManager, projectileDrawer), IWeapon
+public class PlasmaBlasterWeapon(
+    ContentManager contentManager,
+    IEffectDrawer effectDrawer,
+    IProjectileDrawer projectileDrawer)
+    : WeaponBase<PlasmaBlasterProjectile>(contentManager, effectDrawer, projectileDrawer), IWeapon
 {
     public WeaponType Type => WeaponType.PlasmaBlaster;
 
@@ -18,10 +22,10 @@ public class PlasmaBlasterWeapon(ContentManager contentManager, IProjectileDrawe
     protected override PlasmaBlasterProjectile CreateShot(IGameObject parent, Vector2 destinationPoint)
     {
         this.AudioService.PlaySound(Sound.Weapon_PlasmaBlaster_Shoot);
-        
+
         Vector2 startPosition = parent.Position + parent.Origin;
 
-        var projectile = new PlasmaBlasterProjectile(this.ContentManager)
+        var projectile = new PlasmaBlasterProjectile(this.ContentManager, this.EffectDrawer)
         {
             Velocity = GameHelper.CalculateDirection(startPosition, destinationPoint) * 750,
             Damage = this.Damage,

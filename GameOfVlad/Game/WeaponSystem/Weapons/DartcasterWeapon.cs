@@ -1,13 +1,14 @@
 using GameOfVlad.Game.WeaponSystem.Projectiles;
 using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.Utils;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Game.WeaponSystem.Weapons;
 
-public class DartcasterWeapon(ContentManager contentManager, IProjectileDrawer projectileDrawer)
-    : WeaponBase<DartcasterProjectile>(contentManager, projectileDrawer), IWeapon
+public class DartcasterWeapon(ContentManager contentManager, IEffectDrawer effectDrawer, IProjectileDrawer projectileDrawer)
+    : WeaponBase<DartcasterProjectile>(contentManager, effectDrawer, projectileDrawer), IWeapon
 {
     public WeaponType Type => WeaponType.Dartcaster;
 
@@ -19,7 +20,7 @@ public class DartcasterWeapon(ContentManager contentManager, IProjectileDrawer p
     {
         Vector2 startPosition = parent.Position + parent.Origin;
 
-        var projectile = new DartcasterProjectile(this.ContentManager)
+        var projectile = new DartcasterProjectile(this.ContentManager, this.EffectDrawer)
         {
             Velocity = GameHelper.CalculateDirection(startPosition, destinationPoint) * 1200,
             Damage = this.Damage,

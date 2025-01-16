@@ -1,4 +1,5 @@
 using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.GameObjects.Entities;
 using GameOfVlad.GameObjects.Entities.Interfaces;
 using GameOfVlad.GameObjects.Interfaces;
@@ -7,12 +8,14 @@ using Microsoft.Xna.Framework.Content;
 
 namespace GameOfVlad.Game.WeaponSystem;
 
-public abstract class ProjectileBase(ContentManager contentManager) : ColliderGameObject(contentManager)
+public abstract class ProjectileBase(ContentManager contentManager, IEffectDrawer effectDrawer) : ColliderGameObject(contentManager)
 {
     public override float LayerDepth => (float)DrawOrderType.Projectile / 100f;
     public int UpdateOrder => 1;
     
     public int Damage { get; set; }
+
+    protected readonly IEffectDrawer EffectDrawer = effectDrawer;
 
     public virtual void OnCollision(IColliderGameObject other)
     {

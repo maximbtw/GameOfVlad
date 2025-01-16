@@ -34,6 +34,7 @@ public class GameSceneStateManager(ContentManager contentManager)
         
         var eventArgs = new GameLevelChangeEventArgs(_level, newLevel);
 
+        _level?.Destroy();
         newLevel.OnLevelEnd += OnLevelEnd;
         _level = newLevel;
 

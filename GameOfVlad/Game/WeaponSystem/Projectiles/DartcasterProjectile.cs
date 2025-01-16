@@ -1,4 +1,6 @@
 using System;
+using GameOfVlad.GameObjects;
+using GameOfVlad.GameObjects.Effects;
 using GameOfVlad.Utils;
 using GameOfVlad.Utils.GameObject;
 using Microsoft.Xna.Framework;
@@ -7,14 +9,15 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.Game.WeaponSystem.Projectiles;
 
-public class DartcasterProjectile(ContentManager contentManager) : ProjectileBase(contentManager), IProjectile
+public class DartcasterProjectile(ContentManager contentManager, IEffectDrawer effectDrawer)
+    : ProjectileBase(contentManager, effectDrawer), IProjectile
 {
     public Vector2 Velocity { get; set; }
 
-    private const float LifeTime  = 3f;
+    private const float LifeTime = 3f;
 
     private TextureAnimation<DartcasterProjectile> _animation;
-    
+
     private readonly Timer _timer = new();
 
     protected override void LoadCore()
@@ -43,20 +46,20 @@ public class DartcasterProjectile(ContentManager contentManager) : ProjectileBas
     public override void Update(GameTime gameTime)
     {
         UpdateMovement(gameTime);
-        
+
         _timer.Update(gameTime);
         if (_timer.Time >= LifeTime)
         {
             Destroy();
         }
-        
+
         base.Update(gameTime);
     }
 
     public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
     {
         UpdateAppearance(gameTime);
-        
+
         base.Draw(gameTime, spriteBatch);
     }
 
@@ -77,7 +80,17 @@ public class DartcasterProjectile(ContentManager contentManager) : ProjectileBas
 
     protected override void OnHit()
     {
-
+        AnimationHelper.AddSplashEffect(
+            this.ContentManager,
+            this.EffectDrawer,
+            textureNumber: "002",
+            countTexture: 12,
+            this.CenterPosition,
+            Color.GreenYellow,
+            scale: Vector2.One,
+            layerDepth: (float)DrawOrderType.FrontEffect / 100f,
+            timePerFrame: 0.02f
+        );
     }
 
     private void UpdateAppearance(GameTime gameTime)
@@ -87,6 +100,6 @@ public class DartcasterProjectile(ContentManager contentManager) : ProjectileBas
 
     private Texture2D LoadProjectileTexture(string textureName)
     {
-        return ContentManager.Load<Texture2D>($"2025/Sprites/Game/Weapons/Projectiles/Dartcaster/{textureName}");
+        return this.ContentManager.Load<Texture2D>($"2025/Sprites/Game/Weapons/Projectiles/Dartcaster/{textureName}");
     }
 }
