@@ -2,12 +2,13 @@ namespace GameOfVlad.GameObjects;
 
 public enum DrawOrderType : int
 {
-    Background = -1000,
-    Effect = -500,
-    BackgroundEntity = -400,
-    Projectile = -350,
-    Entity = -250,
-    Player = 0,
-    FrontEntity = 250,
-    FrontCanvas = 1000
+    Background = 0,
+    BackgroundEntity = 10,
+    BackEffect = 20,
+    Projectile = 30,
+    Entity = 40,
+    Player = 50,
+    FrontEntity = 60,
+    FrontEffect = 70,
+    UI = 80
 }

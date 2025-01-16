@@ -7,6 +7,7 @@ using GameOfVlad.GameObjects.Interfaces;
 using GameOfVlad.GameRenderer;
 using GameOfVlad.Services.Camera;
 using GameOfVlad.Services.Game;
+using GameOfVlad.Utils;
 using GameOfVlad.Utils.Keyboards;
 using GameOfVlad.Utils.Mouse;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,11 +22,11 @@ namespace GameOfVlad.GameObjects.Entities.Player;
 public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effectDrawer, IProjectileDrawer projectileDrawer)
     : HealthGameObject, ITrustForcePhysicalGameObject, ILevelBorderRestrictedGameObject, IHealth
 {
-    public int DrawOrder => (int)DrawOrderType.Player;
+    public override float LayerDepth => (float)DrawOrderType.Player / 100f;
     public int UpdateOrder => 1;
     
 
-    public override IEnumerable<IRendererObject> ChildrenBefore 
+    public override IEnumerable<IRendererObject> Children 
     {
         get
         {
@@ -67,23 +68,26 @@ public partial class PlayerV2(ContentManager contentManager, IEffectDrawer effec
     {
         if (Settings.Debug)
         {
-            spriteBatch.DrawString(
-                _font, 
-                this.Position.ToString(),
-                new Vector2(this.Position.X - 1200, this.Position.Y - 700), 
-                Color.Green);
+            GameHelper.DrawDebugString(
+                spriteBatch, 
+                _font,
+                new Vector2(this.Position.X - 1200, this.Position.Y - 700),
+                Color.Green,
+                this.Position.ToString());
             
-            spriteBatch.DrawString(
-                _font, 
-                _weaponManager.GetCurrentWeaponType().ToString(),
+            GameHelper.DrawDebugString(
+                spriteBatch, 
+                _font,
                 new Vector2(this.Position.X - 1200, this.Position.Y - 650),
-                Color.Green);
+                Color.Green,
+                _weaponManager.GetCurrentWeaponType().ToString());
             
-            spriteBatch.DrawString(
-                _font, 
-                $"{this.GameService.GetCurrentFps()} FPS",
+            GameHelper.DrawDebugString(
+                spriteBatch, 
+                _font,
                 new Vector2(this.Position.X - 1200, this.Position.Y - 600), 
-                Color.Green);
+                Color.Green,
+                $"{this.GameService.GetCurrentFps()} FPS");
         }
 
         base.Draw(gameTime, spriteBatch);

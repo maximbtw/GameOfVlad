@@ -7,11 +7,10 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 
-public sealed class Button(ContentManager contentManager)
+public class Button(ContentManager contentManager)
     : CollierUiComponent(contentManager), IUiComponent, IClickable, IColliderGameObject
 {
-    public int UpdateOrder => (int)DrawOrderType.FrontCanvas;
-    public int DrawOrder => 1;
+    public int UpdateOrder => 1;
     
     public event Action OnBtnClick;
     public ButtonText Text { get; set; }

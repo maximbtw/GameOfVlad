@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GameOfVlad.GameObjects;
 using GameOfVlad.GameObjects.UI.Components;
 using GameOfVlad.GameObjects.UI.Components.ButtonComponent;
 using GameOfVlad.GameObjects.UI.Interfaces;
@@ -13,43 +14,50 @@ public partial class MainMenuScene
     {
         var background = new Image(this.ContentManager)
         {
-            Texture = this.ContentManager.Load<Texture2D>("Pages/MainMenu/Backgraund")
+            Texture = this.ContentManager.Load<Texture2D>("Pages/MainMenu/Backgraund"),
+            LayerDepth = (float)DrawOrderType.Background / 100f
         };
 
         var btnStartGame = new Button(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Buttons/Start"),
-            Position = new Vector2(1420, 150)
+            Position = new Vector2(1420, 150),
+            LayerDepth = (float)DrawOrderType.UI / 100f
         };
 
         var btnMap= new Button(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Buttons/Levels"),
-            Position = new Vector2(1410, 300)
+            Position = new Vector2(1410, 300),
+            LayerDepth = (float)DrawOrderType.UI / 100f
         };
 
         var btnMiniGames = new Button(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Buttons/MiniGames"),
-            Position = new Vector2(1320, 450)
+            Position = new Vector2(1320, 450),
+            LayerDepth = (float)DrawOrderType.UI / 100f
         };
 
         var btnGallery = new Button(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Buttons/Gallery"),
-            Position = new Vector2(1410, 600)
+            Position = new Vector2(1410, 600),
+            LayerDepth = (float)DrawOrderType.UI / 100f
         };
 
         var btnSettings = new Button(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Buttons/Setting"),
-            Position = new Vector2(1320, 750)
+            Position = new Vector2(1320, 750),
+            LayerDepth = (float)DrawOrderType.UI / 100f
         };
 
         var btnExit = new Button(this.ContentManager)
         {
             Texture = this.ContentManager.Load<Texture2D>("Buttons/Exit"),
-            Position = new Vector2(1420, 900)
+            Position = new Vector2(1420, 900),
+            LayerDepth = (float)DrawOrderType.UI / 100f
         };
 
         btnStartGame.OnBtnClick += () => this.SceneService.PushScene(SceneType.Game);

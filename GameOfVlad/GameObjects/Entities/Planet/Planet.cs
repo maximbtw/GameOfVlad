@@ -9,7 +9,7 @@ namespace GameOfVlad.GameObjects.Entities.Planet;
 
 public class Planet(ContentManager contentManager, PlanetType type) : ColliderGameObject, IColliderGameObject
 {
-    public int DrawOrder => (int)DrawOrderType.BackgroundEntity;
+    public override float LayerDepth => (float)DrawOrderType.BackgroundEntity / 100f;
     public int UpdateOrder => 1;
 
     public event Action OnPlayerCollisionWithPlanet;

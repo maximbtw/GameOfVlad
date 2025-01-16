@@ -6,11 +6,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameOfVlad.GameObjects.Effects.Generators.ParticleGeneration;
 
-public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConfiguration configuration) : GameObject, IGameObject
+public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConfiguration configuration)
+    : GameObject, IGameObject
 {
-    public int DrawOrder => (int)DrawOrderType.Effect;
+    public override float LayerDepth => 0;
     public int UpdateOrder => 1;
-    
+
     private readonly Random _random = new();
 
 
@@ -19,16 +20,16 @@ public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConf
     public override void Update(GameTime gameTime)
     {
         _timeSinceLastSpawn += (float)gameTime.ElapsedGameTime.TotalSeconds;
-        
+
         if (!configuration.CanProduceParticle())
         {
             return;
         }
-        
+
         while (_timeSinceLastSpawn >= 1f / configuration.SpawnRate)
         {
             _timeSinceLastSpawn -= 1f / configuration.SpawnRate;
-            
+
             Particle particle = CreateParticle();
             effectDrawer.AddEffect(particle);
         }
@@ -67,6 +68,7 @@ public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConf
             Lifetime = configuration.ParticleLifetime,
             Texture = texture,
             Color = configuration.Colors[_random.Next(0, configuration.Colors.Count)],
+            LayerDepth = configuration.LayerDepth,
             Parent = this
         };
 
@@ -75,19 +77,19 @@ public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConf
 
     private class Particle : GameObject, IEffect
     {
-        public int DrawOrder => (int)DrawOrderType.Player;
         public int UpdateOrder => 1;
 
         public Vector2 Velocity { get; init; }
         public float RotationSpeed { get; init; }
         public float Lifetime { get; init; }
+        
 
         private readonly Timer _lifetimeTimer = new();
 
         protected override void LoadCore()
         {
             this.Rotation = MathF.Atan2(this.Velocity.Y, this.Velocity.X);
-            
+
             base.LoadCore();
         }
 
@@ -98,7 +100,7 @@ public class ParticleGenerator(IEffectDrawer effectDrawer, ParticleGeneratorConf
             {
                 Destroy();
             }
-            
+
             this.Position += this.Velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
             this.Rotation += this.RotationSpeed * (float)gameTime.ElapsedGameTime.TotalSeconds;
             this.Color *= 1f - _lifetimeTimer.Time / Lifetime;

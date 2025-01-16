@@ -14,10 +14,10 @@ namespace GameOfVlad.GameObjects.Entities.Asteroid;
 internal partial class Asteroid(ContentManager contentManager, IEffectDrawer effectDrawer, Rectangle levelBounds)
     : HealthGameObject, IHealth
 {
-    public int DrawOrder => (int)DrawOrderType.Effect;
+    public override float LayerDepth => (float)DrawOrderType.Entity / 100f;
     public int UpdateOrder => 1;
 
-    public override IEnumerable<IRendererObject> ChildrenBefore
+    public override IEnumerable<IRendererObject> Children
     {
         get { yield return _fireConstantEffectParticleGenerator; }
         set => throw new NotSupportedException();

@@ -14,10 +14,9 @@ namespace GameOfVlad.GameObjects.UI.Components.Game;
 public class HealthBar(ContentManager contentManager, Configuration configuration)
     : UiComponent(contentManager), IUiComponent
 {
-    public int DrawOrder => (int)DrawOrderType.FrontCanvas;
     public int UpdateOrder => 1;
 
-    public override IEnumerable<IRendererObject> ChildrenAfter
+    public override IEnumerable<IRendererObject> Children
     {
         get => _hearts;
         set => throw new NotSupportedException();
@@ -154,7 +153,7 @@ public class HealthBar(ContentManager contentManager, Configuration configuratio
 
     private class Heart(ContentManager contentManager) : UiComponent(contentManager), IUiComponent
     {
-        public int DrawOrder => (int)DrawOrderType.FrontCanvas;
+        public override float LayerDepth => (float)DrawOrderType.UI / 100f;
         public int UpdateOrder => 1;
     }
 }

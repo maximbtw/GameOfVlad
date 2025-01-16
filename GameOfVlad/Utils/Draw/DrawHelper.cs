@@ -13,18 +13,17 @@ public static class DrawHelper
 
         // Вычисляем угол линии
         float angle = MathF.Atan2(end.Y - start.Y, end.X - start.X);
-
-        // Рисуем линию как повернутый прямоугольник
+        
         spriteBatch.Draw(
             texture,
-            start, // Начальная позиция линии
+            start, 
             null,
-            color, // Цвет линии
-            angle, // Угол наклона линии
-            Vector2.Zero, // Точка вращения (верхний левый угол текстуры)
-            new Vector2(length, 1), // Размер линии (длина и ширина 1 пиксель)
+            color, 
+            angle, 
+            Vector2.Zero,
+            new Vector2(length, 1), 
             SpriteEffects.None,
-            0f
+            1f
         );
     }
 }

@@ -50,12 +50,7 @@ public abstract class BaseRendererObjectHandler<TObject> where TObject : IRender
                 yield return castedObj;
             }
 
-            foreach (TObject child in GetAllCastedObjects(obj.ChildrenBefore))
-            {
-                yield return child;
-            }
-
-            foreach (TObject child in GetAllCastedObjects(obj.ChildrenAfter))
+            foreach (TObject child in GetAllCastedObjects(obj.Children))
             {
                 yield return child;
             }

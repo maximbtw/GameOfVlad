@@ -12,7 +12,7 @@ namespace GameOfVlad.GameObjects.Entities.Enemies.Forkfighter;
 
 public partial class Forkfighter(ContentManager contentManager, IEffectDrawer effectDrawer) : HealthGameObject, IHealth, IPlayerFinder
 {
-    public int DrawOrder => (int)DrawOrderType.FrontEntity;
+    public override float LayerDepth => (float)DrawOrderType.FrontEntity / 100f;
     public int UpdateOrder => 1;
     
     protected override Size ColliderSize => new(base.Size.Width * 0.5f, base.Size.Height * 0.75f);
@@ -86,18 +86,17 @@ public partial class Forkfighter(ContentManager contentManager, IEffectDrawer ef
         }
         
         float distanceToPlayer = Vector2.Distance(_player.CenterPosition, this.CenterPosition);
+        Vector2 direction = GameHelper.CalculateDirection(this.CenterPosition, _player.CenterPosition);
+        
+        this.Rotation = MathF.Atan2(direction.Y, direction.X);
 
         bool needToMove = distanceToPlayer is <= MaxDistanceToMove and >= MinDistanceToMove;
-        if (!needToMove)
+        if (needToMove)
         {
-            return;
+            Vector2 velocity = direction * this.Speed;
+        
+            this.Position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
         }
-        
-        Vector2 direction = GameHelper.CalculateDirection(this.CenterPosition, _player.CenterPosition);
-        Vector2 velocity = direction * this.Speed;
-        
-        this.Position += velocity * (float)gameTime.ElapsedGameTime.TotalSeconds;
-        this.Rotation = MathF.Atan2(velocity.Y, velocity.X);
     }
     
     private void UpdateAttack(GameTime gameTime)

@@ -69,4 +69,23 @@ public static class GameHelper
 
         return SpriteEffects.None;
     }
+
+    public static void DrawDebugString(
+        SpriteBatch spriteBatch, 
+        SpriteFont font, 
+        Vector2 position, 
+        Color color,
+        string text)
+    {
+        spriteBatch.DrawString(
+            font,
+            text,
+            position,
+            color,
+            layerDepth: 1f,
+            rotation: 0,
+            origin: Vector2.Zero,
+            scale: 1,
+            effects: SpriteEffects.None);
+    }
 }

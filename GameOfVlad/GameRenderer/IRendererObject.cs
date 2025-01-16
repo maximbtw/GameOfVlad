@@ -8,11 +8,6 @@ namespace GameOfVlad.GameRenderer;
 public interface IRendererObject
 {
     /// <summary>
-    /// Возвращает номер в очердели на отрисовку.
-    /// </summary>
-    int DrawOrder { get; }
-
-    /// <summary>
     /// Возвращает номер в очердели на обновление.
     /// </summary>
     int UpdateOrder { get; }
@@ -48,14 +43,9 @@ public interface IRendererObject
     IRendererObject Parent { get; set; }
 
     /// <summary>
-    /// Возвращает или устанавливает дочерние элементы, которые отрисовываются перед объектом.
+    /// Возвращает или устанавливает дочерние элементы
     /// </summary>
-    IEnumerable<IRendererObject> ChildrenBefore { get; set; }
-
-    /// <summary>
-    /// Возвращает или устанавливает дочерние элементы, которые отрисовываются после объекта.
-    /// </summary>
-    IEnumerable<IRendererObject> ChildrenAfter { get; set; }
+    IEnumerable<IRendererObject> Children { get; set; }
 
     void Load();
 

@@ -8,8 +8,7 @@ namespace GameOfVlad.Game.WeaponSystem;
 
 public abstract class ProjectileBase : ColliderGameObject
 {
-    public int DrawOrder => (int)DrawOrderType.Projectile;
-    
+    public override float LayerDepth => (float)DrawOrderType.Projectile / 100f;
     public int UpdateOrder => 1;
     
     public int Damage { get; set; }

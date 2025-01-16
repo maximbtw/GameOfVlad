@@ -11,7 +11,7 @@ namespace GameOfVlad.GameObjects.UI.Components.Game.Forms;
 
 public class PlayerDeadForm(ContentManager contentManager) : UiComponent(contentManager), IUiComponent
 {
-    public int DrawOrder => (int)DrawOrderType.FrontCanvas;
+    public override float LayerDepth => (float)DrawOrderType.UI / 100f;
     public int UpdateOrder => 1;
     
     public Button BtnRestartLevel { get; } = new(contentManager);
@@ -19,7 +19,7 @@ public class PlayerDeadForm(ContentManager contentManager) : UiComponent(content
     public Button BtnToSettingsScene { get; } = new(contentManager);
     public Button BtnToMainMenuScene { get; } = new(contentManager);
     
-    public override IEnumerable<IRendererObject> ChildrenAfter 
+    public override IEnumerable<IRendererObject> Children 
     {
         get
         {
@@ -52,18 +52,22 @@ public class PlayerDeadForm(ContentManager contentManager) : UiComponent(content
     {
         this.BtnRestartLevel.Texture = this.ContentManager.Load<Texture2D>("Buttons/Restart");
         this.BtnRestartLevel.Position = new Vector2(275, 225);
+        this.BtnRestartLevel.LayerDepth = (float)DrawOrderType.UI / 100f + 0.01f;
         this.BtnRestartLevel.Parent = this;
 
         this.BtnToMapScene.Texture = this.ContentManager.Load<Texture2D>("Buttons/Levels");
         this.BtnToMapScene.Position = new Vector2(280, 325);
+        this.BtnToMapScene.LayerDepth = (float)DrawOrderType.UI / 100f + 0.01f;
         this.BtnToMapScene.Parent = this;
 
         this.BtnToSettingsScene.Texture = this.ContentManager.Load<Texture2D>("Buttons/SettingInMenu");
         this.BtnToSettingsScene.Position = new Vector2(280, 425);
+        this.BtnToSettingsScene.LayerDepth = (float)DrawOrderType.UI / 100f + 0.01f;
         this.BtnToSettingsScene.Parent = this;
 
         this.BtnToMainMenuScene.Texture = this.ContentManager.Load<Texture2D>("Buttons/MainMenu");
         this.BtnToMainMenuScene.Position = new Vector2(280, 525);
+        this.BtnToMainMenuScene.LayerDepth = (float)DrawOrderType.UI / 100f + 0.01f;
         this.BtnToMainMenuScene.Parent = this;
     }
 }

@@ -13,10 +13,9 @@ namespace GameOfVlad.GameObjects.Entities.Asteroid;
 public class AsteroidGenerator(ContentManager contentManager, IEffectDrawer effectDrawer, Rectangle levelBounds)
     : GameObject, IGameObject
 {
-    public int DrawOrder => (int)DrawOrderType.Effect;
     public int UpdateOrder => 1;
 
-    public override IEnumerable<IRendererObject> ChildrenAfter
+    public override IEnumerable<IRendererObject> Children
     {
         get => _meteorites;
         set => throw new NotSupportedException();

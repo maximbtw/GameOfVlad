@@ -12,7 +12,6 @@ namespace GameOfVlad.GameObjects.Effects.Generators;
 public class StarfallGenerator(ContentManager contentManager, IEffectDrawer effectDrawer, Rectangle levelBounds)
     : UiComponent(contentManager), IUiComponent
 {
-    public int DrawOrder => (int)DrawOrderType.Background;
     public int UpdateOrder => 1;
     
     public int SpawnFrequency { get; set; } = 10;
@@ -86,9 +85,9 @@ public class StarfallGenerator(ContentManager contentManager, IEffectDrawer effe
 
     private class Star(Rectangle levelBounds) : GameObject, IEffect
     {
-        public int DrawOrder => (int)DrawOrderType.Background;
+        public override float LayerDepth => (float)DrawOrderType.BackEffect / 100f;
         public int UpdateOrder => 1;
-
+        
         public override Vector2 CenterPosition => this.Position;
         public Vector2 Velocity { get; set; } 
 

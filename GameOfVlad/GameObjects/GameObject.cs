@@ -10,22 +10,20 @@ namespace GameOfVlad.GameObjects;
 public abstract class GameObject
 {
     public Guid Guid { get; } = Guid.NewGuid();
-
+    
+    public virtual float LayerDepth { get; set; } = 0f;
     public virtual IRendererObject Parent { get; set; }
-
-    public virtual IEnumerable<IRendererObject> ChildrenAfter  { get; set; } = [];
-    public virtual IEnumerable<IRendererObject> ChildrenBefore  { get; set; } = [];
-
+    public virtual IEnumerable<IRendererObject> Children  { get; set; } = [];
     public virtual bool Destroyed { get; set; } 
     public virtual bool IsActive { get; set; } = true;
     public virtual bool Visible { get; set; } = true;
+    
     public Texture2D Texture { get; set; }
     public Vector2 Position { get; set; } = Vector2.Zero;
     public Color Color { get; set; } = Color.White;
     public float Rotation { get; set; } 
     public Vector2 Scale { get; set; } = Vector2.One;
     public SpriteEffects SpriteEffects { get; set; } = SpriteEffects.None;
-    public float LayerDepth { get; set; } = 0f;
     
     public virtual Vector2 Origin => new(this.Size.Width * 0.5f, this.Size.Height * 0.5f);
     public virtual Size Size => new(this.Texture?.Width ?? 0, this.Texture?.Height ?? 0);
@@ -84,15 +82,6 @@ public abstract class GameObject
     }
 
     protected virtual void UnloadCore()
-    {
-    }
-    
-    public virtual bool OnDestroyCompleted(GameTime gameTime)
-    {
-        return true;
-    }
-
-    public virtual void OnDestroyDraw(GameTime gameTime, SpriteBatch spriteBatch)
     {
     }
 }

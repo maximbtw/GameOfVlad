@@ -29,4 +29,6 @@ public class ParticleGeneratorConfiguration
     public Range<float> ScaleRange { get; init; } = Range<float>.Create(0.5f, 1.5f);
 
     public Texture2D[] Textures { get; init; }
+    
+    public float LayerDepth { get; init; } = (float)DrawOrderType.BackEffect / 100f;
 }

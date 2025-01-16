@@ -13,10 +13,10 @@ public class TemporaryParticleGenerator(
     float generationTime)
     : GameObject, IEffect
 {
-    public int DrawOrder => (int)DrawOrderType.Effect;
+    public override float LayerDepth => 0;
     public int UpdateOrder => 1;
 
-    public override IEnumerable<IRendererObject> ChildrenAfter
+    public override IEnumerable<IRendererObject> Children
     {
         get
         {

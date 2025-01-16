@@ -7,6 +7,8 @@ namespace GameOfVlad.GameObjects;
 
 public interface IGameObject : IRendererObject
 {
+    float LayerDepth { get; }
+    
     Texture2D Texture { get; set; }
 
     Vector2 Position { get; set; }
@@ -26,6 +28,4 @@ public interface IGameObject : IRendererObject
     Vector2 Scale { get; set; }
 
     SpriteEffects SpriteEffects { get; set; }
-
-    float LayerDepth { get; set; }
 }

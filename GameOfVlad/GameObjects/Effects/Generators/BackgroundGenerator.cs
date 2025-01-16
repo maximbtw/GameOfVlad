@@ -6,7 +6,6 @@ namespace GameOfVlad.GameObjects.Effects.Generators;
 
 public class BackgroundGenerator : GameObject, IGameObject
 {
-    public int DrawOrder => (int)DrawOrderType.Background;
     public int UpdateOrder => 1;
 
     private const int DrawOffset = 2000;
@@ -58,7 +57,7 @@ public class BackgroundGenerator : GameObject, IGameObject
     
     private class BackgroundImage : GameObject, IEffect
     {
-        public int DrawOrder => (int)DrawOrderType.Background;
+        public override float LayerDepth => (float)DrawOrderType.Background / 100f;
         public int UpdateOrder => 1;
     }
 }

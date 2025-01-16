@@ -19,14 +19,8 @@ public abstract class DrawerGameObject
         get => null;
         set => throw new NotSupportedException();
     }
-
-    public IEnumerable<IRendererObject> ChildrenBefore
-    {
-        get => [];
-        set => throw new NotSupportedException();
-    }
-
-    public IEnumerable<IRendererObject> ChildrenAfter
+    
+    public IEnumerable<IRendererObject> Children
     {
         get => _gameObjects;
         set => throw new NotSupportedException();
